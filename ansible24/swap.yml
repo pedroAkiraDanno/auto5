@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: dbname
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+
+      - name: Ansible copy file to remote server
+        copy:
+         owner: root
+         group: root
+         mode:  0777         
+         src:  swap.sh
+         dest: /var/lib/postgresql/scripts
+
+      - name:  Command swap.sh
+        shell: /var/lib/postgresql/scripts/swap.sh
+        args:
+         executable: /bin/bash                 
+
+
+
