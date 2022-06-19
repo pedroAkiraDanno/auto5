@@ -110,28 +110,49 @@ and not cleared by autovaccum process
 
 
 
-how to install pg_repack
+step1. how to install pg_repack
 
-# yum install pg_repack12
+    # yum install pg_repack12
 
-sudo su - postgresql 
+    sudo su - postgresql 
 
-psql 
-psql# set shared_preload_libraries = 'pg_repack';
+    psql 
+    psql# set shared_preload_libraries = 'pg_repack';
 
-/usr/pgsql-14/bin/pg_ctl -D $PGDATA restart -mf
-
-
-step2; create this extension in database/s where you
-are planning to execute it. 
-
-sudo su - postgres
-
-psql 
-postgres# \c test; 
-postgres# CREATE EXTENSION pg_repack; 
+    /usr/pgsql-14/bin/pg_ctl -D $PGDATA restart -mf
 
 
+
+
+
+step2. create this extension in database/s where you are planning to execute it. 
+
+    sudo su - postgres
+
+    psql 
+    postgres# \c test; 
+    postgres# CREATE EXTENSION pg_repack; 
+
+
+
+step 3. pg_repack utility to Rebuild table online. 
+    $ pg_repack --dry-run -d pgbench --table pgbench_accounts
+    $ pg_repack -d pgbench --table pgbench_accounts 
+
+    or 
+
+step4. how to rebuild an entire database using pg_repack 
+    $ pg_repack --dry-run -d pgbench 
+    $ pg_repack -d pgbench -j 2
+
+
+This can be run remotely also, only condition is version of pg_repack must be same. 
+
+Appendix 
+
+DROP EXTENSION pg_repack; 
+
+yum remove pg_repack12
 
 
 
