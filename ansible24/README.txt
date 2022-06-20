@@ -52,6 +52,7 @@ step - 5
 	cd /etc/ansible/auto5/ansible24/ 
                 mv *  /etc/ansible/ 
 	cd /etc/ansible/  && rm -rf auto5/
+	ls -lath
 
 	and 
 	execute 
@@ -138,11 +139,11 @@ need exec
 	vi /etc/fstab
 
 
-UUID="ce67559d-5121-45a8-8f72-b80a0787b392"
-UUID="545fc1cc-5c1d-47ab-8846-1f235450305d"
+UUID="f4321f8a-342a-45f4-9efe-379cd982838b" 
+UUID="725ecb74-5c76-4be2-9e54-5df0c5aa8538"
 
-UUID="ce67559d-5121-45a8-8f72-b80a0787b392"  /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
-UUID="545fc1cc-5c1d-47ab-8846-1f235450305d"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+UUID="f4321f8a-342a-45f4-9efe-379cd982838b"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
+UUID="725ecb74-5c76-4be2-9e54-5df0c5aa8538"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
 
 
 	#sudo apt-get update && sudo apt-get upgrade -y

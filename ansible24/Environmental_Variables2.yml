@@ -12,12 +12,12 @@
   tasks:
 
 
-      - name: Ansible copy file .bash_profile to remote server in /var/lib/postgresql/ 
+      - name: Ansible copy file .profile to remote server in /var/lib/postgresql/ 
         copy:
          owner: postgres
          group: postgres
          mode:  0664         
-         src:  .bash_profile
+         src:  .profile
          dest: /var/lib/postgresql/       
 
 
