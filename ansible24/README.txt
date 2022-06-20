@@ -44,7 +44,15 @@ step - 4 login with ssh root
 
 
 step - 5 
-	move ansible files to server with sftp to /etc/ansible
+	user with root
+	move ansible files to server with sftp to /etc/ansible OR USE GITHUB REPO
+	GitHub:
+	cd /etc/ansible/  && rm -rf /etc/ansible/*  
+	git clone https://github.com/pedroAkiraDanno/auto5
+	cd /etc/ansible/auto5/ansible24/ 
+                mv *  /etc/ansible/ 
+	cd /etc/ansible/  && rm -rf auto5/
+
 	and 
 	execute 
 	cd /etc/ansible
