@@ -100,8 +100,10 @@ first:
 	ansible-playbook -i hosts /etc/ansible/health-check-script.yml
 	ansible-playbook -i hosts /etc/ansible/health-check-script2.yaml
 	ansible-playbook -i hosts /etc/ansible/health-check-script3.yaml
-	ansible-playbook -i hosts /etc/ansible/vacuum_pgstattuple.yaml
 	ansible-playbook -i hosts /etc/ansible/pg_freespacemap.yaml
+	ansible-playbook -i hosts /etc/ansible/vacuum_pgstattuple.yaml
+	ansible-playbook -i hosts vacuum.yml
+
 
 need exec 
 	#use user root

@@ -1,0 +1,66 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: vacuum_test
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+
+      - name: Create the database specified in vars
+        become: true
+        become_user: postgres
+        postgresql_db: name={{ db_name }}
+            template='template0'
+            state=present
+
+
+#      - name: createdb dvdrental 
+#        become: true
+#        become_user: postgres      
+#        shell: createdb dvdrental 
+#        args:
+#         executable: /bin/bash    
+
+
+
+      - name: Ansible copy file pg_repack_install.sh to remote server
+        copy:
+         owner: postgres
+         group: postgres
+         mode:  0777         
+         src:  pg_repack_install.sh
+         dest: /var/lib/postgresql/scripts/
+
+
+      - name: unzip chmod +x dvdrental use script
+        shell: chmod +x /var/lib/postgresql/scripts/pg_repack_install.sh
+        args:
+         executable: /bin/bash
+
+
+      - name: exec pg_repack_install to install pg_repack
+        become: true
+        become_user: root      
+        shell: /var/lib/postgresql/scripts/pg_repack_install.sh
+        args:
+         executable: /bin/bash
+
+
+
+
+
+
+
+
+## REFERENCES: 
+## https://www.postgresqltutorial.com/load-postgresql-sample-database/
+## https://www.youtube.com/watch?v=ctESJSfgkBg&t=57s
+## https://www.postgresqltutorial.com/postgresql-sample-database/
+## https://www.geeksforgeeks.org/postgresql-loading-a-database/
+## https://github.com/robconery/dvdrental

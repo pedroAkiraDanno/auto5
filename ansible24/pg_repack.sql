@@ -160,6 +160,3 @@ yum remove pg_repack12
 ref: https://www.youtube.com/watch?v=jfn1FA6zyUE
 */
 
-
-
-
