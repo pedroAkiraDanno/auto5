@@ -79,8 +79,8 @@ first:
 	ansible-playbook -i hosts pgbackRest.yaml
 	ansible-playbook -i hosts swap.yml
 	ansible-playbook -i hosts pg_collector.yml
-	ansible-playbook -i hosts /etc/ansible/Load_sample_database_dvdrental.yml
-	/var/lib/postgresql/scripts/dvdrental.sh
+	ansible-playbook -i hosts /etc/ansible/Load_sample_database_dvdrental3.yml
+	#/var/lib/postgresql/scripts/dvdrental.sh
 	ansible-playbook -i hosts /etc/ansible/db-temp.yml
 	ansible-playbook -i hosts /etc/ansible/large_sort_temporary_files.yml
 	ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
