@@ -38,7 +38,7 @@
          name: "### execute vacuum_TABLE_BLOAT.sql scripts"
          user: postgres
          minute: "*"
-         hour: "*15"
+         hour: "15"
          day: "*"
          month: "*"
          weekday: "*"

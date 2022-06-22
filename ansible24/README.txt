@@ -10,8 +10,8 @@ login server:
 
 1- step 
 	### On Ubuntu ### sudo su - 
-	sudo apt update
-	sudo apt install software-properties-common
+	sudo apt update  --yes
+	sudo apt install software-properties-common  --yes
 	sudo apt-add-repository --yes --update ppa:ansible/ansible
 	sudo apt install ansible --yes
 	#sudo apt-get update && sudo apt-get upgrade -y
@@ -70,6 +70,8 @@ step - 5
 
 
 first: 
+cd /etc/ansible
+
 	ansible-playbook -i hosts filesystem-playbook2.yml
 	ansible-playbook -i hosts db-server-playbook.yml 		
 	ansible-playbook -i  hosts backup_filesystem.yml
@@ -141,11 +143,11 @@ need exec
 	vi /etc/fstab
 
 
-UUID="f4321f8a-342a-45f4-9efe-379cd982838b" 
-UUID="725ecb74-5c76-4be2-9e54-5df0c5aa8538"
+UUID="c455c24b-4ab6-48a9-a90e-4a6ef5616e98"
+UUID="c8a0ae2a-e803-417d-862f-7799eb579544"
 
-UUID="f4321f8a-342a-45f4-9efe-379cd982838b"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
-UUID="725ecb74-5c76-4be2-9e54-5df0c5aa8538"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+UUID="c455c24b-4ab6-48a9-a90e-4a6ef5616e98"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
+UUID="c8a0ae2a-e803-417d-862f-7799eb579544"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
 
 
 	#sudo apt-get update && sudo apt-get upgrade -y
