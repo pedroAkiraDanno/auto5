@@ -54,7 +54,7 @@ People often assume that VACUUM is the process that should return the disk space
 
 If you give the VACUUM command the special flag FULL, then all of that reusable space is returned to the file system. But VACUUM FULL does this by completely rewriting the entire table (and all its indexes) to new pages and takes an exclusive lock on the table the entire time it takes to run (CLUSTER does the same thing, but what that does is outside the scope of this post). For large tables in frequent use, this is problematic. pg_repack has been the most common tool we’ve used to get around that. It recreates the table in the background, tracking changes to it, and then takes a brief lock to swap the old bloated table with the new one.
 
-Why bloat is actually a problem when it gets out of hand is not just the disk space it uses up. Every time a query is run against a table, the visibility flags on individual rows and index entries is checked to see if is actually available to that transaction. On large tables (or small tables with a lot of bloat) that time spent checking those flags builds up. This is especially noticeable with indexes where you expect an index scan to improve your query performance and it seems to be making no difference or is actually worse than a sequential scan of the whole table. And this is why index bloat is checked independently of table bloat since a table could have little to no bloat, but one or more of its indexes could be badly bloated. Index bloat (as long as it’s not a primary key) is easier to solve because you can either just reindex that one index, or you can concurrently create a new index on the same column and then drop the old one when it’s done.
+Why bloat is actually a !problem when it gets out of hand is not just the disk space it uses up. Every time a query is run against a table, the visibility flags on individual rows and index entries is checked to see if is actually available to that transaction. On large tables (or small tables with a lot of bloat) that time spent checking those flags builds up. This is especially noticeable with indexes where you expect an index scan to improve your query performance and it seems to be making no difference or is actually worse than a sequential scan of the whole table. And this is why index bloat is checked independently of table bloat since a table could have little to no bloat, but one or more of its indexes could be badly bloated. Index bloat (as long as it’s not a primary key) is easier to solve because you can either just reindex that one index, or you can concurrently create a new index on the same column and then drop the old one when it’s done.
 
 
 
@@ -247,7 +247,7 @@ Once you’ve stemmed the bleeding on this front, the next stage is to repair th
 We identified 3 potential options
 VACUUM FULL. Pros: can be faster than VACUUM ANALYZE and will eliminate all bloat in the table while also shrinking the table’s physical size on disk. Cons: Requires an exclusive read/write lock on the table for the operation’s duration, which can cause application outages depending on the table. Imagine not being able to access your users table temporarily — a non-starter.
 
-pg_repack. Pros: Very fast, and doesn’t require a read/write lock on the table. Cons: Very resource-intensive, which can degrade overall database performance. It also can cause significant replication lag, as well as OOM errors when using replication slots (details below).
+pg_repack. Pros: Very fast, and doesn’t require a read/write lock on the table. Cons: Very resource-intensive, which can degrade overall database performance. It also can cause significant replication lag, as well as OOM !errors when using replication slots (details below).
 
 pgcompacttable. Does the same thing as pg_repack, but modifies the rows in place. I won’t go into detail here, but it uses significantly fewer resources and operates much slower, so it’s not as problematic for replication slots. However, in our case, pgcompacttable was far too slow to remove the amount of bloat we had.
 
@@ -297,7 +297,7 @@ it locks the table for the whole duration
 depending on version it might: bloat indexes and/or take ages to finish
 
 
-The problem was that quick estimate told us that if we removed 100% of bloat, the table (with indexes) would use ~ 150GB, and we had only 50GB of free disk space, so using pg_reorg is not an option.
+The !problem was that quick estimate told us that if we removed 100% of bloat, the table (with indexes) would use ~ 150GB, and we had only 50GB of free disk space, so using pg_reorg is not an option.
 
 
 https://www.depesz.com/2013/06/21/bloat-removal-by-tuples-moving/
