@@ -103,7 +103,7 @@ first:
 	ansible-playbook -i hosts /etc/ansible/pg_freespacemap.yaml
 	ansible-playbook -i hosts /etc/ansible/vacuum_pgstattuple.yaml
 	ansible-playbook -i hosts vacuum.yml
-
+	ansible-playbook -i hosts /etc/ansible/vacuum_TABLE_BLOAT.yml
 
 need exec 
 	#use user root

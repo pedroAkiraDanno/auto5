@@ -72,6 +72,16 @@ ref: https://www.crunchydata.com/blog/checking-for-postgresql-bloat
 
 
 
+--DROP EXTENSION IF EXISTS <extension name>;
+CREATE  EXTENSION pgstattuple;
+
+--ls  /usr/share/postgresql/14/extension/pgstattuple*
+
+
+--Check extension details by query pg_extension and pg_available_extensions.
+SELECT * FROM pg_extension;
+SELECT * FROM pg_available_extensions;
+
 
 
 
@@ -100,33 +110,48 @@ There are couple of ways to detect the bloat and identify the problematic areas 
 
 refe: https://www.highgo.ca/2021/03/20/how-to-check-and-resolve-bloat-in-postgresql/
 */
+DROP TABLE IF EXISTS test_highgo;
+DROP INDEX IF EXISTS test_highgo_x_idx;
 
-CREATE TABLE test as SELECT x, md5(random()::text) as y FROM generate_Series(1, 1000000) x;
-CREATE INDEX ON test (x);
-SELECT pg_size_pretty(pg_relation_size('test')) as table_size, 
-       pg_size_pretty(pg_relation_size('test_x_idx')) as index_size,
-       (pgstattuple('test')).dead_tuple_percent;
+CREATE TABLE test_highgo as SELECT x, md5(random()::text) as y FROM generate_Series(1, 1000000) x;
+ALTER TABLE test_highgo  SET (autovacuum_enabled = off);
+\d+ test_highgo
+CREATE INDEX ON test_highgo (x);
 
-DELETE FROM test WHERE x % 3 = 0;
-ANALYZE test;
- SELECT pg_size_pretty(pg_relation_size('test')) as table_size, 
-       pg_size_pretty(pg_relation_size('test_x_idx')) as index_size,
-       (pgstattuple('test')).dead_tuple_percent;
+--SELECT    tablename,    indexname,    indexdef FROM    pg_indexes WHERE    schemaname = 'public' ORDER BY   tablename,   indexname;
+SELECT    tablename,    indexname,    indexdef FROM    pg_indexes WHERE    tablename = 'test_highgo' ORDER BY   tablename,   indexname;
+
+SELECT pg_size_pretty(pg_relation_size('test_highgo')) as table_size, 
+       pg_size_pretty(pg_relation_size('test_highgo_x_idx')) as index_size,
+       (pgstattuple('test_highgo')).dead_tuple_percent;
+
+DELETE FROM test_highgo WHERE x % 3 = 0;
+ANALYZE test_highgo;
+
+ SELECT pg_size_pretty(pg_relation_size('test_highgo')) as table_size, 
+       pg_size_pretty(pg_relation_size('test_highgo_x_idx')) as index_size,
+       (pgstattuple('test_highgo')).dead_tuple_percent;
 
 
 --See the table size remains the same, however the output of pgstattuple shows that 29.78% of disk space is wasted. It’s taking the space in table but not useable anymore.
 
- SELECT pg_relation_size('test') as table_size, 
-       pg_relation_size('test_x_idx') as index_size,
-       100-(pgstatindex('test_x_idx')).avg_leaf_density as bloat_ratio;
+ SELECT pg_relation_size('test_highgo') as table_size, 
+       pg_relation_size('test_highgo_x_idx') as index_size,
+       100-(pgstatindex('test_highgo_x_idx')).avg_leaf_density as bloat_ratio;
 
 
 
-UPDATE test SET x = x + 2 WHERE x % 2 = 0;
+UPDATE test_highgo SET x = x + 2 WHERE x % 2 = 0;
 
- SELECT pg_relation_size('test') as table_size, 
-       pg_relation_size('test_x_idx') as index_size,
-       100-(pgstatindex('test_x_idx')).avg_leaf_density as bloat_ratio;
+ SELECT pg_relation_size('test_highgo') as table_size, 
+       pg_relation_size('test_highgo_x_idx') as index_size,
+       100-(pgstatindex('test_highgo_x_idx')).avg_leaf_density as bloat_ratio;
+
+
+SELECT pg_size_pretty(pg_relation_size('test_highgo')) as table_size, 
+       pg_size_pretty(pg_relation_size('test_highgo_x_idx')) as index_size,
+       (pgstattuple('test_highgo')).dead_tuple_percent;
+
 
 --After the above operations, index has become 41.08% bloated. That means that the performance of this index will degrade because that much entries are either empty or pointing to dead tuples.
 
@@ -280,7 +305,7 @@ https://www.depesz.com/2013/06/21/bloat-removal-by-tuples-moving/
 */
  CREATE EXTENSION pageinspect;
 
- drop table test;
+DROP TABLE IF EXISTS test;
  create table test (id serial primary key, payload text);
  insert into test (payload) select repeat('depesz', 100) from generate_series(1,1000000);
 
@@ -327,7 +352,7 @@ https://www.depesz.com/2013/06/21/bloat-removal-by-tuples-moving/
  SELECT * FROM pgstattuple('test');
 
 
-
+DROP TABLE IF EXISTS test;
 
 
 
@@ -531,7 +556,7 @@ SELECT heap_page_items.t_ctid,t_xmin, t_xmax, tuple_data_split('scott.employee':
 
 
 
-
+DROP TABLE IF EXISTS test;
 
 
 
