@@ -412,7 +412,7 @@ UPDATE scott.employee SET emp_name = 'avii';
 SELECT t_xmin, t_xmax, tuple_data_split('scott.employee'::regclass, t_data, t_infomask, t_infomask2, t_bits) FROM heap_page_items(get_raw_page('scott.employee', 0));
 
  select pg_size_pretty(pg_relation_size('scott.employee'));
- ANALYZE VERBOSE test;
+ ANALYZE VERBOSE scott.employee;
  select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%employee%';
  SELECT * FROM pgstattuple('scott.employee');
 
@@ -424,7 +424,7 @@ vacuum scott.employee;
 SELECT t_xmin, t_xmax, tuple_data_split('scott.employee'::regclass, t_data, t_infomask, t_infomask2, t_bits) FROM heap_page_items(get_raw_page('scott.employee', 0));
 
  select pg_size_pretty(pg_relation_size('scott.employee'));
- ANALYZE VERBOSE test;
+ ANALYZE VERBOSE scott.employee;
  select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%employee%';
  SELECT * FROM pgstattuple('scott.employee');
 
@@ -439,7 +439,7 @@ DELETE FROM  scott.employee WHERE  emp_id%2 = 0;
 SELECT t_xmin, t_xmax, tuple_data_split('scott.employee'::regclass, t_data, t_infomask, t_infomask2, t_bits) FROM heap_page_items(get_raw_page('scott.employee', 0));
 
  select pg_size_pretty(pg_relation_size('scott.employee'));
- ANALYZE VERBOSE test;
+ ANALYZE VERBOSE scott.employee;
  select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%employee%';
  SELECT * FROM pgstattuple('scott.employee');
 
@@ -451,7 +451,7 @@ SELECT t_xmin, t_xmax, tuple_data_split('scott.employee'::regclass, t_data, t_in
 
 
  select pg_size_pretty(pg_relation_size('scott.employee'));
- ANALYZE VERBOSE test;
+ ANALYZE VERBOSE scott.employee;
  select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%employee%';
  SELECT * FROM pgstattuple('scott.employee');
 
@@ -501,7 +501,7 @@ ROLLBACK;
 
 
  select pg_size_pretty(pg_relation_size('scott.employee'));
- ANALYZE VERBOSE test;
+ ANALYZE VERBOSE scott.employee;
  select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%employee%';
  SELECT * FROM pgstattuple('scott.employee');
 
@@ -512,7 +512,7 @@ vacuum scott.employee;
 SELECT t_xmin, t_xmax, tuple_data_split('scott.employee'::regclass, t_data, t_infomask, t_infomask2, t_bits) FROM heap_page_items(get_raw_page('scott.employee', 0));
 
  select pg_size_pretty(pg_relation_size('scott.employee'));
- ANALYZE VERBOSE test;
+ ANALYZE VERBOSE scott.employee;
  select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%employee%';
  SELECT * FROM pgstattuple('scott.employee');
 
@@ -547,7 +547,7 @@ SELECT heap_page_items.t_ctid,t_xmin, t_xmax, tuple_data_split('scott.employee':
 
 
  select pg_size_pretty(pg_relation_size('scott.employee'));
- ANALYZE VERBOSE test;
+ ANALYZE VERBOSE scott.employee;
  select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%employee%';
  SELECT * FROM pgstattuple('scott.employee');
 
