@@ -88,7 +88,7 @@ ORDER BY last_autovacuum;
 --log_autovacuum_min_duration
   --enable to zero, enable log every about vacuum
   alter system set log_autovacuum_min_duration TO 0; 
-
+  --refe: https://postgresqlco.nf/doc/en/param/log_autovacuum_min_duration/
 
 
 
@@ -217,9 +217,8 @@ ORDER BY last_autovacuum;
    -- DELETE FROM rand4;    
 
     DROP TABLE rand,rand2,rand3,rand4;
-
-
-
+  --https://postgresqlco.nf/doc/en/param/log_autovacuum_min_duration/
+ 
 
 
 
@@ -234,7 +233,7 @@ ORDER BY last_autovacuum;
 --autovacuum_vacuum_scale_factor 
 
   --show all settings about vacuum
-    select name,setting,unit from pg_settings where name like '%vacuum%';
+    select name,setting,unit,pending_restart from pg_settings where name like '%vacuum%';
 
     CREATE TABLE IF NOT EXISTS t AS SELECT generate_series(1, 10000) AS seq, MD5(random()::text);
     SELECT * from t order by seq desc limit 10;
@@ -255,7 +254,7 @@ ORDER BY last_autovacuum;
      from pg_stat_all_tables where relname like 't';
 
     --select the size
-select pg_size_pretty(pg_relation_size('t'));
+    select pg_size_pretty(pg_relation_size('t'));
 
     INSERT INTO t (seq) SELECT x  FROM generate_series(1,10000) AS x;
 
@@ -271,9 +270,76 @@ select pg_size_pretty(pg_relation_size('t'));
 
     DROP TABLE t;
 --refe: https://www.2ndquadrant.com/en/blog/autovacuum-tuning-basics/
+--      https://postgresqlco.nf/doc/en/param/autovacuum_vacuum_scale_factor/14/?category=autovacuum
+
+  /*
+  autovacuum_vacuum_scale_factor
+
+
+  PARAMETER INFO
+  Type:real
+  Default:0.2
+  Min:0
+  Max:100
+  Context:sighup
+  Restart:false
+
+  DESCRIPTION
+  Number of tuple updates or deletes prior to vacuum as a fraction of reltuples
+  Specifies a fraction of the table size to add to autovacuum_vacuum_threshold when deciding whether to trigger a VACUUM. The default is 0.2 (20% of table size). This parameter can only be set in the postgresql.conf file or on the server command line; but the setting can be overridden for individual tables by changing table storage parameters.
+
+  */
 
 
 
+/* test 1 autovacuum_vacuum_scale_factor*/
+
+  --show all settings about vacuum
+    select name,setting,unit,pending_restart,reset_val from pg_settings where name like '%autovacuum_vacuum_scale_factor%';
+    
+    
+    SELECT current_setting('autovacuum_vacuum_scale_factor');
+    select name,setting,unit,reset_val from pg_settings where name like '%autovacuum_naptime%';
+
+
+    --set the naptime to 0.1 to see the autovacuum_max_workers works 
+    alter system set autovacuum_vacuum_scale_factor TO 0.1;  
+
+
+    select pg_reload_conf();
+    --systemctl restart postgresql 
+
+
+
+
+
+    CREATE TABLE IF NOT EXISTS t_scale_factor AS SELECT generate_series(1, 5000) AS seq, MD5(random()::text);
+    SELECT * from t_scale_factor order by seq desc limit 10;
+
+    --INSERT INTO t_scale_factor (seq) SELECT x  FROM generate_series(1,5000) AS x;
+
+    --select the size
+    select pg_size_pretty(pg_relation_size('t_scale_factor'));
+
+    ANALYZE VERBOSE t_scale_factor;
+
+    --- update just 10% of table
+    update t_scale_factor set seq = seq +1 where seq in (select seq from t_scale_factor order by seq desc limit (5000*0.1) offset 12);
+
+
+    select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
+     from pg_stat_all_tables where relname like 't_scale_factor';
+
+    ---*****most important column about parameter autovacuum_vacuum_scale_factor is reltuples
+    SELECT relname,reltuples FROM pg_class WHERE relname  like '%t_scale_factor%';
+
+
+
+
+    SET autovacuum_vacuum_scale_factor TO DEFAULT;
+    reset  autovacuum_vacuum_scale_factor;
+
+    DROP TABLE t_scale_factor;
 
 
 --find bloated tables postgres
