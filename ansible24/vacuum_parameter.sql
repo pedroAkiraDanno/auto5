@@ -36,7 +36,7 @@ SELECT relname, n_dead_tup FROM pg_stat_user_tables;
 
 
 
---Last time (auto)vacuum ran
+--Last time (auto)vacuum run
 SELECT relname, last_vacuum, last_autovacuum FROM pg_stat_user_tables;
 
 select relname,last_vacuum, vacuum_count from pg_stat_all_tables where relname= 'vacuum_table1';
@@ -70,9 +70,6 @@ select pg_autovacuum_count();
 
 
 
-
-
-
 -- SQL to check table statistics about the number of dead tuples
 SELECT relname, n_live_tup, n_dead_tup, trunc(100*n_dead_tup/(n_live_tup+1))::float "ratio%",
 to_char(last_autovacuum, 'YYYY-MM-DD HH24:MI:SS') as autovacuum_date, 
@@ -87,6 +84,13 @@ ORDER BY last_autovacuum;
 
 
 
+--ABOUT PARAMETERS
+--log_autovacuum_min_duration
+  --enable to zero, enable log every about vacuum
+  alter system set log_autovacuum_min_duration TO 0; 
+
+
+
 
 
 
@@ -94,10 +98,6 @@ ORDER BY last_autovacuum;
 
 
 --ABOUT PARAMETERS 
---enable to zero, enable log every about vacuum
-alter system set log_autovacuum_min_duration TO 0; 
-
-
 --autovacuum_max_workers
     --show all settings about vacuum
     select name,setting,unit from pg_settings where name like '%autovacuum_max_workers%';
@@ -205,7 +205,10 @@ alter system set log_autovacuum_min_duration TO 0;
     select relname,last_vacuum, vacuum_count,n_live_tup,n_dead_tup from pg_stat_all_tables where relname like '%rand%';
 
 
-
+    SELECT current_setting('autovacuum_naptime');
+    select name,setting,unit,reset_val from pg_settings where name like '%autovacuum_naptime%';
+    SET autovacuum_naptime TO DEFAULT;
+    reset  autovacuum_naptime;
 
 
    -- DELETE FROM rand;
@@ -267,7 +270,7 @@ alter system set log_autovacuum_min_duration TO 0;
      from pg_stat_all_tables where relname like 't';    
 
     DROP TABLE t;
-
+--refe: https://www.2ndquadrant.com/en/blog/autovacuum-tuning-basics/
 
 
 

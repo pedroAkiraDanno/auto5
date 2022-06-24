@@ -106,6 +106,9 @@ cd /etc/ansible
 	ansible-playbook -i hosts /etc/ansible/vacuum_pgstattuple.yaml
 	ansible-playbook -i hosts vacuum.yml
 	ansible-playbook -i hosts /etc/ansible/vacuum_TABLE_BLOAT.yml
+	ansible-playbook -i hosts /etc/ansible/vacuum_parameter.yml
+
+
 
 need exec 
 	#use user root
