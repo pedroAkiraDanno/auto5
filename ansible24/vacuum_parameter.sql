@@ -222,6 +222,57 @@ alter system set log_autovacuum_min_duration TO 0;
 
 
 
+
+
+
+
+
+--ABOUT PARAMETERS 
+--autovacuum_vacuum_scale_factor 
+
+  --show all settings about vacuum
+    select name,setting,unit from pg_settings where name like '%vacuum%';
+
+    CREATE TABLE IF NOT EXISTS t AS SELECT generate_series(1, 100) AS seq, MD5(random()::text);
+    SELECT * from t order by seq desc limit 10;
+
+    ALTER TABLE t SET (autovacuum_vacuum_scale_factor = 0);
+    ALTER TABLE t SET (autovacuum_vacuum_threshold = 10000);
+
+    --Getting statistics of all databases
+    -- ANALYZE;
+    --Getting statistics of a specific database
+    --ANALYZE VERBOSE;
+    --Getting the statistics of a table
+    --ANALYZE VERBOSE t;
+    ANALYZE VERBOSE t;
+
+    \x
+    select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
+     from pg_stat_all_tables where relname like 't';
+
+    --select the size
+    select pg_size_pretty(pg_relation_size('t')),
+
+    INSERT INTO t (seq) SELECT x  FROM generate_series(1,10000) AS x;
+
+    select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
+     from pg_stat_all_tables where relname like 't';    
+
+    UPDATE t set seq = seq +1;
+
+    select pg_sleep(3);
+
+    select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
+     from pg_stat_all_tables where relname like 't';    
+
+    DROP TABLE t;
+
+
+
+
+
+
 --find bloated tables postgres
 
 
