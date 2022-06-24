@@ -236,7 +236,7 @@ ORDER BY last_autovacuum;
   --show all settings about vacuum
     select name,setting,unit from pg_settings where name like '%vacuum%';
 
-    CREATE TABLE IF NOT EXISTS t AS SELECT generate_series(1, 100) AS seq, MD5(random()::text);
+    CREATE TABLE IF NOT EXISTS t AS SELECT generate_series(1, 10000) AS seq, MD5(random()::text);
     SELECT * from t order by seq desc limit 10;
 
     ALTER TABLE t SET (autovacuum_vacuum_scale_factor = 0);
@@ -257,11 +257,6 @@ ORDER BY last_autovacuum;
     --select the size
     select pg_size_pretty(pg_relation_size('t')),
 
-    INSERT INTO t (seq) SELECT x % 2 + 1  FROM generate_series(1,10000) AS x;
-
-
-    select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
-     from pg_stat_all_tables where relname like 't';    
 
     UPDATE t set seq = seq +1;
 
