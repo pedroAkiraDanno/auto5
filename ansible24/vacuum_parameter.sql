@@ -257,7 +257,8 @@ ORDER BY last_autovacuum;
     --select the size
     select pg_size_pretty(pg_relation_size('t')),
 
-    INSERT INTO t (seq) SELECT x  FROM generate_series(1,10000) AS x;
+    INSERT INTO t (seq) SELECT x % 2 + 1  FROM generate_series(1,10000) AS x;
+
 
     select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
      from pg_stat_all_tables where relname like 't';    
