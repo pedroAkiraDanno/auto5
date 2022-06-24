@@ -255,8 +255,12 @@ ORDER BY last_autovacuum;
      from pg_stat_all_tables where relname like 't';
 
     --select the size
-    select pg_size_pretty(pg_relation_size('t')),
+select pg_size_pretty(pg_relation_size('t'));
 
+    INSERT INTO t (seq) SELECT x  FROM generate_series(1,10000) AS x;
+
+    select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
+     from pg_stat_all_tables where relname like 't';
 
     UPDATE t set seq = seq +1;
 
