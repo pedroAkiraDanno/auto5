@@ -21,7 +21,7 @@ CREATE DATABASE  vacuum_test TEMPLATE template0;
 \c vacuum_test;
 
  
-
+--test tabl with autovacuum_enabled = off
 CREATE TABLE IF NOT EXISTS vacuum_table1 (id int ) with (autovacuum_enabled = off);
 SELECT reloptions FROM pg_class WHERE relname='vacuum_table1';
 --SELECT * FROM pg_class WHERE relname='vacuum_table1';
@@ -79,6 +79,19 @@ ORDER BY last_autovacuum;
 
 --ref: https://aws.amazon.com/blogs/database/a-case-study-of-tuning-autovacuum-in-amazon-rds-for-postgresql/
 
+
+
+
+
+
+
+
+
+
+
+
+
+-----
 
 
 
@@ -292,6 +305,10 @@ ORDER BY last_autovacuum;
 
 
 
+
+
+
+
 /* test 1 autovacuum_vacuum_scale_factor*/
 
   --show all settings about vacuum
@@ -310,11 +327,12 @@ ORDER BY last_autovacuum;
     --systemctl restart postgresql 
 
 
-
-
-
     CREATE TABLE IF NOT EXISTS t_scale_factor AS SELECT generate_series(1, 5000) AS seq, MD5(random()::text);
     SELECT * from t_scale_factor order by seq desc limit 10;
+
+    ALTER TABLE t_scale_factor SET (autovacuum_vacuum_scale_factor = 0.1);
+    ALTER TABLE t_scale_factor SET (autovacuum_vacuum_threshold = 0);
+
 
     --INSERT INTO t_scale_factor (seq) SELECT x  FROM generate_series(1,5000) AS x;
 
@@ -323,18 +341,23 @@ ORDER BY last_autovacuum;
 
     ANALYZE VERBOSE t_scale_factor;
 
+
+    select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
+     from pg_stat_all_tables where relname like 't_scale_factor';
+
     --- update just 10% of table
-    update t_scale_factor set seq = seq +1 where seq in (select seq from t_scale_factor order by seq desc limit (5000*0.1) offset 12);
+    update t_scale_factor set seq = seq +1 where seq in (select seq from t_scale_factor order by seq desc limit (5000*0.2) offset 12);
 
 
     select relname,n_live_tup,n_dead_tup,last_vacuum, vacuum_count,last_autovacuum,autovacuum_count,last_analyze,analyze_count,last_autoanalyze,autoanalyze_count
      from pg_stat_all_tables where relname like 't_scale_factor';
 
     ---*****most important column about parameter autovacuum_vacuum_scale_factor is reltuples
-    SELECT relname,reltuples FROM pg_class WHERE relname  like '%t_scale_factor%';
+    \x
+    SELECT relname,reltuples,reloptions FROM pg_class WHERE relname  like '%t_scale_factor%';
 
-
-
+    --not change nothing , autovacuum is not call, because change little rows/lines
+    update t_scale_factor set seq = seq +1 where seq in (select seq from t_scale_factor order by seq desc limit (5000*0.02) offset 12);
 
     SET autovacuum_vacuum_scale_factor TO DEFAULT;
     reset  autovacuum_vacuum_scale_factor;
