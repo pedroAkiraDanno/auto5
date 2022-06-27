@@ -365,6 +365,15 @@ ORDER BY last_autovacuum;
     DROP TABLE t_scale_factor;
 
 
+
+
+
+
+
+
+
+
+
 --find bloated tables postgres
 
 
