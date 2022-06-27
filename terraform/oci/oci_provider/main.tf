@@ -1,4 +1,4 @@
-provider "oci" {}
+
 
 resource "oci_core_instance" "generated_oci_core_instance" {
 	agent_config {
