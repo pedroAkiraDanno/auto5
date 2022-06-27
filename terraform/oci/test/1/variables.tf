@@ -2,11 +2,7 @@
     // Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
     // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
-    variable "compartment_ocid" {}
-    variable "tenancy_ocid" {}
-    variable "region" {}
-    variable "availability_domain" {}
-    
+
     variable "block_volume_size_in_gbs" {
       type = number
       default = 50
