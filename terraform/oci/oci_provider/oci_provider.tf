@@ -7,7 +7,7 @@ variable "region"               { type = string }
 variable "root_compartment_id"  { type = string }
 
 # Resources
-provider "oci" {
+provider "oracle/oci" {
   tenancy_ocid     = var.tenancy_ocid
   user_ocid        = var.user_ocid
   private_key_path = var.private_key_path
