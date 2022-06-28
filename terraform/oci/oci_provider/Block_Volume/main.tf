@@ -2,9 +2,9 @@
     // Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
     // Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
     
-    //     terraform {
-    //       required_version = ">= 0.12.0"
-    //     }
+    terraform {
+      required_version = ">= 0.12.0"
+    }
     
     locals {
       vols_default = {
@@ -29,6 +29,7 @@
         compartment_id = var.compartment_ocid
     
         #Optional
+        #backup_policy_id = lookup(data.oci_core_volume_backup_policies.volume_backup_policies.volume_backup_policies[var.backup_policy[var.backup_policy_name]], "id")
         defined_tags = null
         display_name = var.block_volume_display_name
         freeform_tags = null
