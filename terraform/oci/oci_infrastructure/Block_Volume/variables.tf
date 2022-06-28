@@ -11,10 +11,9 @@
       type = number
       default = 50
     }
-    variable "block_volume_display_name" {
-      type = string
-      default = "test-oci-block-volume"
-    }
+
+    variable "block_volume_display_name" {}
+
     variable "backup_policy_name" {
       type = string
       default = "Bronze"
