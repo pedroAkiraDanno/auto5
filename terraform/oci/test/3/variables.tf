@@ -19,6 +19,7 @@
       type = string
       default = "Bronze"
     }
+    
     variable "add_volume_to_volume_group" {} 
     
     /* variable "defined_tags" {
