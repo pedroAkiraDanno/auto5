@@ -1,0 +1,117 @@
+# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+
+title: "Creates a Block Volume and Block Volume Group in Oracle Cloud Infrastructure."
+stackDescription: ${Messages.solutionsHub.solutions.blockVolume.stackDescription()}
+schemaVersion: 1.1.0
+version: "20200301"
+locale: "en"
+
+variableGroups:
+- title: General Configuration
+  visible: false
+  variables:
+    - compartment_ocid
+    - tenancy_ocid
+    - region
+    - backup_policy
+  
+- title: Required Configuration
+  visible: true  
+  variables:
+    - block_volume_display_name
+    - availability_domain
+  
+- title: Optional Configuration
+  visible: true  
+  variables:
+    - block_volume_size_in_gbs
+    - backup_policy_name
+    - source_id
+    - source_type
+    - kms_key_id
+    - add_volume_to_volume_group
+    - volume_group_display_name
+
+variables:
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    title: Compartment
+    required: true
+
+  region:
+    type: oci:identity:region:name
+    required: true
+    title: Region
+    description: Region where you want to deploy the resources defined by this stack
+
+  availability_domain:
+    type: oci:identity:availabilitydomain:name
+    dependsOn:
+      compartmentId: compartment_ocid
+    required: true
+    title: ${Messages.solutionsHub.genericVariables.availability_domain_name.title()}
+    description: ${Messages.solutionsHub.genericVariables.availability_domain_name.description()}
+    default: "tabw:PHX-AD-1"
+
+  block_volume_display_name:
+    type: string
+    required: true
+    default: "test_volume"
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.block_volume_display_name.title()}
+    description: ${Messages.solutionsHub.solutions.blockVolume.variables.block_volume_display_name.description()}
+
+  block_volume_size_in_gbs:
+    type: number
+    default: 50
+    minimum: 1
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.block_volume_size_in_gbs.title()}
+    description: ${Messages.solutionsHub.solutions.blockVolume.variables.block_volume_size_in_gbs.description()}
+      
+  backup_policy_name:
+    type: enum
+    enum:
+    - Gold
+    - Silver
+    - Bronze
+    default: Bronze
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.backup_policy_name.title()}
+  
+  source_id:
+    type: string
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.source_id.title()}
+    description: ${Messages.solutionsHub.solutions.blockVolume.variables.source_id.description()}
+    required: false
+
+  source_type:
+    type: enum
+    enum:
+    - volume
+    - volumeBackup
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.source_type.title()}
+  
+  kms_key_id:
+    type: string
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.kms_key_id.title()}
+    description: ${Messages.solutionsHub.solutions.blockVolume.variables.kms_key_id.description()}
+    required: false
+  
+  add_volume_to_volume_group:
+    type: boolean
+    default: false
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.add_volume_to_volume_group.title()}
+    
+  volume_group_display_name:
+    type: string
+    required: false
+    title: ${Messages.solutionsHub.solutions.blockVolume.variables.volume_group_display_name.title()}
+    description: ${Messages.solutionsHub.solutions.blockVolume.variables.volume_group_display_name.description()}
+    dependsOn:
+      addVolumeToVolumeGroup: \${add_volume_to_volume_group}
+
+outputGroups:
+  - title: ${Messages.solutionsHub.solutions.blockVolume.outputGroups.title()}
+    outputs:
+      - \${vol_name}
+      - \${vol_id}
+      - \${vol_size}
