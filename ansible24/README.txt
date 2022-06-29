@@ -148,11 +148,11 @@ need exec
 	vi /etc/fstab
 
 
-UUID="c455c24b-4ab6-48a9-a90e-4a6ef5616e98"
-UUID="c8a0ae2a-e803-417d-862f-7799eb579544"
+UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
+UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"
 
-UUID="c455c24b-4ab6-48a9-a90e-4a6ef5616e98"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
-UUID="c8a0ae2a-e803-417d-862f-7799eb579544"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
+UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
 
 
 	#sudo apt-get update && sudo apt-get upgrade -y
