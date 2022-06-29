@@ -51,7 +51,7 @@ step - 5
 	cd /etc/ansible/  && rm -rf /etc/ansible/*  
 	git clone https://github.com/pedroAkiraDanno/auto5
 	cd /etc/ansible/auto5/ansible24/ 
-    mv *  /etc/ansible/ 
+    	mv *  /etc/ansible/ 
 	cd /etc/ansible/  && rm -rf auto5/
 	ls -lath
 
@@ -139,6 +139,11 @@ need exec
 
 	chmod +x /var/lib/postgresql/scripts/*.sh
 	chown -R postgres:postgres /postgresql/
+
+	cp profile /var/lib/postgresql
+	login with postgresql 
+	mv profile .profile
+	. .profile
 
 	#rm /root/.ssh/ssh-key-2022-01-19*
 	#sudo passwd postgres
