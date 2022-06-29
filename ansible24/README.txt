@@ -51,9 +51,10 @@ step - 5
 	cd /etc/ansible/  && rm -rf /etc/ansible/*  
 	git clone https://github.com/pedroAkiraDanno/auto5
 	cd /etc/ansible/auto5/ansible24/ 
-                mv *  /etc/ansible/ 
+    mv *  /etc/ansible/ 
 	cd /etc/ansible/  && rm -rf auto5/
 	ls -lath
+
 
 	and 
 	execute 
