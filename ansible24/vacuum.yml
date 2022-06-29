@@ -38,7 +38,7 @@
          name: "### execute vacuum.sql scripts"
          user: postgres
          minute: "*"
-         hour: "*14"
+         hour: "14"
          day: "*"
          month: "*"
          weekday: "*"
