@@ -6,8 +6,11 @@ Repo to postgresql with terraform
 
 
 
+
 ## Cloud Shell:
 
+Your Cloud Shell machine comes with 5GB of storage for your home directory. Your Cloud Shell (machine and home directory) are located in: US East (Ashburn).
+You are using Cloud Shell in tenancy pedro**** as an OCI Local user pedro@****.com
 
 #### Get git and Github 
     cd ~
@@ -16,7 +19,7 @@ Repo to postgresql with terraform
     cd auto5/terraform/oci/oci_infrastructure/
 
 #### Key 
-        #to move public and private key to acess terrafrom with oci 
+    ## move public and private key to acess terrafrom with oci 
     cd ~    
     cd auto5/terraform/oci/oci_infrastructure/Key/
     #myvar=$(id -u -n )
