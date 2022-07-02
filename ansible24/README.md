@@ -45,7 +45,7 @@ Repo to postgresql with ansible
 	#move sshd_config file to server
 
 ## step - 4 login with ssh root 
-	move key to server with sftp to /root/.ssh/ and ssh-key-2022-01-19
+	#move key to server with sftp to /root/.ssh/ and ssh-key-2022-01-19
 	chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
 
 
