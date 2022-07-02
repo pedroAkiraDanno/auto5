@@ -8,6 +8,7 @@ Repo to postgresql with terraform
 
 ## Cloud Shell:
 
+
 #### Get git and Github 
     cd ~
     rm -fr auto5/
@@ -56,7 +57,9 @@ Repo to postgresql with terraform
 
 
 
+---
 
-## Instance:
+## Instance / Linux Environment:
+
 
 
