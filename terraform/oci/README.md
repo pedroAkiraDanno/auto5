@@ -1,18 +1,20 @@
 # Postgresql terraform
 
+repo to postgresql with terraform 
+
 
 
 
 
 ## Cloud Shell:
 
-### Get git and Github 
+#### Get git and Github 
     cd ~
     rm -fr auto5/
     git clone https://github.com/pedroAkiraDanno/auto5.git
     cd auto5/terraform/oci/oci_infrastructure/
 
-### Key 
+#### Key 
         #to move public and private key to acess terrafrom with oci 
     cd ~    
     cd auto5/terraform/oci/oci_infrastructure/Key/
@@ -21,7 +23,7 @@
     cp  *.pem    /home/$myvar/.ssh/
 
 
-### Create_Intance
+#### Create_Intance
         cd ~   
         cd auto5/terraform/oci/oci_infrastructure/Create_Intance
 
@@ -30,7 +32,7 @@
         terraform apply -auto-approve
 
 
-### Block_Volume 1 
+#### Block_Volume 1 
         cd ~   
         cd auto5/terraform/oci/oci_infrastructure/Block_Volume
 
@@ -40,7 +42,7 @@
 
 
 
-### Block_Volume 2
+#### Block_Volume 2
         cd ~   
         cd auto5/terraform/oci/oci_infrastructure/Block_Volume
 
