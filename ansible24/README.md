@@ -100,9 +100,11 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts /etc/ansible/sequence.yml
 	ansible-playbook -i hosts /etc/ansible/walfile.yml
 	#ansible-playbook -i hosts pgAdmin.yaml
+	
 	LOG  	#dont need exec this commands 	IF 
 	ansible-playbook -i hosts /etc/ansible/log2.yml 	#Script to log maintenance log_rotation_size=500MB EXEC THIS IF WANT LESS SIZE 
 	ansible-playbook -i hosts /etc/ansible/log3.yml 	#Script to test log name and size 		JUST TO TEST
+	
 	#ansible-playbook -i hosts /etc/ansible/Environmental_Variables.yml
 	ansible-playbook -i hosts /etc/ansible/Environmental_Variables2.yml
 	ansible-playbook -i hosts /etc/ansible/health-check-script.yml
