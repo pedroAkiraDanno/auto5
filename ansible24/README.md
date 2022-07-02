@@ -110,6 +110,8 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts /etc/ansible/health-check-script.yml
 	ansible-playbook -i hosts /etc/ansible/health-check-script2.yaml
 	ansible-playbook -i hosts /etc/ansible/health-check-script3.yaml
+	
+	## About VACUUM
 	ansible-playbook -i hosts /etc/ansible/pg_freespacemap.yaml
 	ansible-playbook -i hosts /etc/ansible/vacuum_pgstattuple.yaml
 	ansible-playbook -i hosts vacuum.yml
