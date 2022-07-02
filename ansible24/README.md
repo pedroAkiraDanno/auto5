@@ -1,5 +1,7 @@
 # Postgresql ansible
 
+Repo to postgresql with ansible 
+
 ## steps:
 
 OCI 
@@ -7,7 +9,7 @@ OCI
 	create 2 block volumes 	 (manual or with terraform) 
 	atttach block volumes 	 (manual or with terraform) 
 
-
+---
 
 login server: 
 
