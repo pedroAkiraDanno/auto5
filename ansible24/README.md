@@ -49,9 +49,9 @@ Repo to postgresql with ansible
 	chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
 
 
-## 5 - step  move files and folder about ansible manual or with github **better with github
+## 5 - step  move files and folder about ansible
 	#user with root
-	#move ansible files to server with sftp to /etc/ansible OR USE GITHUB REPO
+	#move ansible files to server with sftp to /etc/ansible OR USE GITHUB REPO **better use GITHUB
 	#GitHub:
 	cd /etc/ansible/  && rm -rf /etc/ansible/*  
 	git clone https://github.com/pedroAkiraDanno/auto5
@@ -75,7 +75,7 @@ Repo to postgresql with ansible
 	#lsblk 
 
 
-## first: 
+## 6 - step exec ansible
 	cd /etc/ansible
 
 	ansible-playbook -i hosts filesystem-playbook2.yml
