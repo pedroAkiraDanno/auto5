@@ -2,8 +2,6 @@
 
 Repo to postgresql with ansible 
 
-## steps:
-
 ### OCI 
 	create a instance   	   (manual or with terraform, check terraform README.md)
 	create 2 block volumes 	   (manual or with terraform, check terraform README.md) 
