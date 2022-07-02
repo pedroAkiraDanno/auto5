@@ -5,16 +5,17 @@ Repo to postgresql with ansible
 ## steps:
 
 ### OCI 
-	create a instance		 (manual or with terraform)
-	create 2 block volumes 	 (manual or with terraform) 
-	atttach block volumes 	 (manual or with terraform) 
+	create a instance   	   (manual or with terraform, check terraform README.md)
+	create 2 block volumes 	   (manual or with terraform, check terraform README.md) 
+	atttach block volumes 	   (manual or with terraform, check terraform README.md) 
 
 ---
 
-login server: 
 
 ## 1- step 
-	### On Ubuntu ### sudo su - 
+	### login server: 
+	### On Ubuntu ### 
+	sudo su - 
 	sudo apt update  --yes
 	sudo apt install software-properties-common  --yes
 	sudo apt-add-repository --yes --update ppa:ansible/ansible
@@ -22,9 +23,11 @@ login server:
 	#sudo apt-get update && sudo apt-get upgrade -y
 	#apt list --upgradable
 
+
 ## 2- step 
-	run a iSCSI commands & information #in oci oracle 
+	#run a iSCSI commands & information #in oci oracle 
 	lsblk 
+
 
 ## 3 - step root
 	sudo cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/
@@ -49,9 +52,9 @@ login server:
 
 
 ## step - 5 
-	user with root
-	move ansible files to server with sftp to /etc/ansible OR USE GITHUB REPO
-	GitHub:
+	#user with root
+	#move ansible files to server with sftp to /etc/ansible OR USE GITHUB REPO
+	#GitHub:
 	cd /etc/ansible/  && rm -rf /etc/ansible/*  
 	git clone https://github.com/pedroAkiraDanno/auto5
 	cd /etc/ansible/auto5/ansible24/ 
@@ -60,11 +63,11 @@ login server:
 	ls -lath
 
 
-	and 
-	execute 
+	#and 
+	#execute 
 	cd /etc/ansible
 	ansible <HOST_GROUP> -m ping
-	 ansible psql  -m ping 
+	ansible psql  -m ping 
 	chmod +x README2.sh
 	./README2.sh
 
@@ -76,7 +79,7 @@ login server:
 
 
 ## first: 
-cd /etc/ansible
+	cd /etc/ansible
 
 	ansible-playbook -i hosts filesystem-playbook2.yml
 	ansible-playbook -i hosts db-server-playbook.yml 		
@@ -157,11 +160,14 @@ cd /etc/ansible
 	vi /etc/fstab
 
 
-UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
-UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"
 
-UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
-UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+	UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
+	UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"
+
+	UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
+	UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+
+
 
 
 	#sudo apt-get update && sudo apt-get upgrade -y
