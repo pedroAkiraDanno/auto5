@@ -44,19 +44,18 @@ Repo to postgresql with ansible
 
 	#move sshd_config file to server
 
-## step - 4 login with ssh root 
+## 4 - step login with ssh root 
 	#move key to server with sftp to /root/.ssh/ and ssh-key-2022-01-19
 	chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
 
 
-## step - 5 
+## 5 - step  move files and folder about ansible manual or with github **better with github
 	#user with root
 	#move ansible files to server with sftp to /etc/ansible OR USE GITHUB REPO
 	#GitHub:
 	cd /etc/ansible/  && rm -rf /etc/ansible/*  
 	git clone https://github.com/pedroAkiraDanno/auto5
-	cd /etc/ansible/auto5/ansible24/ 
-    	mv *  /etc/ansible/ 
+	cd /etc/ansible/auto5/ansible24/ ; mv *  /etc/ansible/ 
 	cd /etc/ansible/  && rm -rf auto5/
 	ls -lath
 
