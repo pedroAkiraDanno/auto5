@@ -180,9 +180,8 @@ Repo to postgresql with ansible
 	chmod +x README2.sh
 	./README2.sh
 
-
-	commands.txt
-	about: commands to use
+	**commands.txt**
+	**about: commands to use**	
 
 
 
