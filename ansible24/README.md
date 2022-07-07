@@ -149,7 +149,7 @@ Repo to postgresql with ansible
 	chown -R postgres:postgres /postgresql/
 
 	cp profile /var/lib/postgresql
-	login with postgresql 
+	#login with postgresql 
 	mv profile .profile
 	. .profile
 
