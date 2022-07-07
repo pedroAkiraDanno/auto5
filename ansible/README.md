@@ -10,11 +10,16 @@ docs located at [doc](https://github.com/pedroAkiraDanno/auto5) and [wiki](https
 
 ## How works:
 
-Create a basic ansible postgresql. 
-Will need 2 disks
-	first  disk to  install postgresql in diferent partition. Partition =  /var/lib/postgresql/
-	second disk  to  configuration backup in the future if want. backup in diferent partition. Partition = /postgresql/
+Create a basic ansible postgresql.
 
+**Will need 2 disks**
+
+first  disk to  install postgresql in diferent partition. Partition =  /var/lib/postgresql/
+
+second disk  to  configuration backup in the future if want. backup in diferent partition. Partition = /postgresql/
+
+
+---
 
 
 
