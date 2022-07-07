@@ -1,0 +1,76 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: dbname
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+      - name: Update the package lists
+        shell: sudo apt-get update
+        args:
+         executable: /bin/bash                 
+
+#      - name: Install postfix 
+#        apt: name={{ item }} update_cache=true state=latest
+#        with_items:
+#        - postfix mailutils
+
+
+      - name: Set Postfix option hostname
+        debconf: 
+         name=postifx 
+         question="postfix/mailname" 
+         value="sandbox" 
+         vtype="string"    
+
+      - name: Set Postfix option type as internet site
+        debconf: 
+         name=postfix 
+         question="postfix/main_mailer_type" 
+         value="'Internet Site'" 
+         vtype="string"
+
+      - name: install postfix
+        apt: name=postfix state=present
+
+
+      - name: Ansible copy file to remote server
+        copy:
+         owner: postgres
+         group: postgres
+         src:  backup.sh
+         dest: /var/lib/postgresql/scripts
+         mode:  0777            
+
+
+
+#      - name: Cronjob Entry backup.shscripts
+#        cron:
+#         name: "### execute backup.sh scripts backup will be performed on your server at midnight on Saturday"
+#         user: postgres
+#         minute: "0"
+#         hour: "0"
+#         day: "*"
+#         month: "*"
+#         weekday: "0"
+#         job: /var/lib/postgresql/scripts/backup.sh        
+
+
+      - name: Cronjob Entry backup.shscripts
+        cron:
+         name: "### execute backup.sh scripts backup will be performed on your server at midnight on Saturday"
+         user: postgres
+         minute: "0"
+         hour: "0"
+         day: "*"
+         month: "*"
+         weekday: "*"
+         job: /var/lib/postgresql/scripts/backup.sh     
+
+

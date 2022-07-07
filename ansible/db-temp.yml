@@ -1,0 +1,92 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: testtemp
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+
+
+#      - name: Install dependencies wget
+#        apt: name={{ item }} update_cache=true state=latest
+#        with_items:
+#        - wget
+
+         
+
+
+#      - name: Install the latest version of PostgreSQL
+#        shell: sudo apt-get -y install postgresql
+#        args:
+#         executable: /bin/bash                 
+
+
+
+      - name: Ansible copy file TempFile.sql to remote server
+        copy:
+         owner: postgres
+         group: postgres
+         src:  TempFile.sql
+         dest: /var/lib/postgresql/scripts
+
+      - name: Ansible copy file CreateTempFile.sql to remote server
+        copy:
+         owner: postgres
+         group: postgres
+         src:   CreateTempFile.sql
+         dest: /var/lib/postgresql/scripts         
+      
+     
+      - name: Create the database testtemp specified in vars
+        become: true
+        become_user: postgres
+        postgresql_db: name={{ db_name }}
+            template='template0'
+            state=present
+
+      - name: Ensure user has access to the new database
+        become: true
+        become_user: postgres
+        postgresql_user: db={{ db_name }}
+             name={{ db_user }}
+             password={{ db_password }}
+             priv=ALL
+             state=present
+
+      - name: Ensure user does not have unnecessary permissions
+        become: true
+        become_user: postgres
+        postgresql_user: name={{ db_user }}
+            role_attr_flags=NOSUPERUSER,NOCREATEDB
+            state=present
+            
+      - name: Execute in database CreateTempFile.sql  
+        become: true
+        become_user: postgres
+        shell: psql {{ db_name }} < /var/lib/postgresql/scripts/CreateTempFile.sql   
+
+
+
+      - name: Cronjob Entry TempFile.sql scripts
+        cron:
+         name: "### execute TempFile.sql scripts"
+         user: postgres
+         minute: "*"
+         hour: "*/4"
+         day: "*"
+         month: "*"
+         weekday: "*"
+         job: psql -U postgres -d testtemp -a -f /var/lib/postgresql/scripts/TempFile.sql        
+
+
+
+### REFERENCES 
+### https://stackoverflow.com/questions/54194320/temp-file-in-postgresql
+### https://dba.stackexchange.com/questions/111187/postgresql-size-of-temporary-files
+### https://adriennedomingus.com/blog/understanding-temp-files-in-postgres
