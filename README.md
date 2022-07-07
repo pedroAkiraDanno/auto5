@@ -9,14 +9,19 @@ Ansible is an open-source software provisioning, configuration management, and a
 
 Terraform is an open-source infrastructure as code software tool created by HashiCorp. Users define and provide data center infrastructure using a declarative configuration language known as HashiCorp Configuration Language, or optionally JSON.
 
+
+
 For more information look at our
 docs located at [doc](https://github.com/pedroAkiraDanno/auto5/) and [wiki](https://github.com/pedroAkiraDanno/auto5/wiki) .
 
+
+
 ---
+
 
 ## How works:
 
-Exist 2 folder about automation in postgresql ansible24 and terraform .
+Exist 2 folder about automation in **postgresql** **ansible24** and **terraform** .
 
 
 ## About versions (for more infos check [CHANGELOG.md](https://github.com/pedroAkiraDanno/auto5/blob/main/CHANGELOG.md))
@@ -48,3 +53,4 @@ Exist 2 folder about automation in postgresql ansible24 and terraform .
 
 ---
 Inspired in [postgresql](https://www.postgresql.org/) , [ansible](https://www.ansible.com/) and [terraform](https://www.terraform.io/) , this is postgresql auto-minimalistic version.
+©  [PedroAkira](https://www.instagram.com/pedro.akira.3)
