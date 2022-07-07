@@ -2,6 +2,22 @@
 
 Repo to postgresql with ansible 
 
+
+For more information look at our
+docs located at [doc](https://github.com/pedroAkiraDanno/auto5) and [wiki](https://github.com/pedroAkiraDanno/auto5/wiki) .
+
+
+
+## How works:
+
+Create a basic ansible postgresql. 
+Will need 2 disks
+	first  disk to  install postgresql in diferent partition. Partition =  /var/lib/postgresql/
+	second disk  to  configuration backup in the future if want. backup in diferent partition. Partition = /postgresql/
+
+
+
+
 ### OCI 
 	create a instance   	   (manual or with terraform, check terraform README.md)
 	create 2 block volumes 	   (manual or with terraform, check terraform README.md) 
@@ -81,8 +97,6 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts  filesystem-playbook2.yml
 	ansible-playbook -i hosts  db-server-playbook.yml 		
 	ansible-playbook -i hosts  backup_filesystem.yml
-	#ansible-playbook -i hosts  swap.yml
-	#ansible-playbook -i hosts  /etc/ansible/sudo.yml
 	ansible-playbook -i hosts  /etc/ansible/Environmental_Variables2.yml
 
 	
