@@ -81,11 +81,8 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts  filesystem-playbook2.yml
 	ansible-playbook -i hosts  db-server-playbook.yml 		
 	ansible-playbook -i hosts  backup_filesystem.yml
-	ansible-playbook -i hosts  swap.yml
-	ansible-playbook -i hosts  /etc/ansible/sudo.yml
-	ansible-playbook -i hosts  /etc/ansible/postgres_structure.yaml
-	ansible-playbook -i hosts  /etc/ansible/sequence.yml
-	ansible-playbook -i hosts  /etc/ansible/walfile.yml
+	#ansible-playbook -i hosts  swap.yml
+	#ansible-playbook -i hosts  /etc/ansible/sudo.yml
 	ansible-playbook -i hosts  /etc/ansible/Environmental_Variables2.yml
 
 	
@@ -97,13 +94,6 @@ Repo to postgresql with ansible
 ## need exec 
 	#use user root
 
-	apt-get install -y postfix mailutils
-	#/var/lib/postgresql/scripts/pgmetrics.sh
-
-
-	apt-get install gcc -y
-
-
 	chown -R postgres:postgres /postgresql/
 
 	cp profile /var/lib/postgresql
@@ -114,6 +104,7 @@ Repo to postgresql with ansible
 	#rm /root/.ssh/ssh-key-2022-01-19*
 	#sudo passwd postgres
 
+	#because OCI
 	***change the name in fstab to uuid
 	sudo blkid | grep UUID=
 	vi /etc/fstab
