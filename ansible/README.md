@@ -102,7 +102,7 @@ second disk  to  configuration backup in the future if want. backup in diferent 
 	ansible-playbook -i hosts  filesystem-playbook2.yml
 	ansible-playbook -i hosts  db-server-playbook.yml 		
 	ansible-playbook -i hosts  backup_filesystem.yml
-	ansible-playbook -i hosts  /etc/ansible/Environmental_Variables2.yml
+	#ansible-playbook -i hosts  /etc/ansible/Environmental_Variables2.yml
 
 	
 
