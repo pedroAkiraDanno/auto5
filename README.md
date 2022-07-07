@@ -52,5 +52,5 @@ Exist 2 folder about automation in **postgresql** **ansible24** and **terraform*
 
 
 ---
-Inspired in [postgresql](https://www.postgresql.org/) , [ansible](https://www.ansible.com/) and [terraform](https://www.terraform.io/) , this is postgresql auto-minimalistic version.
+Inspired in [postgresql](https://www.postgresql.org/) , [ansible](https://www.ansible.com/) , [terraform](https://www.terraform.io/) and [oracle_cloud](https://www.oracle.com/cloud/) , this is postgresql auto-minimalistic version.
 ©  [PedroAkira](https://www.instagram.com/pedro.akira.3)
