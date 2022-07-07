@@ -8,12 +8,40 @@ Vagrant is an open-source software product for building and maintaining portable
 
 
 
-## Install and use Vagrant to Ubuntu
+## Install and use Vagrant on Ubuntu
+
+
+
+### Install virtualbox 
+                sudo apt update && sudo apt upgrade
+                sudo apt install virtualbox
+
+
+
+### Install Vagrant
+                curl -O https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb
+                sudo apt install ./vagrant_2.2.9_x86_64.deb
+                vagrant --version
 
 
 
 
-### ubuntu/jammy64 Vagrant box
+### Getting Started with Vagrant
+                mkdir ~/my-vagrant-project
+                cd ~/my-vagrant-project
+
+
+
+
+### Removing Vagrant from Ubuntu 22.04
+                sudo apt remove --autoremove vagrant
+
+
+
+
+
+
+# ubuntu/jammy64 Vagrant box
 How to use this box with Vagrant:
 
         vagrant init ubuntu/jammy64
@@ -32,7 +60,11 @@ Connect with virtual machine:
 
 
 
-### codeup/Ubuntu-20.04-GUI 
+
+
+# codeup/Ubuntu-20.04-GUI 
+
+Ubuntu 20.04 with GUI interface 
 
 How to use this box with Vagrant:
 
@@ -52,7 +84,10 @@ Connect with virtual machine:
 
 
 
-### debian/bullseye64 
+
+
+
+# debian/bullseye64 
 
 How to use this box with Vagrant:
 
@@ -69,7 +104,40 @@ Connect with virtual machine:
 
 
 
+
+
+
+
+
+
+
 ---
-Inspired in [postgresql](https://www.postgresql.org/) , [ansible](https://www.ansible.com/) , [terraform](https://www.terraform.io/) and [oracle_cloud](https://www.oracle.com/cloud/) , this is postgresql auto-minimalistic version.
+# Basic commands
+
+### vagrant status:
+        vagrant status
+
+
+### You can stop the virtual machine with the following command:
+        vagrant halt
+
+
+### To destroy all resources created during the creation of the machine, enter:
+        vagrant destroy
+
+
+
+
+
+
+
+
+
+
+
+
+---
+Inspired in [postgresql](https://www.postgresql.org/) , [vagrant_cloud_box](https://app.vagrantup.com/)  , [vagrantup](https://www.vagrantup.com/) , 
+ [vagrantup_docs](https://www.vagrantup.com/docs) and   [vragrant_source_code](https://github.com/hashicorp/vagrant) this is postgresql auto-minimalistic version.
 ©  [PedroAkira](https://www.instagram.com/pedro.akira.3)
 
