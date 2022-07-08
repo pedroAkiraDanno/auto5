@@ -45,7 +45,7 @@ Exist 2 folder about automation in **postgresql** **ansible24** and **terraform*
     git clone https://github.com/pedroAkiraDanno/auto5
 
     //1 ENTER IN ansible24 folder to automation postgresql 
-    //2 ENTER IN terraform folder to automation postgresql
+    //2 ENTER IN terraform or vagrant folder to automation postgresql
 
 
 
