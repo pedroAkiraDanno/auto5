@@ -12,11 +12,6 @@ docs located at [doc](https://github.com/pedroAkiraDanno/auto5) and [wiki](https
 
 Create a basic ansible postgresql.
 
-**Will need 2 disks**
-
-first  disk to  install postgresql in diferent partition. Partition =  /var/lib/postgresql/
-
-second disk  to  configuration backup in the future if want. backup in diferent partition. Partition = /postgresql/
 
 
 ---
@@ -99,13 +94,14 @@ second disk  to  configuration backup in the future if want. backup in diferent 
 ## 6 - step exec ansible
 	cd /etc/ansible
 
-	ansible-playbook -i hosts  filesystem-playbook2.yml
 	ansible-playbook -i hosts  db-server-playbook.yml 		
-	ansible-playbook -i hosts  backup_filesystem.yml
-	#ansible-playbook -i hosts  /etc/ansible/Environmental_Variables2.yml
+
 
 	
 
+## Explain files about ansible *.yml
+
+	db-server-playbook.yml 	 						will install postgresql in /var/lib/postgresql/
 
 
 
@@ -115,10 +111,7 @@ second disk  to  configuration backup in the future if want. backup in diferent 
 
 	chown -R postgres:postgres /postgresql/
 
-	cp profile /var/lib/postgresql
-	login with postgresql 
-	mv profile .profile
-	. .profile
+
 
 	#rm /root/.ssh/ssh-key-2022-01-19*
 	#sudo passwd postgres
@@ -131,10 +124,10 @@ second disk  to  configuration backup in the future if want. backup in diferent 
 
 
 	UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
-	UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"
+
 
 	UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
-	UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+
 
 
 
@@ -143,24 +136,6 @@ second disk  to  configuration backup in the future if want. backup in diferent 
 	#apt list --upgradable
 	#lsblk 
 	#reboot server --because the HDs
-
-
-
-
-
-
-
-
-
-## OR
-
-	chmod +x README2.sh
-	./README2.sh
-
-	**commands.txt**
-	**about: commands to use**	
-
-
 
 
 
