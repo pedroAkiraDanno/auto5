@@ -5,7 +5,7 @@ Vagrant is an open-source software product for building and maintaining portable
 
 
 For more information look at our
-docs located at [doc](https://github.com/pedroAkiraDanno/logrotate2/blob/main/doc/main/logFileRotate.pdf) and [vagrant-cheat-sheet](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4) .
+docs located at [readme](https://github.com/pedroAkiraDanno/auto5/blob/feature/vagrant2/vagrant/README.md) and [vagrant-cheat-sheet](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4) .
 
 
 
@@ -53,7 +53,7 @@ docs located at [doc](https://github.com/pedroAkiraDanno/logrotate2/blob/main/do
         vagrant box remove NAME
 
 
-### Box Update (This command updates the box for the current Vagrant environment if there are updates available. )
+### Box Update (Command updates the box for the current Vagrant environment if there are updates available)
         vagrant box update
 
 

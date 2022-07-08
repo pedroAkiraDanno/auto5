@@ -5,7 +5,7 @@ Vagrant is an open-source software product for building and maintaining portable
 
 
 For more information look at our
-docs located at [doc](https://github.com/pedroAkiraDanno/logrotate2/blob/main/doc/main/logFileRotate.pdf) and [vagrant-cheat-sheet](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4) .
+docs located at [doc](https://github.com/pedroAkiraDanno/auto5/blob/feature/vagrant2/vagrant/doc.md) and [vagrant-cheat-sheet](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4) .
 
 
 
@@ -131,6 +131,31 @@ Connect with virtual machine:
         sudo passwd root
 
 
+
+
+
+
+
+
+# STEPS by STEPS on Linux Environment (completed)
+
+        sudo su - 
+
+        cd ~
+        rm -fr logrotate2/
+        git clone https://github.com/pedroAkiraDanno/auto5
+        cd  auto5/vagrant
+
+        mkdir ~/my-vagrant-project
+        cd ~/my-vagrant-project
+
+
+        vagrant init debian/bullseye64
+        vagrant up
+
+
+        vagrant ssh 
+        sudo passwd root
 
 
 
