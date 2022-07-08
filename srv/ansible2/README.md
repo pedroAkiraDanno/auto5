@@ -18,7 +18,7 @@ Create a basic ansible postgresql.
 
 ## Explain files about ansible *.yml
 
-	ansible-simple-single_disk 				folder to disk just to SO Operation System and default disk and simple install postgresql  
+	ansible-simple-single_disk 					folder to disk just to SO Operation System and default disk and simple install postgresql  
 	ansible-simple 	 						folder to 2 disks total. Disk 1 to SO, disk 2 to simple install postgresql 							
 	ansible-post-bkp 						folder to 3 disks total   Disk 1 to SO, disk 2 to simple install postgresql, disk 3 to backup 
 
