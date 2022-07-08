@@ -1,0 +1,111 @@
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#passos
+
+cd /d/Users/Pedro/Desktop/P/study/D/vagrant/v/w
+
+vagrant box add Microsoft/EdgeOnWindows10 \
+  --box-version 1.0
+
+vagrant init Microsoft/EdgeOnWindows10 \
+  --box-version 1.0
+
+vim Vagrantfile
+    #descomentar
+    config.vm.network "public_network"
+    #adicionar
+    config.mv.define "srv1_win"
+
+vagrant up
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#comands:
+
+vagrant status
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#remove 
+
+ vagrant halt
+
+ vagrant box list
+
+ vagrant box remove ubuntu/hirsute64
+
+ vagrant destroy [name|id]
+  vagrant destroy -f
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  v.customize ["modifyvm", :id, "--groups", "mygroupname"]
+https://stackoverflow.com/questions/47588787/is-it-possible-to-add-vms-in-a-particular-group-with-virtualbox-vagrant-provider
+create group vagrant virtualbox
+
+
+Vagrant.configure('2') do |config|
+    config.vm.box = "precise64"
+    config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    config.vm.define "foohost"
+end
+
+
+wget http://download.virtualbox.org/virtualbox/4.3.8/VBoxGuestAdditions_4.3.8.iso
+sudo mkdir /media/VBoxGuestAdditions
+sudo mount -o loop,ro VBoxGuestAdditions_4.3.8.iso /media/VBoxGuestAdditions
+sudo sh /media/VBoxGuestAdditions/VBoxLinuxAdditions.run
+rm VBoxGuestAdditions_4.3.8.iso
+sudo umount /media/VBoxGuestAdditions
+sudo rmdir /media/VBoxGuestAdditions
+
+
+https://www.vagrantup.com/docs/providers/virtualbox/boxes
+
+
