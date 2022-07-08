@@ -218,13 +218,12 @@ Connect with virtual machine:
 
         Boxes also support versioning so that members of your team using Vagrant can update the underlying box easily, and the people who create boxes can push fixes and communicate these fixes efficiently.
 
-        You can learn all about boxes by reading this page as well as the sub-pages in the navigation to the left.
 
 
         Reference:      https://www.vagrantup.com/docs/boxes
 
 
-**Vagrantfile**
+**Vagrantfile** use to configure the virtual box machine 
 
         The primary function of the Vagrantfile is to describe the type of machine required for a project, and how to configure and provision these machines. Vagrantfiles are called Vagrantfiles because the actual literal filename for the file is Vagrantfile (casing does not matter unless your file system is running in a strict case sensitive mode).
 
