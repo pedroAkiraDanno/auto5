@@ -41,7 +41,7 @@ Exist 2 folder about automation in **postgresql** **ansible24** and **terraform*
     sudo apt-get install gcc -y
 
     cd ~
-    rm -fr logrotate2/
+    rm -fr auto5/
     git clone https://github.com/pedroAkiraDanno/auto5
 
     //1 ENTER IN ansible24 folder to automation postgresql 
