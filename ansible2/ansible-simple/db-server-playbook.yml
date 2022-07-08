@@ -1,0 +1,84 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: dbname
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+      - name: Create the file repository configuration
+        shell: sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+        args:
+         executable: /bin/bash         
+
+
+#      - name: Install dependencies wget
+#        apt: name={{ item }} update_cache=true state=latest
+#        with_items:
+#        - wget
+
+
+      - name: Import the repository signing key
+        shell: wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+        args:
+         executable: /bin/bash                 
+
+
+      - name: Install dependencies for PostgreSQL
+        apt: name={{ item }} update_cache=true state=latest
+        with_items:
+        - bash
+        - openssl
+        - libssl-dev
+        - libssl-doc
+
+
+
+
+      - name: Update the package lists
+        shell: sudo apt-get update
+        args:
+         executable: /bin/bash                 
+
+#      - name: Install the latest version of PostgreSQL
+#        shell: sudo apt-get -y install postgresql
+#        args:
+#         executable: /bin/bash                 
+
+
+
+      - name: Install PostgreSQL 
+        apt: name={{ item }} update_cache=true state=present
+        with_items:
+        - postgresql        
+        - postgresql-contrib
+        - libpq-dev
+        - python3-psycopg2         
+
+
+
+
+      - name: Ensure the PostgreSQL service is running
+        service: name=postgresql state=started enabled=yes
+
+
+
+
+      - name: Restart postgresql
+        service: name=postgresql state=restarted
+        when: pgconf.changed
+
+
+
+
+      - name: Restart the PostgreSQL service 
+        service: name=postgresql state=restarted 
+
+         
+
+
