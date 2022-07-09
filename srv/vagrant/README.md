@@ -156,6 +156,32 @@ Connect with virtual machine:
 
         vagrant ssh 
         sudo passwd root
+        sudo passwd ubuntu 
+
+
+
+
+
+
+
+# STEPS by STEPS on Windows Environment (completed)
+
+        cd D:\Users\Pedro\Desktop\P\database\PostgreSQL\auto\PRINCIPAL\auto5\srv\vagrant\v
+
+        vagrant init debian/bullseye64
+        vagrant up
+
+
+        vagrant ssh 
+        sudo passwd root
+        sudo passwd ubuntu 
+
+
+        #When finish test 
+        vagrant halt
+        vagrant destroy
+        vagrant box remove debian/bullseye64 
+
 
 
 
