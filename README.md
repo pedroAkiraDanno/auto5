@@ -25,6 +25,7 @@ Exist 2 folder about automation in **postgresql** **ansible24** and **terraform*
 
 
 ## About versions (for more infos check [CHANGELOG.md](https://github.com/pedroAkiraDanno/auto5/blob/main/CHANGELOG.md))
+    v0.3.0 -         Add vagrant to this version
     v0.2.0 -         Version v0.2.0 Add terraform in repo
     v0.1.2 -         Fix database dvdrental version v0.1.2
     v0.1.1 -         Fix Environmental_Variables2.yml-change .bash_profile to .profile version for v0.1.1
@@ -40,11 +41,12 @@ Exist 2 folder about automation in **postgresql** **ansible24** and **terraform*
     sudo apt-get install gcc -y
 
     cd ~
-    rm -fr logrotate2/
+    rm -fr auto5/
     git clone https://github.com/pedroAkiraDanno/auto5
 
-    //1 ENTER IN ansible24 folder to automation postgresql 
-    //2 ENTER IN terraform folder to automation postgresql
+    #1 ENTER IN terraform or vagrant folder to automation postgresql
+    #2 ENTER IN ansible24 folder to automation postgresql 
+
 
 
 
