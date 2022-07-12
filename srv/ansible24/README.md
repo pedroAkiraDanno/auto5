@@ -76,10 +76,11 @@ Repo to postgresql with ansible
 	#user with root
 	#move ansible files to server with sftp to /etc/ansible OR USE GITHUB REPO **better use GITHUB
 	#GitHub:
-	cd ~  
+	cd /etc/ansible/  && rm -rf /etc/ansible/*  
 	git clone https://github.com/pedroAkiraDanno/auto5
-	cd /root/auto5/srv/ansible24/ ; mv sshd_config  /etc/ssh/
-	cat /etc/ssh/ssh_config | grep PasswordAuthentication
+	cd /etc/ansible/auto5/srv/ansible24/ ; mv *  /etc/ansible/ 
+	cd /etc/ansible/  && rm -rf auto5/
+	ls -lath
 
 
 
