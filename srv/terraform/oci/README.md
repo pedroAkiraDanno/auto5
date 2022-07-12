@@ -51,7 +51,7 @@ You are using Cloud Shell in tenancy pedro**** as an OCI Local user pedro@****.c
         cd auto5/terraform/oci/oci_infrastructure/Block_Volume
 
         vi variables_vars.auto.tfvars 
-        change name block_volume_display_name to blv1
+        #change name block_volume_display_name to blv1
 
         terraform init
         terraform plan
