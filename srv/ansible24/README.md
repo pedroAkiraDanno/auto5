@@ -33,6 +33,15 @@ Repo to postgresql with ansible
 
 	#login by root 	
 	sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bkp
+	
+	#move file sshd_config with github
+	cd /etc/ansible/  && rm -rf /etc/ansible/*  
+	git clone https://github.com/pedroAkiraDanno/auto5
+	cd /etc/ansible/auto5/srv/ansible24/ ; mv sshd_config  /etc/ssh/
+
+	OR
+	
+	# move the sshd_config file with (SCP)
 	Set in vi /etc/ssh/sshd_config:
 
 	PermitRootLogin yes
