@@ -35,10 +35,11 @@ Repo to postgresql with ansible
 	sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bkp
 	
 	#move file sshd_config with github
-	cd ~  
+	cd ~  ; rm -fr auto5	
 	git clone https://github.com/pedroAkiraDanno/auto5
 	cd /root/auto5/srv/ansible24/ ; mv sshd_config  /etc/ssh/
 	cat /etc/ssh/ssh_config | grep PasswordAuthentication
+	cd ~  ; rm -fr auto5	
 	
 
 	OR
@@ -66,7 +67,8 @@ Repo to postgresql with ansible
 	rm -fr auto5
 	git clone https://github.com/pedroAkiraDanno/auto5  
 	cd  root/auto5/srv/ansible24/ ; mv ssh-key-2022-01-19.key.pub  /root/.ssh/	
-
+	cd ~  ; rm -fr auto5	
+	chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
 
 
 
