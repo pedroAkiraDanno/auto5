@@ -166,9 +166,11 @@ Connect with virtual machine:
 
 # STEPS by STEPS on Windows Environment (completed)
 
-        cd D:\Users\Pedro\Desktop\P\database\PostgreSQL\auto\PRINCIPAL\auto5\srv\vagrant\v
+        # Open cmd 
+        D:
+        cd \Users\Pedro\Desktop\P\database\PostgreSQL\auto\PRINCIPAL\auto5\srv\vagrant\v
 
-        vagrant init debian/bullseye64
+        vagrant init ubuntu/jammy64
         vagrant up
 
 
@@ -178,9 +180,13 @@ Connect with virtual machine:
 
 
         #When finish test 
+        vagrant status
+        vagrant box list
+        vagrant resume                        
         vagrant halt
         vagrant destroy
-        vagrant box remove debian/bullseye64 
+
+        vagrant box remove codeup/Ubuntu-20.04-GUI
 
 
 
