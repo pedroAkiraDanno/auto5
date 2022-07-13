@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 #sudo su - 
 sudo apt-get update && sudo apt-get upgrade -y
 
@@ -14,8 +13,10 @@ sudo apt-get update && sudo apt-get upgrade -y
 
 
 
+
 #REMOVE iptables RULES
     sudo truncate -s 0 /etc/iptables/rules.v4
+
 
 
 
@@ -34,6 +35,7 @@ sudo apt-get update && sudo apt-get upgrade -y
     sudo systemctl restart systemd-networkd    
 
     ##reboot
+
 
 
 
