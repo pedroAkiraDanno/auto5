@@ -47,6 +47,12 @@ You are using Cloud Shell in tenancy pedro**** as an OCI Local user pedro@****.c
 
 
 #### Block_Volume 2
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        cd auto5/srv/terraform/oci/oci_infrastructure/
+
         cd ~   
         cd auto5/srv/terraform/oci/oci_infrastructure/Block_Volume
 
