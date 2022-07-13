@@ -145,6 +145,12 @@ Repo to postgresql with ansible
 
 
 
+	## About GUI Graphical User Interface in Linux 
+	ansible-playbook -i hosts /etc/ansible/GUI_linux.yml
+	ansible-playbook -i hosts /etc/ansible/change_password.yml
+
+
+
 ## need exec 
 	#use user root
 
