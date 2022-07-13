@@ -16,12 +16,12 @@ You are using Cloud Shell in tenancy pedro**** as an OCI Local user pedro@****.c
     cd ~
     rm -fr auto5/
     git clone https://github.com/pedroAkiraDanno/auto5.git
-    cd auto5/terraform/oci/oci_infrastructure/
+    cd auto5/srv/terraform/oci/oci_infrastructure/
 
 #### Key 
     ## move public and private key to acess terrafrom with oci 
     cd ~    
-    cd auto5/terraform/oci/oci_infrastructure/Key/
+    cd auto5/srv/terraform/oci/oci_infrastructure/Key/
     #myvar=$(id -u -n )
     myvar=$(whoami)
     cp  *.pem    /home/$myvar/.ssh/
@@ -29,7 +29,7 @@ You are using Cloud Shell in tenancy pedro**** as an OCI Local user pedro@****.c
 
 #### Create_Intance
         cd ~   
-        cd auto5/terraform/oci/oci_infrastructure/Create_Intance
+        cd auto5/srv/terraform/oci/oci_infrastructure/Create_Intance
 
         terraform init
         terraform plan
@@ -38,7 +38,7 @@ You are using Cloud Shell in tenancy pedro**** as an OCI Local user pedro@****.c
 
 #### Block_Volume 1 
         cd ~   
-        cd auto5/terraform/oci/oci_infrastructure/Block_Volume
+        cd auto5/srv/terraform/oci/oci_infrastructure/Block_Volume
 
         terraform init
         terraform plan
@@ -47,8 +47,14 @@ You are using Cloud Shell in tenancy pedro**** as an OCI Local user pedro@****.c
 
 
 #### Block_Volume 2
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        cd auto5/srv/terraform/oci/oci_infrastructure/
+
         cd ~   
-        cd auto5/terraform/oci/oci_infrastructure/Block_Volume
+        cd auto5/srv/terraform/oci/oci_infrastructure/Block_Volume
 
         vi variables_vars.auto.tfvars 
         #change name block_volume_display_name to blv1
