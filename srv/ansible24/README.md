@@ -2,7 +2,7 @@
 
 Repo to postgresql with ansible 
 
-### OCI 
+### OCI ( [teraform](https://github.com/pedroAkiraDanno/auto5/tree/develop/srv/terraform/oci))
 	create a instance   	   (manual or with terraform, check terraform README.md)
 	create 2 block volumes 	   (manual or with terraform, check terraform README.md) 
 	atttach block volumes 	   (manual or with terraform, check terraform README.md) 
