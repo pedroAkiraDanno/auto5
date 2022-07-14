@@ -32,3 +32,16 @@
       - name: Reboot the machine with all defaults using Ansible
         reboot:
 
+
+
+#      - name: Check the Uptime of the servers
+#        shell: "uptime"
+#        register: Uptime
+
+#      - debug: var=Uptime
+
+
+
+
+# REFERENCES:
+# https://www.middlewareinventory.com/blog/ansible_wait_for_reboot_to_complete/
