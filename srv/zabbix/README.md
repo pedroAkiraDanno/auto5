@@ -1,4 +1,4 @@
-# zabbix
+# Zabbix
 
 
 **Zabbix** is an open-source software tool to monitor IT infrastructure such as networks, servers, virtual machines, and cloud services. Zabbix collects and displays basic metrics.
@@ -11,6 +11,18 @@ docs located at [doc](https://github.com/pedroAkiraDanno/auto5/) and [wiki](http
 
 
 ---
+
+
+
+## NOTES/INFOS: 
+
+**Long-term support (LTS)**  is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period of time than the standard edition. The term is typically reserved for open-source software, where it describes a software edition that is supported for months or years longer than the software's standard edition.
+
+
+
+
+
+
 
 
 ## How works:
@@ -48,5 +60,5 @@ Exist 2 folder about automation in **postgresql** **ansible24** and **terraform*
 
 
 ---
-Inspired in [zabbix](https://www.zabbix.com/) , [git.zabbix]](https://git.zabbix.com/projects/zbx/repos/zabbix/browse) and [gihub_zabbix](https://github.com/zabbix/zabbix) this is postgresql auto-minimalistic version.
+Inspired in [Zabbix](https://www.zabbix.com/) , [git.zabbix](https://git.zabbix.com/projects/zbx/repos/zabbix/browse) and [gihub_zabbix](https://github.com/zabbix/zabbix) this is zabbix to postgresql auto-minimalistic version.
 ©  [PedroAkira](https://www.instagram.com/pedro.akira.3)
