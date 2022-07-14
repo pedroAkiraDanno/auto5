@@ -25,17 +25,20 @@ docs located at [doc](https://github.com/pedroAkiraDanno/auto5/) and [wiki](http
 
 
 
+
 ## How works:
 
 Exist 2 folder about automation in **postgresql** **ansible24** and **terraform** .
 
 
-## About versions (for more infos check [CHANGELOG.md](https://github.com/pedroAkiraDanno/auto5/blob/main/CHANGELOG.md))
-    v0.3.0 -         Add vagrant to this version
-    v0.2.0 -         Version v0.2.0 Add terraform in repo
-    v0.1.2 -         Fix database dvdrental version v0.1.2
-    v0.1.1 -         Fix Environmental_Variables2.yml-change .bash_profile to .profile version for v0.1.1
-    v0.1.0 -         dont recomend to use, is forks about old project - have a lot problemas and bugs to fix 
+
+## Download and Install Zabbix
+
+### Step 1 - click in link: 
+
+    https://www.zabbix.com/download
+
+
 
 
 
