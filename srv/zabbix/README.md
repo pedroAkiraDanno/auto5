@@ -29,11 +29,7 @@ Simple install and configuration about **Zabbix**.
 
 <br /> 
 
-Default root password for Zabbix Appliance:
-
-Admin
-
-zabbix
+Default root password for Zabbix Appliance: User: Admin     Password: zabbix
 
 
 ---
