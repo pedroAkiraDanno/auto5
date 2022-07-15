@@ -40,7 +40,8 @@ Repo to postgresql with ansible
 	cd /root/auto5/srv/ansible24/ ; mv sshd_config  /etc/ssh/
 	cat /etc/ssh/ssh_config | grep PasswordAuthentication
 	cd ~  ; rm -fr auto5	
-	
+	systemctl restart sshd	
+
 
 	OR
 	
