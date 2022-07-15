@@ -123,6 +123,13 @@ Follow steps described in Zabbix documentation: [Installing frontend](https://ww
 
 
 
+# PostgreSQL Monitoring With ZABBIX
+
+
+
+
+
+
 
 ---
 Inspired in [Zabbix](https://www.zabbix.com/) , [git.zabbix](https://git.zabbix.com/projects/zbx/repos/zabbix/browse) and [gihub_zabbix](https://github.com/zabbix/zabbix) this is zabbix to postgresql auto-minimalistic version.
