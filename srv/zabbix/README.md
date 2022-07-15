@@ -116,11 +116,104 @@ Follow steps described in Zabbix documentation: [Installing frontend](https://ww
 
 
 
-
+<br /> 
 
 
 # PostgreSQL Monitoring With ZABBIX
 
+
+## How works:
+Use Zabbix agent1 to monitoring PostgreSQL.
+PostgreSQL by Zabbix agent
+
+
+Overview
+For Zabbix version: 6.2 and higher
+Templates to monitor PostgreSQL by Zabbix. This template was tested on PostgreSQL versions 9.6, 10 and 11 on Linux and Windows.
+
+---
+
+
+### Step 1 - Install Zabbix agent and create a read-only zbx_monitor user with proper access to your PostgreSQL server.
+
+For PostgreSQL version 10 and above:
+
+    su - postgres 
+    psql 
+
+    postgres=# CREATE USER zbx_monitor WITH PASSWORD 'zabbix' INHERIT;
+    postgres=# GRANT pg_monitor TO zbx_monitor;
+
+
+
+
+
+### Step 2 - Dowload templete postgresql/
+    #Dowload from https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/postgresql?at=release/6.2
+
+    sudo su - 
+    cd ~ 
+    git clone https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/postgresql?at=release/6.2
+
+
+
+### Step 3 - Copy postgresql/ to Zabbix agent home directory /var/lib/zabbix/. 
+
+The postgresql/ directory contains the files needed to obtain metrics from PostgreSQL.
+
+    mkdir /var/lib/zabbix/
+    chown zabbix:zabbix /var/lib/zabbix/
+    chmod 755 /var/lib/zabbix/
+
+
+    mkdir /var/lib/zabbix/postgresql 
+    cp postgresql/*  /var/lib/zabbix/postgresql/
+    ls -lath  /var/lib/zabbix/postgresql/
+
+
+
+### Step 4 - Copy template_db_postgresql.conf to Zabbix agent configuration directory /etc/zabbix/zabbix_agentd.d/ and restart Zabbix agent service.
+
+    cp template_db_postgresql.conf /etc/zabbix/zabbix_agentd.d/
+
+    ls -lath /etc/zabbix/zabbix_agentd.d/
+
+
+
+### Step 5 - Edit pg_hba.conf to allow connections from Zabbix agent https://www.postgresql.org/docs/current/auth-pg-hba-conf.html.
+Add rows (for example):
+
+    find / -name pg_hba.conf
+
+    vi /etc/postgresql/14/main/pg_hba.conf
+            host all zbx_monitor 127.0.0.1/32 trust
+            host all zbx_monitor 0.0.0.0/0 md5
+            host all zbx_monitor ::0/0 md5
+
+    sudo systemctl restart postgresql
+
+
+
+
+vim /var/lib/zabbix/.pgpass 
+
+127.0.0.1:5432:postgres:zbx_monitor:zabbix
+
+
+ls -lath /var/lib/zabbix/.pgpass 
+
+
+
+systemctl restart postgresql
+
+
+## References: 
+    https://www.youtube.com/watch?v=Dw_2-SB-QKY
+
+    https://www.zabbix.com/integrations/postgresql
+
+
+-rw-------
 
 
 
