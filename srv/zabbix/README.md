@@ -145,7 +145,7 @@ For PostgreSQL version 10 and above:
     postgres=# GRANT pg_monitor TO zbx_monitor;
 
 
-
+<br /> 
 
 
 ### Step 2 - Dowload templete postgresql/
@@ -155,6 +155,8 @@ For PostgreSQL version 10 and above:
     cd ~ 
     git clone https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/postgresql?at=release/6.2
 
+
+<br /> 
 
 
 ### Step 3 - Copy postgresql/ to Zabbix agent home directory /var/lib/zabbix/. 
@@ -171,6 +173,8 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
     ls -lath  /var/lib/zabbix/postgresql/
 
 
+<br /> 
+
 
 ### Step 4 - Copy template_db_postgresql.conf to Zabbix agent configuration directory /etc/zabbix/zabbix_agentd.d/ and restart Zabbix agent service.
 
@@ -179,12 +183,14 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
     ls -lath /etc/zabbix/zabbix_agentd.d/
 
 
+<br /> 
 
-### Step 5 - Edit pg_hba.conf to allow connections from Zabbix agent https://www.postgresql.org/docs/current/auth-pg-hba-conf.html.
+### Step 5 - Edit pg_hba.conf to allow connections from Zabbix agent [auth-pg-hba-conf.html](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html).
 Add rows (for example):
 
     find / -name pg_hba.conf
 
+    sudo su - postgres 
     vi /etc/postgresql/14/main/pg_hba.conf
             host all zbx_monitor 127.0.0.1/32 trust
             host all zbx_monitor 0.0.0.0/0 md5
@@ -194,17 +200,23 @@ Add rows (for example):
 
 
 
+### Step 6 - /var/lib/zabbix/.pgpass 
 
-vim /var/lib/zabbix/.pgpass 
-
-127.0.0.1:5432:postgres:zbx_monitor:zabbix
-
-
-ls -lath /var/lib/zabbix/.pgpass 
+    vi /var/lib/zabbix/.pgpass 
+            127.0.0.1:5432:postgres:zbx_monitor:zabbix
 
 
+    chown zabbix:zabbix /var/lib/zabbix/.pgpass 
+    chmod 600 /var/lib/zabbix/.pgpass 
+    ls -lath /var/lib/zabbix/.pgpass 
 
-systemctl restart postgresql
+
+    systemctl restart postgresql
+
+
+
+<br /> 
+
 
 
 ## References: 
@@ -212,8 +224,8 @@ systemctl restart postgresql
 
     https://www.zabbix.com/integrations/postgresql
 
+    https://chmod-calculator.com/
 
--rw-------
 
 
 
