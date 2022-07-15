@@ -2,7 +2,7 @@
 
 Repo to postgresql with ansible 
 
-### OCI 
+### OCI ( [teraform](https://github.com/pedroAkiraDanno/auto5/tree/develop/srv/terraform/oci))
 	create a instance   	   (manual or with terraform, check terraform README.md)
 	create 2 block volumes 	   (manual or with terraform, check terraform README.md) 
 	atttach block volumes 	   (manual or with terraform, check terraform README.md) 
@@ -142,6 +142,12 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts vacuum.yml
 	ansible-playbook -i hosts /etc/ansible/vacuum_TABLE_BLOAT.yml
 	ansible-playbook -i hosts /etc/ansible/vacuum_parameter.yml
+
+
+
+	## About GUI Graphical User Interface in Linux 
+	ansible-playbook -i hosts /etc/ansible/GUI_linux.yml
+	ansible-playbook -i hosts /etc/ansible/change_password.yml
 
 
 
