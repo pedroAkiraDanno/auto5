@@ -60,9 +60,42 @@ Ubuntu and Debian(ARM64)  SHA256: 98f22640af2f816e09cd8d41bdd98fe5320b73cec83062
 
 
 
+### Step 3 -  Enable Grafana when start 
+    #info about linux 
+    lsb_release -a 
+    cat /etc/issue
+    cat /etc/os-release
+    hostnamectl
+
+    #info about linux 
+    sudo apt install screenfetch
+    screenfetch
+
+    #enable and restart grafana 
+    sudo systemctl enable grafana-server 
+    sudo systemctl start grafana-server 
 
 
-### Step 3 - Configure Grafana frontend
+<br /> 
+
+
+### Step 4 -  Install plugins and zabbix plugins
+    #info about grafana configuration 
+    cat /etc/default/grafana-server
+
+    #install some plugins about grafana 
+    sudo grafana-cli plugins install jdbranham-diagram-panel 
+    sudo grafana-cli plugins install grafana-piechart-panel 
+
+    #install zabbix plugin
+    grafana-cli plugins install alexanderzobnin-zabbix-app
+
+
+
+<br /> 
+
+
+### Step 5 - Configure Grafana frontend
 Connect to your newly installed Grafana frontend: **http://server_ip_or_name:3000** 
 
 And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabbix/doc/zabbix.pdf)
