@@ -1,7 +1,7 @@
-# Zabbix
+# Grafana
 
 
-**Zabbix** is an open-source software tool to monitor IT infrastructure such as networks, servers, virtual machines, and cloud services. Zabbix collects and displays basic metrics.
+**Grafana** is a multi-platform open source analytics and interactive visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. 
 
 
 
@@ -15,87 +15,59 @@ docs located at [doc](https://github.com/pedroAkiraDanno/auto5/) and [wiki](http
 
 
 
-
 ## How works:
 
-Simple install and configuration about **Zabbix**.
+Simple install and configuration about **Grafana**.
+
+
 
 <br /> 
 
 
 ## Notes/Infos: 
-**Long-term support (LTS)**  is a product lifecycle management policy in which a stable release of computer software is maintained for a longer period of time than the standard edition. The term is typically reserved for open-source software, where it describes a software edition that is supported for months or years longer than the software's standard edition.
 
 
 <br /> 
 
-Default root password for Zabbix Appliance: User: Admin     Password: zabbix
+
 
 
 ---
 
 
 
-## Download and Install Zabbix
+## Download and Install Grafana
+
 
 
 ### Step 1 - click in link: 
 
-    https://www.zabbix.com/download
-
-<br /> 
-
-### Step 2 -  a. Install Zabbix repository
-    wget https://repo.zabbix.com/zabbix/6.2/ubuntu-arm64/pool/main/z/zabbix-release/zabbix-release_6.2-1+ubuntu22.04_all.deb
-    dpkg -i zabbix-release_6.2-1+ubuntu22.04_all.deb
-    apt update
-
-<br /> 
-
-### Step 3 -  b. Install Zabbix server, frontend, agent
-     apt install zabbix-server-pgsql zabbix-frontend-php php8.1-pgsql zabbix-apache-conf zabbix-sql-scripts zabbix-agent
-
-<br /> 
-
-### Step 4 -  c. Create initial database
-Make sure you have database server up and running.
-
-Run the following on your database host.
-
-        #sudo su - postgres
-        sudo -u postgres createuser --pwprompt zabbix
-        sudo -u postgres createdb -O zabbix zabbix
-
-
-<br /> 
-
-### Step 4.1 - On Zabbix server host import initial schema and data. You will be prompted to enter your newly created password.
-    zcat /usr/share/doc/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+    https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1&platform=arm
 
 <br /> 
 
 
-### Step 5 -  d. Configure the database for Zabbix server
-Edit file /etc/zabbix/zabbix_server.conf
 
-    DBPassword=password
 
-<br /> 
+### Step 2 -  Install Grafana repository
+Ubuntu and Debian(ARM64)  SHA256: 98f22640af2f816e09cd8d41bdd98fe5320b73cec83062550c8888fc7a8b0990
 
-### Step 6 -  e. Start Zabbix server and agent processes
-Start Zabbix server and agent processes and make it start at system boot.
-
-    systemctl restart zabbix-server zabbix-agent apache2
-    systemctl enable zabbix-server zabbix-agent apache2
+    sudo apt-get install -y adduser libfontconfig1
+    wget https://dl.grafana.com/enterprise/release/grafana-enterprise_9.0.3_arm64.deb
+    sudo dpkg -i grafana-enterprise_9.0.3_arm64.deb
 
 <br /> 
 
-### Step 7 -  f. Configure Zabbix frontend
-Connect to your newly installed Zabbix frontend: **http://server_ip_or_name/zabbix** 
+
+
+
+
+### Step 3 - Configure Grafana frontend
+Connect to your newly installed Grafana frontend: **http://server_ip_or_name:3000** 
 
 And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabbix/doc/zabbix.pdf)
 
-Follow steps described in Zabbix documentation: [Installing frontend](https://www.zabbix.com/documentation/6.2/en/manual/installation/install#installing_frontend)
+
 
 <br /> 
 
@@ -105,31 +77,22 @@ Follow steps described in Zabbix documentation: [Installing frontend](https://ww
 
 
 
-## STEPS by STEPS How to Install and configure Zabbix (completed)
+## STEPS by STEPS How to Install and configure Grafana (completed)
     sudo su - 
 
-    wget https://repo.zabbix.com/zabbix/6.2/ubuntu-arm64/pool/main/z/zabbix-release/zabbix-release_6.2-1+ubuntu22.04_all.deb
-    dpkg -i zabbix-release_6.2-1+ubuntu22.04_all.deb
-    apt update
-
-    #sudo su - postgres
-    sudo -u postgres createuser --pwprompt zabbix
-    sudo -u postgres createdb -O zabbix zabbix
-
-    zcat /usr/share/doc/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
-
-
-    Edit file /etc/zabbix/zabbix_server.conf
-         DBPassword=password
-
-    systemctl restart zabbix-server zabbix-agent apache2
-    systemctl enable zabbix-server zabbix-agent apache2
+    sudo apt-get install -y adduser libfontconfig1
+    wget https://dl.grafana.com/enterprise/release/grafana-enterprise_9.0.3_arm64.deb
+    sudo dpkg -i grafana-enterprise_9.0.3_arm64.deb
 
 
 <br /> 
 
 
-# PostgreSQL Monitoring With ZABBIX
+
+
+
+
+# PostgreSQL Monitoring with Grafana
 
 
 ## How works:
@@ -262,5 +225,5 @@ And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabb
 
 
 ---
-Inspired in [Zabbix](https://www.zabbix.com/) , [git.zabbix](https://git.zabbix.com/projects/zbx/repos/zabbix/browse) and [gihub_zabbix](https://github.com/zabbix/zabbix) this is zabbix to postgresql auto-minimalistic version.
+Inspired in [Grafana](https://grafana.com/) , [Grafana.plugins](https://grafana.com/grafana/plugins/) , [Grafana.dashboards](https://grafana.com/grafana/dashboards/) , [Grafana.download](https://grafana.com/grafana/download) , [Grafana.docs](https://grafana.com/docs/) , [Grafana.github](https://github.com/grafana) and [Grafana.youtube](https://www.youtube.com/c/Grafana/videos) this is grafana to postgresql auto-minimalistic version.
 ©  [PedroAkira](https://www.instagram.com/pedro.akira.3)
