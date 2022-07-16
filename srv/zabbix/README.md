@@ -151,9 +151,15 @@ For PostgreSQL version 10 and above:
 ### Step 2 - Dowload templete postgresql/
     #Dowload from https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/postgresql?at=release/6.2
 
+    #git clone https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/postgresql?at=release/6.2
+
     sudo su - 
     cd ~ 
-    git clone https://git.zabbix.com/projects/ZBX/repos/zabbix/browse/templates/db/postgresql?at=release/6.2
+    git clone https://github.com/pedroAkiraDanno/auto5.git
+    mkdir /root/zabbix 
+    cd auto5/srv/zabbix ; cp zabbix-master@c2b18672840.zip /root/zabbix ; cd /root/zabbix/ ; unzip zabbix-master@c2b18672840.zip
+
+    
 
 
 <br /> 
@@ -169,8 +175,10 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
 
 
     mkdir /var/lib/zabbix/postgresql 
-    cp postgresql/*  /var/lib/zabbix/postgresql/
+    cp /root/zabbix/templete/db/postgresql/*  /var/lib/zabbix/postgresql/
     ls -lath  /var/lib/zabbix/postgresql/
+
+
 
 
 <br /> 
