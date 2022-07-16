@@ -91,7 +91,9 @@ Start Zabbix server and agent processes and make it start at system boot.
 <br /> 
 
 ### Step 7 -  f. Configure Zabbix frontend
-Connect to your newly installed Zabbix frontend: **http://server_ip_or_name/zabbix**
+Connect to your newly installed Zabbix frontend: **http://server_ip_or_name/zabbix** 
+
+And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabbix/doc/zabbix.pdf)
 
 Follow steps described in Zabbix documentation: [Installing frontend](https://www.zabbix.com/documentation/6.2/en/manual/installation/install#installing_frontend)
 
@@ -103,17 +105,25 @@ Follow steps described in Zabbix documentation: [Installing frontend](https://ww
 
 
 
-## STEPS by STEPS How to use (completed)
+## STEPS by STEPS How to Install and configure Zabbix (completed)
     sudo su - 
-    sudo apt-get install gcc -y
 
-    cd ~
-    rm -fr auto5/
-    git clone https://github.com/pedroAkiraDanno/auto5
+    wget https://repo.zabbix.com/zabbix/6.2/ubuntu-arm64/pool/main/z/zabbix-release/zabbix-release_6.2-1+ubuntu22.04_all.deb
+    dpkg -i zabbix-release_6.2-1+ubuntu22.04_all.deb
+    apt update
 
-    #1 ENTER IN terraform or vagrant folder to automation postgresql
-    #2 ENTER IN ansible24 folder to automation postgresql 
+    #sudo su - postgres
+    sudo -u postgres createuser --pwprompt zabbix
+    sudo -u postgres createdb -O zabbix zabbix
 
+    zcat /usr/share/doc/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
+
+
+    Edit file /etc/zabbix/zabbix_server.conf
+         DBPassword=password
+
+    systemctl restart zabbix-server zabbix-agent apache2
+    systemctl enable zabbix-server zabbix-agent apache2
 
 
 <br /> 
@@ -224,6 +234,17 @@ Add rows (for example):
 
 
 <br /> 
+
+
+
+### Step 7 -  f. Configure Zabbix frontend with Postgresql 
+Connect to your newly installed Zabbix frontend: **http://server_ip_or_name/zabbix** 
+
+And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabbix/doc/zabbix.pdf)
+
+
+<br /> 
+
 
 
 
