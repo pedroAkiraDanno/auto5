@@ -258,5 +258,5 @@ And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabb
 
 
 ---
-Inspired in [Grafana](https://grafana.com/) , [Grafana.plugins](https://grafana.com/grafana/plugins/) , [Grafana.dashboards](https://grafana.com/grafana/dashboards/) , [Grafana.download](https://grafana.com/grafana/download) , [Grafana.docs](https://grafana.com/docs/) , [Grafana.github](https://github.com/grafana) and [Grafana.youtube](https://www.youtube.com/c/Grafana/videos) this is grafana to postgresql auto-minimalistic version.
+Inspired in [Grafana](https://grafana.com/) , [Grafana.plugins](https://grafana.com/grafana/plugins/) , [Grafana.dashboards](https://grafana.com/grafana/dashboards/) , [Grafana.download](https://grafana.com/grafana/download) , [Grafana.docs](https://grafana.com/docs/) , [Grafana.github](https://github.com/grafana) , [Grafana.youtube](https://www.youtube.com/c/Grafana/videos) and [Grafana.Demo](https://play.grafana.org/) this is grafana to postgresql auto-minimalistic version.
 ©  [PedroAkira](https://www.instagram.com/pedro.akira.3)
