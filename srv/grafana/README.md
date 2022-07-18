@@ -150,14 +150,11 @@ Templates to monitor PostgreSQL by Zabbix. This template was tested on PostgreSQ
 <br /> 
 
 
-<br /> 
 
+### Step 2 Configure Grafana frontend 
+Connect to your newly installed Grafana frontend: **http://server_ip_or_name:3000** 
 
-
-### Step 7 -  f. Configure Zabbix frontend with Postgresql 
-Connect to your newly installed Zabbix frontend: **http://server_ip_or_name/zabbix** 
-
-And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabbix/doc/zabbix.pdf)
+And access: [doc]([https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabbix/doc/zabbix.pdf](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/grafana/doc/grafana.pdf))
 
 
 <br /> 
