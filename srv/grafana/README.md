@@ -141,8 +141,6 @@ Templates to monitor PostgreSQL by Zabbix. This template was tested on PostgreSQ
 
 
 ### Step 1 - Change the password to user postgres to postgresql 
-
-For PostgreSQL version 10 and above:
     sudo su - postgres 
     psql 
 
