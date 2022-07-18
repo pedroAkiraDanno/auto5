@@ -40,7 +40,8 @@ Repo to postgresql with ansible
 	cd /root/auto5/srv/ansible24/ ; mv sshd_config  /etc/ssh/
 	cat /etc/ssh/ssh_config | grep PasswordAuthentication
 	cd ~  ; rm -fr auto5	
-	
+	systemctl restart sshd	
+
 
 	OR
 	
@@ -57,11 +58,7 @@ Repo to postgresql with ansible
 	#move sshd_config file to server
 
 ## 4 - step login with ssh root 
-	#move key to server with sftp to /root/.ssh/ and ssh-key-2022-01-19
-	chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
-	
-	
-	 OR 
+
 	#move key to server with sftp to /root/.ssh/ and ssh-key-2022-01-19
 	cd ~  
 	rm -fr auto5
@@ -70,6 +67,14 @@ Repo to postgresql with ansible
 	cd ~  ; rm -fr auto5	
 	chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
 	ls -lath /root/.ssh/ssh-key-2022-01-19.key*
+
+
+	OR 	
+
+
+	#move key to server with sftp to /root/.ssh/ and ssh-key-2022-01-19
+	chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
+		
 
 
 
