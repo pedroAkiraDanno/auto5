@@ -126,6 +126,7 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
 	ansible-playbook -i hosts /etc/ansible/postgres_structure.yaml
 	#ansible-playbook -i hosts /etc/ansible/PGTune_Parameters8GB.yml
+	#ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml	
 	ansible-playbook -i hosts /etc/ansible/pg_stat_statements.yml
 	ansible-playbook -i hosts /etc/ansible/sequence.yml
 	ansible-playbook -i hosts /etc/ansible/walfile.yml
