@@ -200,6 +200,9 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
     cp /root/zabbix/templates/db/postgresql/template_db_postgresql.conf /etc/zabbix/zabbix_agentd.d/
 
     ls -lath /etc/zabbix/zabbix_agentd.d/
+    
+     cd ~
+     cd var/lib/zabbix/postgresql/postgresql ; cp * /var/lib/zabbix/postgresql/
 
 
 <br /> 
