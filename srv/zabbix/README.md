@@ -185,7 +185,7 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
 
 
     mkdir /var/lib/zabbix/postgresql 
-    cp /root/zabbix/templete/db/postgresql/*  /var/lib/zabbix/postgresql/
+    cp -r /root/zabbix/templete/db/postgresql/*  /var/lib/zabbix/postgresql/
     ls -lath  /var/lib/zabbix/postgresql/
 
 
@@ -196,7 +196,7 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
 
 ### Step 4 - Copy template_db_postgresql.conf to Zabbix agent configuration directory /etc/zabbix/zabbix_agentd.d/ and restart Zabbix agent service.
 
-    cp template_db_postgresql.conf /etc/zabbix/zabbix_agentd.d/
+    cp /root/zabbix/templete/db/postgresql/template_db_postgresql.conf /etc/zabbix/zabbix_agentd.d/
 
     ls -lath /etc/zabbix/zabbix_agentd.d/
 
