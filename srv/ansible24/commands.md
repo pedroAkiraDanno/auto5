@@ -105,6 +105,11 @@ begin:
 
 
 
+## LINUX about disks and size:
+
+
+
+
 
 ## PGMETRICS: 
 	postgres@instance-20220308-1903:~$ pgmetrics --no-password
