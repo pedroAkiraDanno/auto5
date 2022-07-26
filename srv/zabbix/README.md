@@ -185,7 +185,8 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
 
 
     mkdir /var/lib/zabbix/postgresql 
-    cp -r /root/zabbix/templetes/db/postgresql/*  /var/lib/zabbix/postgresql/
+    cd /root/zabbix/templetes/db/postgresql/
+    cp -r *  /var/lib/zabbix/postgresql/
     ls -lath  /var/lib/zabbix/postgresql/
 
 
