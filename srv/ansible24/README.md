@@ -228,14 +228,55 @@ Repo to postgresql with ansible
 
 
 
-
+---
 
 
 ## OPTIONS 1: Enable 80 in OCI and iptables
 
+	
+## Step 1: in the OCI in browser 
+	Access the OCI and enable port 80/443/3000 in the firewall 
+	Virtual Cloud Networks:
+	Networking  -> Virtual Cloud Networks  -> vcn-20220114-0043  -> Subnet Details  -> Security Lists
+	Add enable port 80/443/3000 to the rules 
+
+
+
+## Step 2: in the server Linux 
+	sudo apt update
+	sudo apt -y install apache2
+
+	sudo systemctl restart apache2
+
+
+	sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
+	sudo netfilter-persistent save
+
+
+	access the browser
+	http://<x.x.x.x.x>
+	http://
+
+	access the browser example: 
+	zabbix: 
+	http://129.213.163.55/zabbix/
+	Grafana: 
+	http://129.213.163.55:3000
 
 
 
 
+### REFERENCES: 
+https://docs.oracle.com/pt-br/iaas/developer-tutorials/tutorials/apache-on-ubuntu/01oci-ubuntu-apache-summary.htm
+
+https://www.youtube.com/watch?v=XwpZwtXyHxc&t=262s
+
+
+
+
+
+<br/>
+
+---
 
 end:
