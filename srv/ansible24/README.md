@@ -225,4 +225,17 @@ Repo to postgresql with ansible
 
 
 
+
+
+
+
+
+
+## OPTIONS 1: Enable 80 in OCI and iptables
+
+
+
+
+
+
 end:
