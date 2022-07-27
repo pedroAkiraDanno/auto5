@@ -84,16 +84,28 @@ https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-u
 
 
 
-## 
 
 
-## OR
 
-	chmod +x README2.sh
-	./README2.sh
 
-	**commands.txt**
-	**about: commands to use**	
+---
+
+### Link them with Docker network and set up Pgadmin
+
+To make Pgadmin installed with Docker work along with Postgesql, we should link them with the Docker network command.
+
+
+## 1- step 
+	$docker network create --driver bridge pgnetwork
+	$docker network ls
+
+	$docker network connect pgnetwork pgadmin
+	$docker network connect pgnetwork postgres
+
+
+
+
+
 
 
 
@@ -103,37 +115,11 @@ https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-u
 ---
 
 
-## OPTIONS 1: Enable 80 in OCI and iptables
 
-	
-## Step 1: in the OCI in browser 
-	Access the OCI and enable port 80/443/3000 in the firewall 
-	Virtual Cloud Networks:
-	Networking  -> Virtual Cloud Networks  -> vcn-20220114-0043  -> Subnet Details  -> Security Lists
-	Add enable port 80/443/3000 to the rules 
+## OPTION: 
+	You can stop them after you test them not to use your resources with this.
+	$docker stop pgadmin postgres
 
-
-
-## Step 2: in the server Linux 
-	sudo apt update
-	sudo apt -y install apache2
-
-	sudo systemctl restart apache2
-
-
-	sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
-	sudo netfilter-persistent save
-
-
-	access the browser
-	http://<x.x.x.x.x>
-	http://
-
-	access the browser example: 
-	zabbix: 
-	http://129.213.163.55/zabbix/
-	Grafana: 
-	http://129.213.163.55:3000
 
 
 
