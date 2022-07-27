@@ -9,7 +9,10 @@ Repo to postgresql and pgAdmin Docker
 
 <br />
 
-### Install Docker Linux 
+
+
+
+## Install Docker Linux 
 
 ## 1 - step 
 	Remove any Docker files that are running in the system, using the following command:
@@ -48,7 +51,9 @@ https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-u
 
 
 
-### How to set up Postgresql and Pgadmin with Docker
+
+
+## How to set up Postgresql and Pgadmin with Docker
 
 
 
@@ -84,13 +89,14 @@ https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-u
 
 
 
-
-
-
-
 ---
 
-### Link them with Docker network and set up Pgadmin
+
+
+
+
+
+## Link them with Docker network and set up Pgadmin
 
 To make Pgadmin installed with Docker work along with Postgesql, we should link them with the Docker network command.
 
@@ -105,24 +111,32 @@ To make Pgadmin installed with Docker work along with Postgesql, we should link 
 
 
 
+---
 
 
 
 
 
+## Follow the document bellow to configure GUI pgAdmin 
 
+Document: [postgresql](https://www.postgresql.org/)
+
+
+<br />
 
 ---
 
 
 
-## OPTION: 
+
+
+## Options: 
 	You can stop them after you test them not to use your resources with this.
 	$docker stop pgadmin postgres
 
+<br />
 
-
-
+---
 
 
 
