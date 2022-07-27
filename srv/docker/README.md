@@ -3,11 +3,42 @@
 Repo to postgresql and pgAdmin Docker  
 
 
+<br />
+
 ### Install Docker Linux 
 
-	create a instance   	   (manual or with terraform, check terraform README.md)
-	create 2 block volumes 	   (manual or with terraform, check terraform README.md) 
-	atttach block volumes 	   (manual or with terraform, check terraform README.md) 
+## 1 - step 
+	Remove any Docker files that are running in the system, using the following command:
+	$ sudo su - 
+	$ sudo apt-get remove docker docker-engine docker.io
+
+## 2 - step 
+	Check if the system is up-to-date using the following command:
+	$ sudo apt-get update
+
+## 3 - step 
+	Install Docker using the following command:
+	$ sudo apt install docker.io
+
+
+## 4 - step 
+	Install all the dependency packages using the following command:
+	$ sudo snap install docker
+
+
+## 5 - step 
+	Before testing Docker, check the version installed using the following command:
+	$ docker --version
+
+
+## 6 - step: some commands
+	$ sudo docker images
+	$ sudo docker ps -a
+	$ sudo docker ps
+
+REFERENCE: 
+https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu
+
 
 ---
 
