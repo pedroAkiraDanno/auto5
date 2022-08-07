@@ -215,6 +215,31 @@ Repo to postgresql with ansible
 
 
 
+	#sudo with no NOPASSWD
+	sudo su - 
+	cp /etc/sudoers /root/sudoers.bak
+	su - postgres 
+	sudo visudo
+		postgres ALL=(ALL) NOPASSWD: ALL
+	sudo -k
+
+
+	## install nmap and traceroute to zabbix
+	sudo apt-get update
+	sudo apt-get install nmap
+	nmap --version
+
+	sudo apt-get install traceroute
+
+
+	#https://www.youtube.com/watch?v=FmiDt5hiOe0
+	#https://phoenixnap.com/kb/how-to-install-nmap-ubuntu-18-04
+	#https://linuxhint.com/setup-sudo-no-password-linux/
+
+
+
+
+
 ## OR
 
 	chmod +x README2.sh
