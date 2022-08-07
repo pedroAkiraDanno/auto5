@@ -195,6 +195,7 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
 <br /> 
 
 
+
 ### Step 4 - Copy template_db_postgresql.conf to Zabbix agent configuration directory /etc/zabbix/zabbix_agentd.d/ and restart Zabbix agent service.
     cd ~ 
     cp /root/zabbix/templates/db/postgresql/template_db_postgresql.conf /etc/zabbix/zabbix_agentd.d/
@@ -202,7 +203,7 @@ The postgresql/ directory contains the files needed to obtain metrics from Postg
     ls -lath /etc/zabbix/zabbix_agentd.d/
     
      cd ~
-     cd var/lib/zabbix/postgresql/postgresql ; cp * /var/lib/zabbix/postgresql/
+     cd /var/lib/zabbix/postgresql/postgresql ; cp * /var/lib/zabbix/postgresql/
 
 
 <br /> 
@@ -240,8 +241,42 @@ Add rows (for example):
 <br /> 
 
 
+### Step 7 - sudo with NOPASSWD and install nmap & traceroute
+    sudo su - 
+    cp /etc/sudoers /root/sudoers.bak
 
-### Step 7 -  f. Configure Zabbix frontend with Postgresql 
+    su - postgres 
+    sudo visudo
+    postgres ALL=(ALL) NOPASSWD: ALL
+    sudo -k
+
+
+    #install  nmap & traceroute
+    sudo visudo
+    zabbix  ALL=NOPASSWD: /usr/bin/cat, /usr/bin/grep, /usr/bin/sed,  /usr/bin/nmap
+
+    sudo apt-get install traceroute
+    sudo apt-get update
+    sudo apt-get install nmap
+    nmap --version
+
+
+    nmap linuxhint.com
+    sudo nmap -sS 132.145.169.55
+    sudo nmap -O --osscan-guess 132.145.169.55
+    sudo nmap -sV  132.145.169.55
+
+    #REFERENCES: 
+    #https://phoenixnap.com/kb/how-to-install-nmap-ubuntu-18-04
+    #https://linuxhint.com/setup-sudo-no-password-linux/
+    #https://www.youtube.com/watch?v=FmiDt5hiOe0
+
+
+
+<br /> 
+
+
+### Step 8 -  f. Configure Zabbix frontend with Postgresql 
 Connect to your newly installed Zabbix frontend: **http://server_ip_or_name/zabbix** 
 
 And access: [doc](https://github.com/pedroAkiraDanno/auto5/blob/develop/srv/zabbix/doc/zabbix.pdf)

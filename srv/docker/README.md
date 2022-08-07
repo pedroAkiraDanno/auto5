@@ -119,7 +119,7 @@ To make Pgadmin installed with Docker work along with Postgesql, we should link 
 
 ## Follow the document bellow to configure GUI pgAdmin 
 
-Document: [postgresql](https://www.postgresql.org/)
+Document: [docker.pdf](https://github.com/pedroAkiraDanno/auto5/blob/main/srv/docker/docs/docker.pdf)
 
 
 <br />
@@ -131,8 +131,17 @@ Document: [postgresql](https://www.postgresql.org/)
 
 
 ## Options: 
+
+
+### Option  1: 
 	You can stop them after you test them not to use your resources with this.
 	$docker stop pgadmin postgres
+
+
+### Option  2: Install GUI in Linux server  
+
+[GUI_linux.sh](https://github.com/pedroAkiraDanno/auto5/blob/main/srv/ansible24/GUI_linux.sh)
+
 
 <br />
 
