@@ -125,8 +125,6 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts /etc/ansible/sudo.yml
 	ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
 	ansible-playbook -i hosts /etc/ansible/postgres_structure.yaml
-	#ansible-playbook -i hosts /etc/ansible/PGTune_Parameters8GB.yml
-	#ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml	
 	ansible-playbook -i hosts /etc/ansible/pg_stat_statements.yml
 	ansible-playbook -i hosts /etc/ansible/sequence.yml
 	ansible-playbook -i hosts /etc/ansible/walfile.yml
@@ -148,6 +146,13 @@ Repo to postgresql with ansible
 	ansible-playbook -i hosts vacuum.yml
 	ansible-playbook -i hosts /etc/ansible/vacuum_TABLE_BLOAT.yml
 	ansible-playbook -i hosts /etc/ansible/vacuum_parameter.yml
+
+
+	## PGTune  Parameters 	OPTION TO EXEC
+	#ansible-playbook -i hosts /etc/ansible/PGTune_Parameters8GB.yml
+	#ansible-playbook -i hosts /etc/ansible/PGTune_Parameters12GB.yml	
+	#ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml	
+
 
 
 
@@ -355,7 +360,7 @@ https://www.youtube.com/watch?v=XwpZwtXyHxc&t=262s
 	lsblk 
 	systemctl stop postgresql 
 
-	# /dev/sdb1 /postgresql
+	# /dev/sdb1 /var/lib/postgresql
 	umount /dev/sdb1
 	fdisk -u /dev/sdb
 	p
@@ -374,14 +379,14 @@ https://www.youtube.com/watch?v=XwpZwtXyHxc&t=262s
 
 	resize2fs /dev/sdb1
 
-	mount /dev/sdb1 /postgresql
+	mount /dev/sdb1 /var/lib/postgresql
 
 
 
 
 ## Step 3: Extending partition and file system sizes (/dev/sdc1)
 
-	# /dev/sdc1 /var/lib/postgresql
+	# /dev/sdc1 /postgresql
 	umount /dev/sdc1
 
 	fdisk -u /dev/sdc
@@ -401,7 +406,7 @@ https://www.youtube.com/watch?v=XwpZwtXyHxc&t=262s
 
 	resize2fs /dev/sdc1
 
-	mount /dev/sdc1 /var/lib/postgresql
+	mount /dev/sdc1 /postgresql
 
 
 
