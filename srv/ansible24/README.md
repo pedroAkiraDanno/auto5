@@ -302,6 +302,122 @@ https://www.youtube.com/watch?v=XwpZwtXyHxc&t=262s
 
 <br/>
 
+
 ---
+
+
+
+## OPTIONS 1: Extending partition and file system sizes
+
+
+	
+## Step 1: in the OCI in browser 
+	Access the OCI  
+	Storage -> Block Volume 
+	Select the block volume (blv0, blv1) -> edit 
+	Volume Size and Performance
+	Volume Size (in GB) 
+	To 70
+
+
+
+
+## Step 2: Extending partition and file system sizes
+	df -h
+	lsblk 
+	systemctl stop postgresql 
+
+	# /dev/sdb1 /postgresql
+	umount /dev/sdb1
+	fdisk -u /dev/sdb
+	p
+	d
+	1
+	n
+	p
+	1
+	enter
+	enter
+	w
+
+	e2fsck -f /dev/sdb1
+	enter
+	enter 
+
+	resize2fs /dev/sdb1
+
+	mount /dev/sdb1 /postgresql
+
+
+
+
+## Step 3: Extending partition and file system sizes (/dev/sdc1)
+
+	# /dev/sdc1 /var/lib/postgresql
+	umount /dev/sdc1
+
+	fdisk -u /dev/sdc
+	p
+	d
+	1
+	n
+	p
+	1
+	enter
+	enter
+	w
+
+	e2fsck -f /dev/sdc1
+	enter
+	enter 
+
+	resize2fs /dev/sdc1
+
+	mount /dev/sdc1 /var/lib/postgresql
+
+
+
+## Step 4: edit /etc/fstab
+
+	***change the name in fstab to uuid
+	sudo blkid | grep UUID=
+	vi /etc/fstab
+
+
+
+	UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
+	UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"
+
+	UUID="a16fb5a4-9f8e-4a5f-9304-53573bbb65fd"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
+	UUID="0488adbc-b0ae-4071-8853-f8240b8a3841"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+
+
+	#restart postgresql and reboot server with reboot command or oci 
+	#systemctl restart postgresql 
+	reboot 
+
+
+
+
+
+
+
+
+### REFERENCES: 
+https://www.ibm.com/docs/en/cloud-pak-system-w3550/2.3.3?topic=images-extending-partition-file-system-sizes
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
 
 end:
