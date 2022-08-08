@@ -300,6 +300,34 @@ https://www.youtube.com/watch?v=XwpZwtXyHxc&t=262s
 
 
 
+
+---
+
+<br/>
+
+
+
+## OPTIONS 2: Improve shape of Computer Instance and Block Volumes 
+
+	
+
+## Step 1: Improve shape of Computer Instance
+	Add Memory (GB): 12 OCPU count: 4
+
+	Access the OCI
+	Computer -> Instance -> edit -> change the shape to 4 OCPU and Memory to 12GB
+
+
+## Step 2: Block Volumes 
+	Access the OCI
+	Storage -> Block Volumes  -> Edit (blv0,blv1)
+	VPU to: 20 
+	Enable Auto-tube Performance 
+	Backup Policies: choose the Gold or Blonze 
+	
+
+
+
 <br/>
 
 
@@ -307,7 +335,7 @@ https://www.youtube.com/watch?v=XwpZwtXyHxc&t=262s
 
 
 
-## OPTIONS 1: Extending partition and file system sizes
+## OPTIONS 3: Extending partition and file system sizes
 
 
 	
