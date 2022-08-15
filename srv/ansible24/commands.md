@@ -66,6 +66,12 @@ begin:
 	postgres=# SELECT  pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE  pid <> pg_backend_pid();
 
 
+	PostgreSQL: Show size of all databases
+		postgres=# SELECT pg_database.datname as "database_name", pg_database_size(pg_database.datname)/1024/1024 AS size_in_mb FROM pg_database ORDER by size_in_mb DESC;
+		#refe: https://makandracards.com/makandra/37935-postgresql-show-size-of-all-databases
+
+
+
 ## LINUX:
 	root@instance-20220308-1903:/var/# sudo apt-get update && sudo apt-get upgrade -y
 	root@instance-20220308-1903:/var/# apt list --upgradable
