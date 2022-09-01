@@ -1,0 +1,17 @@
+"blockvolume.0002": {
+    "solutionExposure": "prod",
+    "name": "${Messages.solutionsHub.solutions.blockVolume.solutionName()}",
+    "description": "${Messages.solutionsHub.solutions.blockVolume.stackDescription()}",
+    "longDescription": {
+        "description": "${Messages.solutionsHub.solutions.blockVolume.longDescription()}"
+    },
+    "icon": {
+        "iconLine1": "Block",
+        "iconLine2": "Volume",
+        "iconLine3": ""
+    },
+    "terraformVersion": "0.12.x",
+    "isFreeTier": false,
+    "type": "service",
+    "categoryId": "1"
+}
