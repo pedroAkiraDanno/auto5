@@ -20,8 +20,10 @@ Google Cloud Shell is an online bash shell based on Debian. The free tier includ
         cd ~
         cd auto5/srv/terraform/gcp/Compute_Engine/
 
+
         terraform init
         terraform plan
+        //terraform apply
         terraform apply -auto-approve
 
 ---
