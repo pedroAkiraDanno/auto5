@@ -13,6 +13,7 @@ resource "google_compute_disk" "tst-disk2" {
     type         = "pd-standard"
 }
 
+
 # Create a single Compute Engine instance
 resource "google_compute_instance" "default" {
   name         = "instance-1-postgres"
@@ -21,6 +22,7 @@ resource "google_compute_instance" "default" {
   tags         = ["ssh", "http-server", "https-server"]
 
 
+# Add ssh-keys ssh-key-2022-01-19
   metadata = {
     enable-oslogin = "TRUE"
     ssh-keys = <<EOF
@@ -48,7 +50,8 @@ resource "google_compute_instance" "default" {
   }
 }
 
-# Connect compute & disk
+
+# Connect compute & disk 1 
 resource "google_compute_attached_disk" "default" {
   disk     = google_compute_disk.default.id
   instance = google_compute_instance.default.id
@@ -56,7 +59,7 @@ resource "google_compute_attached_disk" "default" {
 
 
 
-# Connect compute & disk
+# Connect compute & disk 2
 resource "google_compute_attached_disk" "attached_disk2" {
   disk     = google_compute_disk.tst-disk2.id
   instance = google_compute_instance.default.id
