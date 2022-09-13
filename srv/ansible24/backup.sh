@@ -8,7 +8,7 @@ backupfolder=/postgresql/backups
 recipient_email=username@mail.com
 
 # Number of days to store the backup 
-keep_day=30
+keep_day=7
 
 sqlfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M).sql
 zipfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M).bz2
