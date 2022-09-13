@@ -11,7 +11,7 @@ recipient_email=username@mail.com
 keep_day=30
 
 sqlfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M).sql
-zipfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M).bz2
+zipfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M).zip
 
 #create backup folder
 mkdir -p $backupfolder
@@ -36,7 +36,7 @@ else
 fi
 
 # Compress backup 
-if bzip2 -k $sqlfile ; then
+if zip $zipfile $sqlfile ; then
    echo 'The backup was successfully compressed'
 else
    echo 'Error compressing backup' | mailx -s 'Backup was not created!' $recipient_email
@@ -62,9 +62,10 @@ find $backupfolder -mtime +$keep_day -delete
    # cd /postgresql/backups 
    # sudo less /var/mail/$(whoami)
    # mail
+   # unzip -l file.zip 
    #
-   # bzip2 -d file.bz2 
-   # psql -f  file.sql postgres 
+   # unzip file.zip  
+   # cd postgresql/backups 
+   # pgsql -f  file.sql postgres 
    # REFERENCE: https://www.tecmint.com/backup-and-restore-postgresql-database/
-   #            https://www.geeksforgeeks.org/bzip2-command-in-linux-with-examples/  
 
