@@ -11,7 +11,7 @@ recipient_email=username@mail.com
 keep_day=30
 
 sqlfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M-%S).sql
-zipfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M-%S).zip
+zipfile=$backupfolder/all-database-$(date +%d-%m-%Y_%H-%M-%S).gz
 
 #create backup folder
 mkdir -p $backupfolder
