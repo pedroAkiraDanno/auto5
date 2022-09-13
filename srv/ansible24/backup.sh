@@ -20,7 +20,6 @@ mkdir -p $backupfolder
 # sudo apt-get install zip -y
 # sudo apt-get install unzip
 
-
 # show file names 
 echo $sqlfile
 echo $zipfile
