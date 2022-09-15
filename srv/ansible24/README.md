@@ -183,6 +183,7 @@ Repo to postgresql with ansible
 
 
     apt-get install gcc -y
+    apt-get install neofetch -y
 
     chmod +x /var/lib/postgresql/scripts/*.sh
     chown -R postgres:postgres /postgresql/
