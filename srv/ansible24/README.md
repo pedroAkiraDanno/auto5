@@ -172,6 +172,7 @@ Repo to postgresql with ansible
     #Generating fake data
     ansible-playbook -i hosts /etc/ansible/GeneratingfakedataSQL.yml
     ansible-playbook -i hosts /etc/ansible/MOCK_DATA.yml
+    ansible-playbook -i hosts /etc/ansible/MOCK_DATA-cvs.yml
 
 
     ## About GUI Graphical User Interface in Linux
