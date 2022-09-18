@@ -105,6 +105,8 @@ Repo to postgresql with ansible
 
 ## 6 - step exec ansible
 
+    #root user
+
     cd /etc/ansible
 
     ansible-playbook -i hosts filesystem-playbook2.yml
@@ -152,6 +154,12 @@ Repo to postgresql with ansible
     #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters8GB.yml
     #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters12GB.yml
     #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml
+    #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters32GB.yml
+
+
+    #Generating fake data
+    ansible-playbook -i hosts /etc/ansible/GeneratingfakedataSQL.yml
+
 
 
     ## About GUI Graphical User Interface in Linux
