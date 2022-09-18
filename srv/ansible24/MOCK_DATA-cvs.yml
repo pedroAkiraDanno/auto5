@@ -46,7 +46,7 @@
       become_user: postgres
       shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/MOCK_DATA_TABLE.sql
 
-    - name: Ensure user has access to the new database and exec .sql
+    - name: Ensure user has access to the new database and exec .sql to cvs file
       become: true
       become_user: postgres
       shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/MOCK_DATA_cvs.sql
