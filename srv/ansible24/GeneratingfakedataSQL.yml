@@ -18,14 +18,14 @@
         dest: /var/lib/postgresql/scripts
 
     - name: Ensure the PostgreSQL service is running
-       service: name=postgresql state=started enabled=yes
+      service: name=postgresql state=started enabled=yes
 
     - name: Create the database specified in vars
       become: true
       become_user: postgres
       postgresql_db: name={{ db_name2 }}
-          template='template0'
-          state=present
+        template='template0'
+        state=present
 
     - name: Ensure user has access to the new database and exec .sql
       become: true
@@ -34,5 +34,3 @@
 
     - name: Restart postgresql
       service: name=postgresql state=restarted
-
-
