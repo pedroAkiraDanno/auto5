@@ -10,11 +10,11 @@
     postgresql_version: 14
 
   tasks:
-    - name: Ansible copy file PGTune_Parameters.sql to remote server
+    - name: Ansible copy file PGTune_Parameters32GB.sql to remote server
       copy:
         owner: postgres
         group: postgres
-        src: PGTune_Parameters8GB.sql
+        src: PGTune_Parameters32GB.sql
         dest: /var/lib/postgresql/scripts
 
     - name: Ensure user has access to the new database
