@@ -1,6 +1,7 @@
 ---
 - hosts: all
   become: yes
+  become_user: postgres
   vars:
       db_user: dbusername
       db_name: dvdrental
@@ -72,4 +73,5 @@
 ## https://www.postgresqltutorial.com/load-postgresql-sample-database/
 ## https://www.youtube.com/watch?v=ctESJSfgkBg&t=57s
 ## https://www.postgresqltutorial.com/postgresql-sample-database/
+## https://github.com/pedroAkiraDanno/pg_faker
 
