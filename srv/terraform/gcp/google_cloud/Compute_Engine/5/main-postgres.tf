@@ -39,7 +39,7 @@ resource "google_compute_instance" "default" {
   }
 
   # Install Packets 
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python-pip rsync git gcc postfix mailutils nmap traceroute"
+  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python-pip rsync git gcc postfix mailutils nmap traceroute neofetch"
 
   network_interface {
     network = "default"
