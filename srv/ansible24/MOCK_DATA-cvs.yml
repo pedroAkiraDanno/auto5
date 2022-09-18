@@ -1,0 +1,55 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: mockaroo_cvs
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 14
+
+  tasks:
+    - name: Ansible copy file MOCK_DATA_TABLE.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: MOCK_DATA_TABLE.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file MOCK_DATA_cvs.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: MOCK_DATA_cvs.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file MOCK_DATA.csv to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: MOCK_DATA.csv
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes
+
+    - name: Create the database specified in vars
+      become: true
+      become_user: postgres
+      postgresql_db: name={{ db_name2 }}
+        template='template0'
+        state=present
+
+    - name: Ensure user has access to the new database and exec .sql
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/MOCK_DATA_TABLE.sql
+
+    - name: Ensure user has access to the new database and exec .sql
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/MOCK_DATA_cvs.sql
+
+    - name: Restart postgresql
+      service: name=postgresql state=restarted
