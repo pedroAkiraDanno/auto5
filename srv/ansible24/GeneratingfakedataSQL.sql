@@ -1,10 +1,4 @@
 
---The setup
-CREATE DATABASE test_db;
-\c test_db
-
-
-
 
 -- And here it is the CREATE TABLE script:
 CREATE TABLE users(
