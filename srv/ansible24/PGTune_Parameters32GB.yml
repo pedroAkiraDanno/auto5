@@ -14,7 +14,7 @@
       copy:
         owner: postgres
         group: postgres
-        src: PGTune_Parameters16GB.sql
+        src: PGTune_Parameters8GB.sql
         dest: /var/lib/postgresql/scripts
 
     - name: Ensure user has access to the new database
@@ -24,5 +24,3 @@
 
     - name: Restart postgresql
       service: name=postgresql state=restarted
-# REFERENCE:
-# --https://pgtune.leopard.in.ua/#/
