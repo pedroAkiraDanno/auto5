@@ -34,5 +34,5 @@
 
     - name: Restart postgresql
       service: name=postgresql state=restarted
-# REFERENCE:
-# --https://pgtune.leopard.in.ua/#/
+
+
