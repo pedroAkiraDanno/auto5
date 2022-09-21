@@ -1,21 +1,23 @@
 # Postgresql terraform
 
-Repo to postgresql with terraform in <strong>GCP<strong/>(Google Cloud Plataform)
+Repo to postgresql with terraform in <strong>AZURE<strong/>(Microsoft AZURE)
 
 ---
 
-# Cloud Shell:
+# AZURE & Cloud Shell :
 
-Google Cloud Shell is an online bash shell based on Debian. The free tier includes 1.7 gigabytes of random-access memory and a persistent 5 gigabyte home directory. Except for the home and root directories, the Cloud Shell environment is volatile. The editor in Google Cloud Shell is based on Eclipse Theia.
+Microsoft Azure, often referred to as Azure, is a cloud computing service operated by Microsoft for application management via Microsoft-managed data centers.
+
+Azure Power Shell is an authenticated, browser-accessible way to interact with Azure resources from the Azure portal. Cloud Shell is authenticated, meaning once you have access to your Azure portal you also have access to Cloud Shell. It allows you to use either Bash or Powershell in combination with the Azure CLI to programmatically interact with most Azure resources quickly and without having to set up an environment. Companies use Cloud Shell because of the ease it offers in managing Azure resources.
 
 #### Get git and Github
 
     cd ~
     rm -fr auto5/
     git clone https://github.com/pedroAkiraDanno/auto5.git
-    cd auto5/srv/terraform/gcp/
+    cd auto5/srv/terraform/azure/
 
-#### Create Compute_Engine
+#### Create Virtual_Machine(VM)
 
         cd ~
         cd auto5/srv/terraform/gcp/google_cloud/Compute_Engine/5
