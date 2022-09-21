@@ -50,6 +50,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         cd ~
         cd auto5/srv/terraform/azure/d/test/06_vm_linux/
 
+
         # format the tf files
         terraform fmt
 
@@ -61,6 +62,10 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
         # plan and save the infra changes into tfplan file
         terraform plan -out tfplan
+
+        # show the tfplan file
+        terraform show -json tfplan
+        terraform show -json tfplan >> tfplan.json
 
         # Format tfplan.json file
         terraform show -json tfplan | jq '.' > tfplan.json
