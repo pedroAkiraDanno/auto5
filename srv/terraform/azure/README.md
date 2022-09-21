@@ -12,12 +12,12 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
 #### Get git and Github
 
-    cd ~
-    rm -fr auto5/
-    git clone https://github.com/pedroAkiraDanno/auto5.git
-    // cd auto5 ; git checkout develop
-    // cd auto5 ;git checkout azure
-    cd auto5/srv/terraform/azure/
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
+        // cd auto5 ;git checkout azure
+        cd auto5/srv/terraform/azure/
 
 #### Create Virtual_Machine(VM)
 
