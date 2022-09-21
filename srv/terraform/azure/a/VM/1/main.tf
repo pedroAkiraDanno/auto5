@@ -133,11 +133,11 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    sku       = "20.04-LTS"
     version   = "latest"
   }
 
-  computer_name                   = "myvm"
+  computer_name                   = "vm-1-postgres"
   admin_username                  = "azureuser"
   disable_password_authentication = true
 
