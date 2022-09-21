@@ -5,6 +5,7 @@ resource "azurerm_resource_group" "rg" {
 
   tags = {
     environment = "production"
+    database    = "postgreSQL"
   }
 }
 
@@ -17,6 +18,7 @@ resource "azurerm_virtual_network" "vnet" {
 
   tags = {
     environment = "production"
+    database    = "postgreSQL"
   }
 }
 
@@ -37,6 +39,7 @@ resource "azurerm_public_ip" "public_ip" {
 
   tags = {
     environment = "production"
+    database    = "postgreSQL"
   }
 }
 
@@ -60,6 +63,7 @@ resource "azurerm_network_security_group" "nsg" {
 
   tags = {
     environment = "production"
+    database    = "postgreSQL"
   }
 }
 
@@ -78,6 +82,7 @@ resource "azurerm_network_interface" "nic" {
 
   tags = {
     environment = "production"
+    database    = "postgreSQL"
   }
 }
 
@@ -107,6 +112,7 @@ resource "azurerm_storage_account" "storage" {
 
   tags = {
     environment = "production"
+    database    = "postgreSQL"
   }
 }
 
@@ -152,5 +158,6 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
 
   tags = {
     environment = "production"
+    database    = "postgreSQL"
   }
 }
