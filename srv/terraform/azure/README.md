@@ -8,7 +8,7 @@ Repo to postgresql with terraform in <strong>AZURE<strong/>(Microsoft AZURE)
 
 Microsoft Azure, often referred to as Azure, is a cloud computing service operated by Microsoft for application management via Microsoft-managed data centers.
 
-Azure Power Shell is an authenticated, browser-accessible way to interact with Azure resources from the Azure portal. Cloud Shell is authenticated, meaning once you have access to your Azure portal you also have access to Cloud Shell. It allows you to use either Bash or Powershell in combination with the Azure CLI to programmatically interact with most Azure resources quickly and without having to set up an environment. Companies use Cloud Shell because of the ease it offers in managing Azure resources.
+Azure Power Shell is an authenticated, browser-accessible way to interact with Azure resources from the Azure portal. Cloud Shell is authenticated, meaning once you have access to your Azure portal you also have access to Cloud Shell.
 
 #### Get git and Github
 
