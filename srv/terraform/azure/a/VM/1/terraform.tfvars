@@ -1,4 +1,4 @@
-resource_group_name         = "vm_terraform_rg"
+resource_group_name         = "vm_terraform_rg1"
 resource_group_location     = "West Europe"
 virtual_network_name        = "vnetprod019"
 subnet_name                 = "subnet019"
