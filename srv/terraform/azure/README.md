@@ -32,7 +32,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
 ---
 
-# Instance / Linux Environment:
+# VM(Virtual Machine) / Linux Environment:
 
 ## Install Terraform
 
