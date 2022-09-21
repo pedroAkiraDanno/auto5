@@ -22,9 +22,12 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 #### Create Virtual_Machine(VM)
 
         cd ~
-        cd auto5/srv/terraform/azure/a/VM/5
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
 
-
+        cd ~
+        cd auto5/srv/terraform/azure/a/VM/1/
         terraform init
         terraform plan
         //terraform apply
