@@ -34,6 +34,19 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
 ---
 
+# TESTS :
+
+## 06_vm_linux
+
+    cd ~
+    rm -fr auto5/
+    git clone https://github.com/pedroAkiraDanno/auto5.git
+    // cd auto5 ; git checkout develop
+    // cd auto5 ;git checkout azure
+    cd auto5/srv/terraform/azure/
+
+---
+
 # Instance / Linux Environment:
 
 ## Install Terraform
