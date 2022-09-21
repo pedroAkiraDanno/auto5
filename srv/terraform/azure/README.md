@@ -38,21 +38,42 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
 ## 06_vm_linux
 
-    cd ~
-    rm -fr auto5/
-    git clone https://github.com/pedroAkiraDanno/auto5.git
-    // cd auto5 ; git checkout develop
-    // cd auto5 ;git checkout azure
-
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
+        // cd auto5 ;git checkout azure
 
         cd ~
         cd auto5/srv/terraform/azure/d/test/06_vm_linux/
-        terraform init
-        terraform plan
-        //terraform apply
-        terraform apply -auto-approve
 
-        //terraform destroy -auto-approve
+        # format the tf files
+        terraform fmt
+
+        # initialize terraform Azure modules
+        terraform init
+
+        # validate the template
+        terraform validate
+
+        # plan and save the infra changes into tfplan file
+        terraform plan -out tfplan
+
+        # Format tfplan.json file
+        terraform show -json tfplan | jq '.' > tfplan.json
+
+        # apply the infra changes
+        terraform apply tfplan
+
+        # delete the infra
+        terraform destroy
+
+        # cleanup files
+        rm terraform.tfstate
+        rm terraform.tfstate.backup
+        rm tfplan
+        rm tfplan.json
+        rm -r .terraform/
 
 ---
 
