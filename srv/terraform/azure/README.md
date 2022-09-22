@@ -27,13 +27,23 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         // cd auto5 ; git checkout develop
 
         cd ~
-        cd auto5/srv/terraform/azure/a/VM/1/
+        cd auto5/srv/terraform/azure/a/VM/02/
         terraform init
-        terraform plan
-        //terraform apply
-        terraform apply -auto-approve
+        terraform plan -out main.tfplan
+        terraform apply main.tfplan
+        //terraform apply main.tfplan -auto-approve
 
-        //terraform destroy -auto-approve
+        //Verify the results
+        terraform output -raw tls_private_key > id_rsa
+        terraform output public_ip_address
+        ssh -i id_rsa azureuser@<public_ip_address>
+
+        #Clean up resources
+        terraform plan -destroy -out main.destroy.tfplan
+        terraform apply main.destroy.tfplan
+        terraform apply main.destroy.tfplan -auto-approve
+
+        REFERENCE: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-terraform
 
 ---
 
