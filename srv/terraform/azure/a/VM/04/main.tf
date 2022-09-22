@@ -87,7 +87,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "example" {
 
 
 
-resource "azurerm_managed_disk" "example" {
+resource "azurerm_managed_disk" "example1" {
   name                 = "${local.vm_name}-disk2"
   location             = azurerm_resource_group.example.location
   resource_group_name  = azurerm_resource_group.example.name
@@ -96,7 +96,7 @@ resource "azurerm_managed_disk" "example" {
   disk_size_gb         = 10
 }
 
-resource "azurerm_virtual_machine_data_disk_attachment" "example" {
+resource "azurerm_virtual_machine_data_disk_attachment" "example1" {
   managed_disk_id    = azurerm_managed_disk.example.id
   virtual_machine_id = azurerm_virtual_machine.example.id
   lun                = "10"
