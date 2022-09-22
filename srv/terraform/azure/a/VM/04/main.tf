@@ -99,7 +99,7 @@ resource "azurerm_managed_disk" "example1" {
   disk_size_gb         = 10
 }
 
-resource "azurerm_virtual_machine_data_disk_attachment" "example1" {
+resource "azurerm_virtual_machine_data_disk_attachment" "example1-disk" {
   managed_disk_id    = azurerm_managed_disk.example1.id
   virtual_machine_id = azurerm_virtual_machine.example.id
   lun                = "10"
