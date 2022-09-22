@@ -33,7 +33,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         terraform apply main.tfplan
         //terraform apply main.tfplan -auto-approve
 
-        //Verify the results
+        #Verify the results
         terraform output -raw tls_private_key > id_rsa
         terraform output public_ip_address
         ssh -i id_rsa azureuser@<public_ip_address>
@@ -41,7 +41,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         #Clean up resources
         terraform plan -destroy -out main.destroy.tfplan
         terraform apply main.destroy.tfplan
-        terraform apply main.destroy.tfplan -auto-approve
+        //terraform apply main.destroy.tfplan -auto-approve
 
         REFERENCE: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-terraform
 
