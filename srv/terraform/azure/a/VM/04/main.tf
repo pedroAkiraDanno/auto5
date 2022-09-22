@@ -75,11 +75,6 @@ resource "azurerm_virtual_machine" "example" {
 
 
 
-
-
-
-
-
 resource "azurerm_managed_disk" "example" {
   count = 2
   name                 = "${local.vm_name}-disk${count.index + 1}" 
