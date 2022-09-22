@@ -87,6 +87,9 @@ resource "azurerm_virtual_machine_data_disk_attachment" "example" {
 
 
 
+
+
+
 resource "azurerm_managed_disk" "example1" {
   name                 = "${local.vm_name}-disk2"
   location             = azurerm_resource_group.example.location
@@ -97,7 +100,7 @@ resource "azurerm_managed_disk" "example1" {
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "example1" {
-  managed_disk_id    = azurerm_managed_disk.example.id
+  managed_disk_id    = azurerm_managed_disk.example1.id
   virtual_machine_id = azurerm_virtual_machine.example.id
   lun                = "10"
   caching            = "ReadWrite"
