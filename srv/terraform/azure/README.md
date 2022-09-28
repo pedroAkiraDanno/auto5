@@ -27,23 +27,19 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         // cd auto5 ; git checkout develop
 
         cd ~
-        cd auto5/srv/terraform/azure/a/VM/02/
+        cd auto5/srv/terraform/azure/a/VM/05/
         terraform init
-        terraform plan -out main.tfplan
-        terraform apply main.tfplan
-        //terraform apply main.tfplan -auto-approve
+        terraform plan
+        terraform apply
+                  Enter a value: eastus
+                  Enter a value: vmtest
 
-        #Verify the results
-        terraform output -raw tls_private_key > id_rsa
-        terraform output public_ip_address
-        ssh -i id_rsa azureuser@<public_ip_address>
 
         #Clean up resources
-        terraform plan -destroy -out main.destroy.tfplan
-        terraform apply main.destroy.tfplan
-        //terraform apply main.destroy.tfplan -auto-approve
+        terraform destroy
 
-        REFERENCE: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-terraform
+
+        REFERENCE: https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples/virtual-machines/linux/public-ip
 
 ---
 
@@ -107,6 +103,32 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         terraform init
         terraform plan
         terraform apply
+
+## test03 VM
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
+
+        cd ~
+        cd auto5/srv/terraform/azure/a/VM/02/
+        terraform init
+        terraform plan -out main.tfplan
+        terraform apply main.tfplan
+        //terraform apply main.tfplan -auto-approve
+
+        #Verify the results
+        terraform output -raw tls_private_key > id_rsa
+        terraform output public_ip_address
+        ssh -i id_rsa azureuser@<public_ip_address>
+
+        #Clean up resources
+        terraform plan -destroy -out main.destroy.tfplan
+        terraform apply main.destroy.tfplan
+        //terraform apply main.destroy.tfplan -auto-approve
+
+        REFERENCE: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-terraform
 
 ---
 
