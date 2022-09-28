@@ -29,7 +29,6 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         cd ~
         cd auto5/srv/terraform/azure/a/VM/05/
         terraform init
-        terraform plan
         terraform apply
                   Enter a value: eastus
                   Enter a value: vmtest
@@ -99,6 +98,21 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
         cd ~
         cd auto5/srv/terraform/azure/a/Disks/2/
+
+        terraform init
+        terraform plan
+        terraform apply
+
+## test02 disk
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
+        // cd auto5 ;git checkout azure
+
+        cd ~
+        cd auto5/srv/terraform/azure/a/Disks/3/
 
         terraform init
         terraform plan
