@@ -28,6 +28,9 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         #Clean up resources
         terraform destroy
 
+        ACCESS ssh moba or putty:
+                user: adminuser
+                password: P@ssw0rd1234!
 
         REFERENCE: https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples/virtual-machines/linux/public-ip
 
@@ -67,7 +70,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 #### Attached Disks
 
         Portal Azure
-        Virtual machines -> vmtest-vm | Disks -> Attach existing disks -> select the two disks that was created
+        Virtual machines -> vmtest-vm | Disks -> Attach existing disks -> select the two disks that was created (srv2-postgres-ubuntu-vm-disk1, srv2-postgres-ubuntu-vm-disk2)
 
 ---
 
