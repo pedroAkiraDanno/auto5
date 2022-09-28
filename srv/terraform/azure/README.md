@@ -103,7 +103,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         terraform plan
         terraform apply
 
-## test02 disk
+## test03 disk
 
         cd ~
         rm -fr auto5/
