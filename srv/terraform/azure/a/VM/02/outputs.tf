@@ -11,8 +11,3 @@ output "tls_private_key" {
   sensitive = true
 }
 
-
-output "tls_public_key" {
-  value     = tls_public_key.example_ssh.public_key_pem
-  sensitive = true
-}
