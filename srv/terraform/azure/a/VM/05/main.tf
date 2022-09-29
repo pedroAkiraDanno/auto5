@@ -55,7 +55,7 @@ resource "azurerm_network_interface" "internal" {
 
 
 
-// SECURITY GROUP
+# SECURITY GROUP
 
 resource "azurerm_network_security_group" "webserver" {
   name                = "tls_webserver"
@@ -86,7 +86,7 @@ resource "azurerm_network_interface_security_group_association" "main" {
 
 
 
-// SECURITY GROUP 2 
+# SECURITY GROUP 2 
 
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "my_terraform_nsg" {
@@ -142,7 +142,7 @@ resource "azurerm_linux_virtual_machine" "main" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    sku       = "20.04 LTS"
     version   = "latest"
   }
 
