@@ -85,32 +85,34 @@ resource "azurerm_network_interface_security_group_association" "main" {
 
 
 
-// SECURITY GROUP 2
 
-resource "azurerm_network_security_group" "webserver2" {
-  name                = "tls_webserver2"
+// SECURITY GROUP 2 
+
+# Create Network Security Group and rule
+resource "azurerm_network_security_group" "my_terraform_nsg" {
+  name                = "myNetworkSecurityGroup"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+
   security_rule {
-    access                     = "Allow"
+    name                       = "SSH"
+    priority                   = 1001
     direction                  = "Inbound"
-    name                       = "tls"
-    priority                   = 100
+    access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
+    destination_port_range     = "22"
     source_address_prefix      = "*"
-    destination_port_range     = "443"
-    destination_address_prefix = azurerm_network_interface.main.public_ip_address
+    destination_address_prefix = "*"
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "main2" {
+
+# Connect the security group to the network interface
+resource "azurerm_network_interface_security_group_association" "example" {
   network_interface_id      = azurerm_network_interface.main.id
-  network_security_group_id = azurerm_network_security_group.webserver.id
+  network_security_group_id = azurerm_network_security_group.my_terraform_nsg.id
 }
-
-
-
 
 
 
