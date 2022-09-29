@@ -121,9 +121,9 @@ Repo to postgresql with ansible
 
     cd /etc/ansible
 
-    ansible-playbook -i hosts filesystem-playbook2.yml
+    ansible-playbook -i hosts filesystem-playbook2.yml   #IF AZURE exec because they create sdb1 in /mnt    ansible-playbook -i hosts filesystem-playbook2-azure.yml
     ansible-playbook -i hosts db-server-playbook.yml
-    ansible-playbook -i  hosts backup_filesystem.yml
+    ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure.yml
     ansible-playbook -i hosts backupcron.yml
     ansible-playbook -i hosts archive.yml
     #ansible-playbook -i hosts pgmetrics.yml
