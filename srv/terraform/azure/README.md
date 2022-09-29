@@ -10,15 +10,6 @@ Microsoft Azure, often referred to as Azure, is a cloud computing service operat
 
 Azure Power Shell is an authenticated, browser-accessible way to interact with Azure resources from the Azure portal. Cloud Shell is authenticated, meaning once you have access to your Azure portal you also have access to Cloud Shell.
 
-#### Get git and Github
-
-        cd ~
-        rm -fr auto5/
-        git clone https://github.com/pedroAkiraDanno/auto5.git
-        // cd auto5 ; git checkout develop
-        // cd auto5 ;git checkout azure
-        cd auto5/srv/terraform/azure/
-
 #### Create Virtual_Machine(VM)
 
         cd ~
@@ -27,23 +18,59 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         // cd auto5 ; git checkout develop
 
         cd ~
-        cd auto5/srv/terraform/azure/a/VM/02/
+        cd auto5/srv/terraform/azure/a/VM/05/
         terraform init
-        terraform plan -out main.tfplan
-        terraform apply main.tfplan
-        //terraform apply main.tfplan -auto-approve
+        terraform apply
+                  Enter a value: eastus
+                  Enter a value: vmtest
 
-        #Verify the results
-        terraform output -raw tls_private_key > id_rsa
-        terraform output public_ip_address
-        ssh -i id_rsa azureuser@<public_ip_address>
 
         #Clean up resources
-        terraform plan -destroy -out main.destroy.tfplan
-        terraform apply main.destroy.tfplan
-        //terraform apply main.destroy.tfplan -auto-approve
+        terraform destroy
 
-        REFERENCE: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-terraform
+        ACCESS ssh moba or putty:
+                user: adminuser
+                password: P@ssw0rd1234!
+
+        REFERENCE: https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples/virtual-machines/linux/public-ip
+
+#### Create Disks
+
+        #DISK 1
+                cd ~
+                rm -fr auto5/
+                git clone https://github.com/pedroAkiraDanno/auto5.git
+                // cd auto5 ; git checkout develop
+                // cd auto5 ;git checkout azure
+
+                cd ~
+                cd auto5/srv/terraform/azure/a/Disks/3/
+
+                terraform init
+                terraform plan
+                terraform apply
+
+        #DISK 2
+                cd ~
+                rm -fr auto5/
+                git clone https://github.com/pedroAkiraDanno/auto5.git
+                // cd auto5 ; git checkout develop
+                // cd auto5 ;git checkout azure
+
+                cd ~
+                cd auto5/srv/terraform/azure/a/Disks/3/
+
+                vi main.tf
+                #change name in   name= "${local.vm_name}-disk1 to name= "${local.vm_name}-disk2
+
+                terraform init
+                terraform plan
+                terraform apply
+
+#### Attached Disks
+
+        Portal Azure
+        Virtual machines -> vmtest-vm | Disks -> Attach existing disks -> select the two disks that was created (srv2-postgres-ubuntu-vm-disk1, srv2-postgres-ubuntu-vm-disk2)
 
 ---
 
@@ -92,6 +119,62 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         rm tfplan
         rm tfplan.json
         rm -r .terraform/
+
+## test02 disk
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
+        // cd auto5 ;git checkout azure
+
+        cd ~
+        cd auto5/srv/terraform/azure/a/Disks/2/
+
+        terraform init
+        terraform plan
+        terraform apply
+
+## test03 disk
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
+        // cd auto5 ;git checkout azure
+
+        cd ~
+        cd auto5/srv/terraform/azure/a/Disks/3/
+
+        terraform init
+        terraform plan
+        terraform apply
+
+## test03 VM
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        // cd auto5 ; git checkout develop
+
+        cd ~
+        cd auto5/srv/terraform/azure/a/VM/02/
+        terraform init
+        terraform plan -out main.tfplan
+        terraform apply main.tfplan
+        //terraform apply main.tfplan -auto-approve
+
+        #Verify the results
+        terraform output -raw tls_private_key > id_rsa
+        terraform output public_ip_address
+        ssh -i id_rsa azureuser@<public_ip_address>
+
+        #Clean up resources
+        terraform plan -destroy -out main.destroy.tfplan
+        terraform apply main.destroy.tfplan
+        //terraform apply main.destroy.tfplan -auto-approve
+
+        REFERENCE: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-terraform
 
 ---
 
