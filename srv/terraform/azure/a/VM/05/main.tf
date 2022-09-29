@@ -53,6 +53,10 @@ resource "azurerm_network_interface" "internal" {
   }
 }
 
+
+
+// SECURITY GROUP
+
 resource "azurerm_network_security_group" "webserver" {
   name                = "tls_webserver"
   location            = azurerm_resource_group.main.location
@@ -74,6 +78,51 @@ resource "azurerm_network_interface_security_group_association" "main" {
   network_interface_id      = azurerm_network_interface.internal.id
   network_security_group_id = azurerm_network_security_group.webserver.id
 }
+
+
+
+
+
+
+
+// SECURITY GROUP 2
+
+resource "azurerm_network_security_group" "webserver2" {
+  name                = "tls_webserver2"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+  security_rule {
+    access                     = "Allow"
+    direction                  = "Inbound"
+    name                       = "tls"
+    priority                   = 100
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    source_address_prefix      = "*"
+    destination_port_range     = "443"
+    destination_address_prefix = azurerm_network_interface.main.public_ip_address
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "main" {
+  network_interface_id      = azurerm_network_interface.main.id
+  network_security_group_id = azurerm_network_security_group.webserver.id
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 resource "azurerm_linux_virtual_machine" "main" {
   name                            = "${var.prefix}-vm"
