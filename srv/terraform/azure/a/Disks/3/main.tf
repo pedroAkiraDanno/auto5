@@ -17,7 +17,7 @@ resource "azurerm_managed_disk" "main" {
   resource_group_name  = azurerm_resource_group.main.name
   storage_account_type = "StandardSSD_LRS"
   create_option        = "Empty"
-  disk_size_gb         = 200
+  disk_size_gb         = 250
 }
 
 
