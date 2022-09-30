@@ -2,51 +2,50 @@
 - hosts: all
   become: yes
   vars:
-      db_user: dbusername
-      db_name: dbname
-      db_password: dbpassword
-      postgresql_version: 14
-      uuid: 5494afe6-01   
-      device_disk: /dev/sdc
-      device_disk_n: /dev/sdc1  
+    db_user: dbusername
+    db_name: dbname
+    db_password: dbpassword
+    postgresql_version: 14
+    uuid: 5494afe6-01
+    device_disk: /dev/sdc
+    device_disk_n: /dev/sdc1
 
   tasks:
-      #- name: partition new disk
-      #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdb
-      #  args:
-      #   executable: /bin/bash
+    #- name: partition new disk
+    #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdb
+    #  args:
+    #   executable: /bin/bash
 
-      - name: Create a new ext4 primary partition
-        community.general.parted:
-         device: "{ { device_disk } }"
-         number: 1
-         state: present
-         fs_type: ext4      
+    - name: Create a new ext4 primary partition
+      community.general.parted:
+        device: "{ { device_disk } }"
+        number: 1
+        state: present
+        fs_type: ext4
 
-      - name: Create a ext4 filesystem on /dev/sdb1
-        community.general.filesystem:
-         fstype: ext4
-         dev: "{ { device_disk_n } }"
+    - name: Create a ext4 filesystem on /dev/sdb1
+      community.general.filesystem:
+        fstype: ext4
+        dev: "{ { device_disk_n } }"
 
-      - name: Creates directory to postgresql
-        file:
-          path:  /var/lib/postgresql/
-          state: directory
-          #owner: postgres
-          #group: postgres
-          mode:  0777             
+    - name: Creates directory to postgresql
+      file:
+        path: /var/lib/postgresql/
+        state: directory
+        #owner: postgres
+        #group: postgres
+        mode: 0777
 
-#      - name:  Mount command
-#        shell: mount UUID=$(blkid /dev/sdb1 -sUUID -ovalue) /var/lib/postgresql/
-#        args:
-#         executable: /bin/bash      
+    #      - name:  Mount command
+    #        shell: mount UUID=$(blkid /dev/sdb1 -sUUID -ovalue) /var/lib/postgresql/
+    #        args:
+    #         executable: /bin/bash
 
-      - name: add /var/lib/postgresql entry to /etc/fstab
-        mount:
-         path: /var/lib/postgresql
-         src: "{ { device_disk_n } }" 
-         fstype: ext4
-         opts: defaults,auto,noatime,_netdev
-         dump: '2'
-         state: mounted
-
+    - name: add /var/lib/postgresql entry to /etc/fstab
+      mount:
+        path: /var/lib/postgresql
+        src: "{ { device_disk_n } }"
+        fstype: ext4
+        opts: defaults,auto,noatime,_netdev
+        dump: "2"
+        state: mounted
