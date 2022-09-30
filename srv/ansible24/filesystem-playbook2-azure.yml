@@ -18,15 +18,15 @@
 
     - name: Create a new ext4 primary partition
       community.general.parted:
-        device: { { device_disk } }
+        device: /dev/sdc
         number: 1
         state: present
         fs_type: ext4
 
-    - name: Create a ext4 filesystem on {{ device_disk_n }}
+    - name: Create a ext4 filesystem on /dev/sdc1
       community.general.filesystem:
         fstype: ext4
-        dev: { { device_disk_n } }
+        dev: /dev/sdc1
 
     - name: Creates directory to postgresql
       file:
@@ -44,7 +44,7 @@
     - name: add /var/lib/postgresql entry to /etc/fstab
       mount:
         path: /var/lib/postgresql
-        src: { { device_disk_n } }
+        src: /dev/sdc1
         fstype: ext4
         opts: defaults,auto,noatime,_netdev
         dump: "2"
