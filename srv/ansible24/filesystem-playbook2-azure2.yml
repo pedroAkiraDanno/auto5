@@ -10,7 +10,7 @@
 
   tasks:
       #- name: partition new disk
-      #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdb
+      #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdc
       #  args:
       #   executable: /bin/bash
 
@@ -35,7 +35,7 @@
           mode:  0777             
 
 #      - name:  Mount command
-#        shell: mount UUID=$(blkid /dev/sdb1 -sUUID -ovalue) /var/lib/postgresql/
+#        shell: mount UUID=$(blkid /dev/sdc1 -sUUID -ovalue) /var/lib/postgresql/
 #        args:
 #         executable: /bin/bash      
 
@@ -47,4 +47,3 @@
          opts: defaults,auto,noatime,_netdev
          dump: '2'
          state: mounted
-
