@@ -112,9 +112,9 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    #sku       = "18.04-LTS"
+    sku       = "18.04-LTS"
     #sku      = "19.04" #az vm image list --offer UbuntuServer --output table --all
-    sku      = "19_04-gen2"   
+    #sku      = "19_04-gen2"   
     version   = "latest"
   }
 
