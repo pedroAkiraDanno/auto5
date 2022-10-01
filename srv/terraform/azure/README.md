@@ -72,6 +72,29 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         Portal Azure
         Virtual machines -> vmtest-vm | Disks -> Attach existing disks -> select the two disks that was created (srv2-postgres-ubuntu-vm-disk1, srv2-postgres-ubuntu-vm-disk2)
 
+#### Run Commmand
+
+        #OPEN/SELECT THE VM IN AZURE PORTAL -> Run command -> RunShellScript -> Executes a Linux shell script
+
+        sudo su -
+
+        cd ~
+        rm -fr auto5
+        git clone https://github.com/pedroAkiraDanno/auto5
+        cd  /root/auto5/srv/ansible24/ ; mv ssh-key-2022-01-19.key*  /root/.ssh/
+        cd ~  ; rm -fr auto5
+        chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
+        ls -lath /root/.ssh/ssh-key-2022-01-19.key*
+
+        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsgTrcqnAYNnEo3DTnKbuf/6JqFp4l0Jw2OqfHIVc9mHXahEiboXcumS8kNtuHucDsasbao8AE+R1K5uSbUZr8YcM/sKqOSkWynmsWhZdTSCilJJ5w/ahw+lbsNfB2LNZEbeUmTwWMTpRzWye9Uz5yrkudBlEbo36C+7PgiK4fcEUbHZwvRoOY1Xh0B5GEKpqW8poaZOCjxkYZGtDwlyeesvEmQxF5sc/vNzLrOhwUzgKKu//c9AEI29dCZhClKKDJ37WN7FaRqCbdUaaKr8AkLr/9HrYbut3ejvkBQU9vXg4guTvvTMkhk9dPYWoa4Jbdozp3Kbo2BEdKlHll2fEJ ssh-key-2022-01-19" > /root/.ssh/authorized_keys
+
+
+
+
+        #https://gmusumeci.medium.com/how-to-deploy-linux-virtual-machines-in-azure-using-terraform-55551e41bee9
+
+        #https://gmusumeci.medium.com/how-to-deploy-linux-virtual-machines-in-azure-using-terraform-55551e41bee9
+
 ---
 
 # TESTS :
