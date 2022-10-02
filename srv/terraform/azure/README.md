@@ -22,7 +22,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         terraform init
         terraform apply
                   Enter a value: eastus
-                  Enter a value: vmtest
+                  Enter a value: vmtest              #vmtestYYMMDDHHmm
 
 
         #Clean up resources
