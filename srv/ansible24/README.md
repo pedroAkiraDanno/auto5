@@ -250,7 +250,7 @@ Repo to postgresql with ansible
 
     ## install nmap and traceroute to zabbix
     sudo apt-get update
-    sudo apt-get install nmap
+    sudo apt-get install nmap -y
     nmap --version
 
     sudo apt-get install traceroute
