@@ -20,9 +20,9 @@ SELECT pg_relation_filepath ('test2');
 --NEED EXEC THIS COMMAND IN LINUX TO MONIT
 select  'watch ls -lath /var/lib/postgresql/14/main/' || pg_relation_filepath ('test2') || '*';
 
-INSERT INTO test2 (id) SELECT * FROM generate_series(1, 1000000000);  
+INSERT INTO test2 (id) SELECT * FROM generate_series(1, 10000000);  
 --INSERT INTO test2 (id) SELECT random() FROM generate_series(1, 10000000);  
-INSERT INTO test2 (id) SELECT random_between(1,10000) FROM generate_series(1, 1000000000);  
+INSERT INTO test2 (id) SELECT random_between(1,10000) FROM generate_series(1, 10000000);  
 
 
 -- size of table 
