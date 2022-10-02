@@ -22,7 +22,7 @@ select  'watch ls -lath /var/lib/postgresql/14/main/' || pg_relation_filepath ('
 
 INSERT INTO test2 (id) SELECT * FROM generate_series(1, 10000000);  
 --INSERT INTO test2 (id) SELECT random() FROM generate_series(1, 10000000);  
-INSERT INTO test2 (id) SELECT random_between(1,10000) FROM generate_series(1, 10000000);  
+INSERT INTO test2 (id) SELECT random_between(1,10000) FROM generate_series(1, 100000000);  
 
 
 -- size of table 
