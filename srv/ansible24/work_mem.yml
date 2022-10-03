@@ -54,6 +54,8 @@
       shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/work_mem.sql
 
     - name: restart_postgresql use script
+      become: true
+      become_user: postgres
       shell: chmod +x /var/lib/postgresql/scripts/restart_postgresql.sh
       args:
         executable: /bin/bash
@@ -62,6 +64,8 @@
       service: name=postgresql state=restarted
 
     - name: work_mem use script
+      become: true
+      become_user: postgres
       shell: chmod +x /var/lib/postgresql/scripts/work_mem.sh
       args:
         executable: /bin/bash
@@ -75,6 +79,8 @@
       service: name=postgresql state=restarted
 
     - name: work_mem use script
+      become: true
+      become_user: postgres
       shell: chmod +x /var/lib/postgresql/scripts/work_mem2.sh
       args:
         executable: /bin/bash
