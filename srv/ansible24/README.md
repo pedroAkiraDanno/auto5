@@ -179,6 +179,10 @@ Repo to postgresql with ansible
     ansible-playbook -i hosts /etc/ansible/GUI_linux.yml
     ansible-playbook -i hosts /etc/ansible/change_password.yml
 
+
+    # About Postgresql architecture
+    ansible-playbook -i hosts /etc/ansible/work_mem.yml
+
 ## need exec
 
     #use user root
