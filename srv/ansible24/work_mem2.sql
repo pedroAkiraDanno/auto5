@@ -7,31 +7,34 @@
 
 
 
---TEST 1 PART 
-      select name,context,setting,unit,reset_val from pg_settings where  name like '%work_mem%' order by setting;
 
-      SHOW work_mem;
 
-      alter system set work_mem to '4GB';
 
+-- TEST 2 PART 
+      ALTER SYSTEM RESET work_mem;
       select pg_reload_conf();
 
-      --postgres@instance-20220329-1520:~$ sudo systemctl restart postgresql
+
+
+/*
+      postgres@instance-20220329-1520:~$ sudo systemctl restart postgresql
+
+
+      postgres@instance-20220329-1520:~$ psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/benchmark_SelectFile.sql 
+         Sort Method: top-N heapsort  Memory: 25kB
+         Time: 11572.951 ms (00:11.573)
+
+         Sort Method: external merge  Disk: 176216kB
+         Time: 24350.670 ms (00:24.351)
+
+
+      postgres@instance-20220329-1520:~$ watch ls -lath  /var/lib/postgresql/14/main/base/pgsql_tmp
 
 
 
-      --postgres@instance-20220329-1520:~$ psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/benchmark_InsertFile.sql 
+      #postgres@instance-20220329-1520:~$ psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/benchmark_DeleteFile.sql
 
-      --postgres@instance-20220329-1520:~$ psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/benchmark_SelectFile.sql 
-
-
-      --postgres@instance-20220329-1520:~$ watch ls -lath  /var/lib/postgresql/14/main/base/pgsql_tmp
-
-
-
-
-
-
+*/
 
 
 
