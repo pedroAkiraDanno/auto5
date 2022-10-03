@@ -16,7 +16,7 @@ var.location
 var.prefix
   The prefix which should be used for all resources in this example
 
-  Enter a value: srv2-postgres-ubuntu
+  Enter a value: vmtest     OR    vm-srv2-postgres-ubuntu-YYMMDDHHMM
 
 
 

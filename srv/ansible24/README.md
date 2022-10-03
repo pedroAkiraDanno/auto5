@@ -121,9 +121,9 @@ Repo to postgresql with ansible
 
     cd /etc/ansible
 
-    ansible-playbook -i hosts filesystem-playbook2.yml   #IF AZURE exec because they create sdb1 in /mnt    ansible-playbook -i hosts filesystem-playbook2-azure.yml
+    ansible-playbook -i hosts filesystem-playbook2.yml   #IF AZURE exec because they create sdb1 in /mnt    ansible-playbook -i hosts filesystem-playbook2-azure2.yml
     ansible-playbook -i hosts db-server-playbook.yml
-    ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure.yml
+    ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
     ansible-playbook -i hosts backupcron.yml
     ansible-playbook -i hosts archive.yml
     #ansible-playbook -i hosts pgmetrics.yml
@@ -178,6 +178,10 @@ Repo to postgresql with ansible
     ## About GUI Graphical User Interface in Linux
     ansible-playbook -i hosts /etc/ansible/GUI_linux.yml
     ansible-playbook -i hosts /etc/ansible/change_password.yml
+
+
+    # About Postgresql architecture
+    ansible-playbook -i hosts /etc/ansible/work_mem.yml
 
 ## need exec
 
@@ -250,7 +254,7 @@ Repo to postgresql with ansible
 
     ## install nmap and traceroute to zabbix
     sudo apt-get update
-    sudo apt-get install nmap
+    sudo apt-get install nmap -y
     nmap --version
 
     sudo apt-get install traceroute

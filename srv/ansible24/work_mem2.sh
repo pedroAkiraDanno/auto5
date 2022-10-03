@@ -1,0 +1,1 @@
+psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/benchmark_DeleteFile.sql

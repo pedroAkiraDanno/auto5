@@ -1,0 +1,86 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: test_architecture
+    db_name2: testtemp
+    db_name3: testtemp
+    db_password: dbpassword
+    postgresql_version: 14
+
+  tasks:
+    - name: Ansible copy file work_mem.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: work_mem.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file work_mem2.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: work_mem2.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file restart_postgresql.sh to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: restart_postgresql.sh
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file work_mem.sh to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: work_mem.sh
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file work_mem2.sh to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: work_mem2.sh
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes
+
+    - name: Ensure user has access to the new database and exec work_mem.sql
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/work_mem.sql
+
+    - name: restart_postgresql use script
+      become: true
+      become_user: postgres
+      shell: chmod +x /var/lib/postgresql/scripts/restart_postgresql.sh
+      args:
+        executable: /bin/bash
+
+    - name: Restart postgresql
+      service: name=postgresql state=restarted
+
+    - name: work_mem use script
+      become: true
+      become_user: postgres
+      shell: chmod +x /var/lib/postgresql/scripts/work_mem.sh
+      args:
+        executable: /bin/bash
+
+    - name: Ensure user has access to the new database and exec work_mem2.sql
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/work_mem2.sql
+
+    - name: Restart postgresql
+      service: name=postgresql state=restarted
+
+    - name: work_mem use script
+      become: true
+      become_user: postgres
+      shell: chmod +x /var/lib/postgresql/scripts/work_mem2.sh
+      args:
+        executable: /bin/bash

@@ -140,9 +140,6 @@ resource "azurerm_linux_virtual_machine" "main" {
     azurerm_network_interface.internal.id,
   ]
 
-
-
-/*
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
@@ -151,25 +148,6 @@ resource "azurerm_linux_virtual_machine" "main" {
     sku      = "19_04-gen2"   
     version   = "latest"
   }
-
-*/
-
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-focal"
-    #sku       = "18.04-LTS"
-    #sku      = "19.04" #az vm image list --offer UbuntuServer --output table --all
-    sku      = "20_04-lts-gen2"   
-    version   = "latest"
-  }
-
-#REFERENCE: https://github.com/Azure/azure-cli/issues/13320
-
-
-
-
-
-
 
   os_disk {
     #storage_account_type = "Standard_LRS"    

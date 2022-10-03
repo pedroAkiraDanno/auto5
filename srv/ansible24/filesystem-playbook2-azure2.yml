@@ -7,12 +7,10 @@
     db_password: dbpassword
     postgresql_version: 14
     uuid: 5494afe6-01
-    device_disk: /dev/sdc
-    device_disk_n: /dev/sdc1
 
   tasks:
     #- name: partition new disk
-    #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdc
+    #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdb
     #  args:
     #   executable: /bin/bash
 
@@ -37,7 +35,7 @@
         mode: 0777
 
     #      - name:  Mount command
-    #        shell: mount UUID=$(blkid /dev/sdc1 -sUUID -ovalue) /var/lib/postgresql/
+    #        shell: mount UUID=$(blkid /dev/sdb1 -sUUID -ovalue) /var/lib/postgresql/
     #        args:
     #         executable: /bin/bash
 
