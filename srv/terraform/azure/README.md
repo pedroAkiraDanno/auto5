@@ -97,6 +97,14 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
 ---
 
+# Commands:
+
+        #DELETE ALL RESOURCE GROUPS
+        #put CLI in Power Shell #REFERENCE: https://stackoverflow.com/questions/36403597/how-to-delete-all-azure-resources-with-powershell
+        Get-AzureRmResourceGroup | Remove-AzureRmResourceGroup -verbose -Force
+
+---
+
 # TESTS :
 
 ## 06_vm_linux
