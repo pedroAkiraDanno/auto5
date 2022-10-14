@@ -61,7 +61,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
                 cd auto5/srv/terraform/azure/a/Disks/3/
 
                 vi main.tf
-                #change name in   name= "${local.vm_name}-disk1 to name= "${local.vm_name}-disk2
+                #change name in   name= "${local.vm_name}-disk1 to name= "${local.vm_name}-disk2, change main name     = "${var.prefix}-resources2"
 
                 terraform init
                 terraform plan
