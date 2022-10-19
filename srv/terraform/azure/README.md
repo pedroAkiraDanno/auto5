@@ -21,7 +21,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
         cd auto5/srv/terraform/azure/a/VM/05/
         terraform init
         terraform apply
-                  Enter a value: eastus
+                  Enter a value: eastus                                         OR japaneast **need change to japan disks too
                   Enter a value: vmtest              #vmtestYYMMDDHHmm
 
 
@@ -33,6 +33,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
                 password: P@ssw0rd1234!
 
         REFERENCE: https://github.com/hashicorp/terraform-provider-azurerm/tree/main/examples/virtual-machines/linux/public-ip
+                   https://stackoverflow.com/questions/44143981/is-there-an-api-to-list-all-azure-regions
 
 #### Create Disks
 
@@ -88,6 +89,7 @@ Azure Power Shell is an authenticated, browser-accessible way to interact with A
 
         echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsgTrcqnAYNnEo3DTnKbuf/6JqFp4l0Jw2OqfHIVc9mHXahEiboXcumS8kNtuHucDsasbao8AE+R1K5uSbUZr8YcM/sKqOSkWynmsWhZdTSCilJJ5w/ahw+lbsNfB2LNZEbeUmTwWMTpRzWye9Uz5yrkudBlEbo36C+7PgiK4fcEUbHZwvRoOY1Xh0B5GEKpqW8poaZOCjxkYZGtDwlyeesvEmQxF5sc/vNzLrOhwUzgKKu//c9AEI29dCZhClKKDJ37WN7FaRqCbdUaaKr8AkLr/9HrYbut3ejvkBQU9vXg4guTvvTMkhk9dPYWoa4Jbdozp3Kbo2BEdKlHll2fEJ ssh-key-2022-01-19" > /root/.ssh/authorized_keys
 
+        echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsgTrcqnAYNnEo3DTnKbuf/6JqFp4l0Jw2OqfHIVc9mHXahEiboXcumS8kNtuHucDsasbao8AE+R1K5uSbUZr8YcM/sKqOSkWynmsWhZdTSCilJJ5w/ahw+lbsNfB2LNZEbeUmTwWMTpRzWye9Uz5yrkudBlEbo36C+7PgiK4fcEUbHZwvRoOY1Xh0B5GEKpqW8poaZOCjxkYZGtDwlyeesvEmQxF5sc/vNzLrOhwUzgKKu//c9AEI29dCZhClKKDJ37WN7FaRqCbdUaaKr8AkLr/9HrYbut3ejvkBQU9vXg4guTvvTMkhk9dPYWoa4Jbdozp3Kbo2BEdKlHll2fEJ ssh-key-2022-01-19" > /home/adminuser/.ssh/authorized_keys
 
 
 
