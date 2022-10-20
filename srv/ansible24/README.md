@@ -208,7 +208,6 @@ Repo to postgresql with ansible
 
 
     apt-get install gcc -y
-    apt-get install neofetch -y
 
     chmod +x /var/lib/postgresql/scripts/*.sh
     chown -R postgres:postgres /postgresql/
@@ -258,6 +257,15 @@ Repo to postgresql with ansible
     nmap --version
 
     sudo apt-get install traceroute
+
+
+
+    #INSTALL
+        sudo apt install net-tools -y
+        sudo apt-get install neofetch -y
+        sudo apt install net-tools -y
+
+
 
 
     #https://www.youtube.com/watch?v=FmiDt5hiOe0
