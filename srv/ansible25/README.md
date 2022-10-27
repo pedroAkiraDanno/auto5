@@ -38,7 +38,7 @@ Repo to postgresql 15 with ansible
     #move file sshd_config with github
     cd ~  ; rm -fr auto5
     git clone https://github.com/pedroAkiraDanno/auto5
-    cd /root/auto5/srv/ansible24/ ; mv sshd_config  /etc/ssh/
+    cd /root/auto5/srv/ansible25/ ; mv sshd_config  /etc/ssh/
     cat /etc/ssh/ssh_config | grep PasswordAuthentication
     cd ~  ; rm -fr auto5
     systemctl restart sshd
@@ -64,7 +64,7 @@ Repo to postgresql 15 with ansible
     cd ~
     rm -fr auto5
     git clone https://github.com/pedroAkiraDanno/auto5
-    cd  /root/auto5/srv/ansible24/ ; mv ssh-key-2022-01-19.key*  /root/.ssh/
+    cd  /root/auto5/srv/ansible25/ ; mv ssh-key-2022-01-19.key*  /root/.ssh/
     cd ~  ; rm -fr auto5
     chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
     ls -lath /root/.ssh/ssh-key-2022-01-19.key*
@@ -83,7 +83,7 @@ Repo to postgresql 15 with ansible
     #GitHub:
     cd /etc/ansible/  && rm -rf /etc/ansible/*
     git clone https://github.com/pedroAkiraDanno/auto5
-    cd /etc/ansible/auto5/srv/ansible24/ ; mv *  /etc/ansible/
+    cd /etc/ansible/auto5/srv/ansible25/ ; mv *  /etc/ansible/
     cd /etc/ansible/  && rm -rf auto5/
     ls -lath
 
@@ -110,7 +110,7 @@ Repo to postgresql 15 with ansible
     #cd /etc/ansible/  && rm -rf /etc/ansible/*
     #git clone https://github.com/pedroAkiraDanno/auto5
     #cd /etc/ansible/auto5/ ;     git checkout develop ; cd ..
-    #cd /etc/ansible/auto5/srv/ansible24/ ; mv *  /etc/ansible/
+    #cd /etc/ansible/auto5/srv/ansible25/ ; mv *  /etc/ansible/
     #cd /etc/ansible/  && rm -rf auto5/
 
 
