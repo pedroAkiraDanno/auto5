@@ -1,0 +1,50 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: dvdrental
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+
+#      - name: createdb dvdrental 
+#        become: true
+#        become_user: postgres      
+#        shell: createdb dvdrental 
+#        args:
+#         executable: /bin/bash    
+
+
+      - name: Ansible copy file vacuum_parameter.sql to remote server
+        copy:
+         owner: postgres
+         group: postgres
+         src:  vacuum_parameter.sql
+         dest: /var/lib/postgresql/scripts
+
+
+      - name: Restart postgresql
+        service: name=postgresql state=restarted
+
+
+
+      - name: Cronjob Entry vacuum_parameter.sql scripts
+        cron:
+         name: "### execute vacuum_parameter.sql scripts"
+         user: postgres
+         minute: "*"
+         hour: "12"
+         day: "*"
+         month: "*"
+         weekday: "*"
+         job: psql -U postgres -d postgres -a -f /var/lib/postgresql/scripts/vacuum_parameter.sql
+
+
+
+
+## REFERENCES: 

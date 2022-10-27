@@ -1,0 +1,33 @@
+---
+    - hosts: all
+      become: yes
+      vars:
+          db_user: dbusername
+          db_name: dbname
+          db_name2: postgres      
+          db_name3: test1      
+          db_password: dbpassword
+          postgresql_version: 14
+    
+      tasks:
+
+
+      - name: Ansible copy file  pg_freespacemap.sql to remote server
+        copy:
+         owner: postgres
+         group: postgres
+         src:  pg_freespacemap.sql
+         dest: /var/lib/postgresql/scripts   
+
+            
+      - name: Cronjob Entry pg_freespacemap.sql scripts
+        cron:
+         name: "### execute pg_freespacemap.sql scripts"
+         user: postgres
+         minute: "5"
+         hour: "15"
+         day: "*"
+         month: "*"
+         weekday: "*"
+         job: psql -U postgres -d postgres -a -f /var/lib/postgresql/scripts/pg_freespacemap.sql   
+    

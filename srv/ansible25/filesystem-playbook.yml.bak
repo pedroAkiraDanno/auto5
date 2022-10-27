@@ -1,0 +1,56 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: dbname
+      db_password: dbpassword
+      postgresql_version: 12
+  
+
+  tasks:
+      #- name: partition new disk
+      #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdb
+      #  args:
+      #   executable: /bin/bash
+
+      - name: Create a new ext4 primary partition
+        community.general.parted:
+         device: /dev/sdb
+         number: 1
+         state: present
+         fs_type: ext4      
+
+      - name: Create a ext4 filesystem on /dev/sdb1
+        community.general.filesystem:
+         fstype: ext4
+         dev: /dev/sdb1
+
+      - name: Creates directory to postgresql
+        file:
+          path:  /var/lib/postgresql
+          state: directory
+          #owner: postgres
+          #group: postgres
+          #mode:  755       
+
+      - name: Mount a device by label
+        mount:   
+         src:  /dev/sdb1
+         path: /var/lib/postgresql/
+         fstype: ext4
+         state: present
+
+      - name: add /var/lib/postgresql entry to /etc/fstab
+        mount:
+         path: /var/lib/postgresql/
+         src: /dev/sdb1
+         fstype: ext4
+         opts: defaults,auto
+         dump: '0'
+         state: present
+
+      - name:  Mount -a command
+        shell: sudo mount -a
+        args:
+         executable: /bin/bash      

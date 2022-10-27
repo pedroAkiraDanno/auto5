@@ -1,0 +1,7 @@
+/var/log/health-report/health-check-report-* {
+           weekly
+           rotate 10
+           missingok
+           compress
+           maxage 90
+       }

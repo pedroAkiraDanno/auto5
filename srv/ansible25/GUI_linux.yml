@@ -1,0 +1,47 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: dbname
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+
+      - name: Ansible copy file GUI_linux.sh to remote server
+        copy:
+         owner: root
+         group: root
+         mode:  0777         
+         src:   GUI_linux.sh
+         dest: /var/lib/postgresql/scripts
+
+
+
+      - name:  Command GUI_linux.sh
+        shell: /var/lib/postgresql/scripts/GUI_linux.sh
+        args:
+         executable: /bin/bash               
+    
+
+    
+      - name: Reboot the machine with all defaults using Ansible
+        reboot:
+
+
+
+#      - name: Check the Uptime of the servers
+#        shell: "uptime"
+#        register: Uptime
+
+#      - debug: var=Uptime
+
+
+
+
+# REFERENCES:
+# https://www.middlewareinventory.com/blog/ansible_wait_for_reboot_to_complete/

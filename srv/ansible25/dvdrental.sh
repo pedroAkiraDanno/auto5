@@ -1,0 +1,1 @@
+unzip /tmp/dvdrental.zip 

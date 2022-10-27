@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+  vars:
+      db_user: dbusername
+      db_name: dbname
+      db_name2: postgres      
+      db_name3: test1      
+      db_password: dbpassword
+      postgresql_version: 14
+
+  tasks:
+
+      - name: Ansible copy file to remote server
+        copy:
+         owner: postgres
+         group: postgres
+         mode:  0777         
+         src:  pgmetrics.sh
+         dest: /var/lib/postgresql/scripts           
+
+      - name: Execute the script
+        become: yes
+        become_user: postgres      
+        command: sh /var/lib/postgresql/scripts/pgmetrics.sh
+  
