@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Ansible copy file  linuxsystemhealth.sh to remote server
+      copy:
+        owner: root
+        group: root
+        src: linuxsystemhealth.sh
+        dest: /root/scripts
+
+    - name: Cronjob Entry linuxsystemhealth.sh scripts
+      cron:
+        name: "### execute linuxsystemhealth.sh scripts"
+        user: root
+        minute: "5"
+        hour: "22"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: /root/scripts/linuxsystemhealth.sh
+
+    - name: Cronjob Entry rm_linuxsystemhealth.sh scripts
+      cron:
+        name: "### remove resulto of linuxsystemhealth.sh scripts"
+        user: root
+        minute: "5"
+        hour: "22"
+        day: "1"
+        month: "*"
+        weekday: "*"
+        job: /root/scripts/rm_linuxsystemhealth.sh

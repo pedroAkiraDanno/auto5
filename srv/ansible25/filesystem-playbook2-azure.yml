@@ -1,0 +1,51 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_password: dbpassword
+    postgresql_version: 14
+    uuid: 5494afe6-01
+    device_disk: /dev/sdc
+    device_disk_n: /dev/sdc1
+
+  tasks:
+    #- name: partition new disk
+    #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdc
+    #  args:
+    #   executable: /bin/bash
+
+    - name: Create a new ext4 primary partition
+      community.general.parted:
+        device: /dev/sdc
+        number: 1
+        state: present
+        fs_type: ext4
+
+    - name: Create a ext4 filesystem on /dev/sdc1
+      community.general.filesystem:
+        fstype: ext4
+        dev: /dev/sdc1
+
+    - name: Creates directory to postgresql
+      file:
+        path: /var/lib/postgresql/
+        state: directory
+        #owner: postgres
+        #group: postgres
+        mode: 0777
+
+    #      - name:  Mount command
+    #        shell: mount UUID=$(blkid /dev/sdc1 -sUUID -ovalue) /var/lib/postgresql/
+    #        args:
+    #         executable: /bin/bash
+
+    - name: add /var/lib/postgresql entry to /etc/fstab
+      mount:
+        path: /var/lib/postgresql
+        src: /dev/sdc1
+        fstype: ext4
+        opts: defaults,auto,noatime,_netdev
+        dump: "2"
+        state: mounted

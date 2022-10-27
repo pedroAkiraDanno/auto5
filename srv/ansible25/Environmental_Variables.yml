@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Ansible copy file Environmental_Variables to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        mode: 0777
+        src: Environmental_Variables.sh
+        dest: /var/lib/postgresql/scripts
+
+    - name: Execute the script Environmental_Variables
+      become: yes
+      become_user: postgres
+      command: sh /var/lib/postgresql/scripts/Environmental_Variables.sh

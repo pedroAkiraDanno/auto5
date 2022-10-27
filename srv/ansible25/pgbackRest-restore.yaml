@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    #      - name: Stop postgresql service
+    #        shell: service postgresql stop
+    #        args:
+    #         executable: /bin/bash
+
+    - name: Stop postgresql service
+      shell: systemctl stop  postgresql
+      args:
+        executable: /bin/bash
+
+    - name: Remove/Delete postgresql data
+      shell: rm /var/lib/postgresql/15/main/* -r
+      args:
+        executable: /bin/bash
+
+    - name: Restore database with pgbackrest
+      become: true
+      become_user: postgres
+      shell: pgbackrest --stanza=pgbackrest --delta restore
+
+    - name: Restart the PostgreSQL service
+      service: name=postgresql state=restarted

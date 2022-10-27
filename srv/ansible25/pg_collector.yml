@@ -1,0 +1,70 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Install packages
+      apt: name={{ item }} update_cache=true state=latest
+      with_items:
+        - git
+
+    - name: Git clone pg_collector
+      shell: git clone https://github.com/awslabs/pg-collector.git /tmp/pg_collector
+      args:
+        executable: /bin/bash
+
+    - name: Cronjob Entry pg_collector scripts
+      cron:
+        name: "### execute pg_collector scripts"
+        user: postgres
+        minute: "0"
+        hour: "10"
+        day: "*"
+        month: "*"
+        weekday: "6"
+        job: psql -U postgres -d test1 -a -f  /tmp/pg_collector/pg_collector.sql
+
+    - name: Creates directory to postgresql
+      file:
+        path: /postgresql/pg_collector/
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
+        recurse: yes
+
+    - name: Cronjob Entry mv pg_collector files to /postgresql/pg_collector/
+      cron:
+        name: "### mv pg_collector files to /postgresql/pg_collector/"
+        user: postgres
+        minute: "*"
+        hour: "9"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: mv /tmp/pg_collector_test1* /postgresql/pg_collector/
+
+    - name: Ansible copy file pg_collector_delete.sh to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: pg_collector_delete.sh
+        dest: /var/lib/postgresql/scripts
+
+    - name: Cronjob Entry delete pg_collector_delete.sh files to /postgresql/pg_collector/
+      cron:
+        name: "### delete pg_collector files to /postgresql/pg_collector/"
+        user: postgres
+        minute: "*"
+        hour: "10"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: sh /var/lib/postgresql/scripts/pg_collector_delete.sh

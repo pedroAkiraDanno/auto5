@@ -1,0 +1,37 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Creates directory to pg_basebackup
+      file:
+        path: /postgresql/pg_basebackup
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
+
+    - name: Ansible copy file fullbck-pg_basebackup to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: fullbck-pg_basebackup.sh
+        dest: /var/lib/postgresql/scripts
+
+    - name: Cronjob Entry fullbck-pg_basebackup scripts
+      cron:
+        name: "### execute fullbck-pg_basebackup scripts"
+        user: postgres
+        minute: "5"
+        hour: "6"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: /var/lib/postgresql/scripts/fullbck-pg_basebackup.sh

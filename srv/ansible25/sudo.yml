@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+    password: postgress
+
+  tasks:
+    - name: sudo to postgres
+      shell: usermod -aG sudo postgres
+      args:
+        executable: /bin/bash
+
+    - name: change user's password
+      user:
+        name: postgres
+        password: "{{ 'postgres' | password_hash('sha512') }}"
+
+    #- user: name=postgres password={{password}}
+#password: "{{ 'password' | password_hash('sha512') }}"
+

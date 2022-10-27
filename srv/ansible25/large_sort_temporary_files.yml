@@ -1,0 +1,36 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Ansible copy file to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: large_sort_temporary_files.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Cronjob Entry large_sort_temporary_files scripts
+      cron:
+        name: "### execute large_sort_temporary_files scripts"
+        user: postgres
+        minute: "*"
+        hour: "*/3"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/large_sort_temporary_files.sql
+##commands:
+## cd /var/lib/postgresql/15/main/base/pgsql_tmp
+## watch ls -lath
+
+#SELECT datname database, temp_files AS "Temporary files"      , temp_bytes/1024/1024/1024 AS "Size of temporary files MB"     FROM   pg_stat_database db;
+# select pg_stat_reset();
+
