@@ -5,7 +5,7 @@
     db_user: dbusername
     db_name: dbname
     db_password: dbpassword
-    postgresql_version: 14
+    postgresql_version: 15
     uuid: 5494afe6-01
 
   tasks:
