@@ -2,115 +2,102 @@
 - hosts: all
   become: yes
   vars:
-      db_user: dbusername
-      db_name: dbname
-      db_name2: postgres      
-      db_name3: test1      
-      db_password: dbpassword
-      postgresql_version: 14
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
 
   tasks:
+    - name: Update the package lists
+      shell: sudo apt-get update
+      args:
+        executable: /bin/bash
 
-      - name: Update the package lists
-        shell: sudo apt-get update
-        args:
-         executable: /bin/bash     
+    - name: Install pgbackrest
+      shell: sudo apt-get install -y pgbackrest
+      args:
+        executable: /bin/bash
 
-      - name: Install pgbackrest
-        shell: sudo apt-get install -y pgbackrest
-        args:
-         executable: /bin/bash     
-         
+    - name: Creates directory to pgbackrest
+      file:
+        path: /postgresql/pgbackrest
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
 
-      - name: Creates directory to pgbackrest
-        file:
-         path:  /postgresql/pgbackrest
-         state: directory
-         owner: postgres
-         group: postgres
-         mode:  0777
+    - name: Configure the and permissions on the pgbackrest log location
+      shell: sudo chown -R postgres:postgres /var/log/pgbackrest
+      args:
+        executable: /bin/bash
 
+    - name: cp pgbackrest .backup
+      shell: sudo cp /etc/pgbackrest.conf /etc/pgbackrest.conf.backup
+      args:
+        executable: /bin/bash
 
-      - name: Configure the and permissions on the pgbackrest log location
-        shell: sudo chown -R postgres:postgres /var/log/pgbackrest
-        args:
-         executable: /bin/bash     
+    - name: Ansible copy file pgbackrest to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        mode: 0777
+        src: pgbackrest.conf
+        dest: /etc/
 
+    - name: Ansible copy file pgbackrest to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        mode: 0777
+        src: pgbackrest.sql
+        dest: /var/lib/postgresql/scripts
 
-      - name: cp pgbackrest .backup 
-        shell: sudo cp /etc/pgbackrest.conf /etc/pgbackrest.conf.backup
-        args:
-         executable: /bin/bash     
+    - name: Configuration pgbackrest.sql parameters to our database
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/pgbackrest.sql
 
+    - name: Restart the PostgreSQL service
+      service: name=postgresql state=restarted
 
-      - name: Ansible copy file pgbackrest to remote server
-        copy:
-         owner: postgres
-         group: postgres
-         mode:  0777         
-         src:  pgbackrest.conf
-         dest: /etc/
+    - name: Configure the location  on the pgbackrest log location
+      become: yes
+      become_user: postgres
+      shell: pgbackrest --stanza=pgbackrest stanza-create
+      args:
+        executable: /bin/bash
 
+    - name: Cronjob Entry pgbackrest FULL
+      cron:
+        name: "### execute pgbackrest FULL"
+        user: postgres
+        minute: "0"
+        hour: "0"
+        day: "*"
+        month: "*"
+        weekday: "0"
+        job: pgbackrest --stanza=pgbackrest --type=full backup
 
-      - name: Ansible copy file pgbackrest to remote server
-        copy:
-         owner: postgres
-         group: postgres
-         mode:  0777         
-         src:  pgbackrest.sql
-         dest: /var/lib/postgresql/scripts   
+    - name: Cronjob Entry pgbackrest scripts DIFF
+      cron:
+        name: "### execute pgbackrest DIFF"
+        user: postgres
+        minute: "0"
+        hour: "0"
+        day: "*"
+        month: "*"
+        weekday: "6"
+        job: pgbackrest --stanza=pgbackrest --type=diff backup
 
-
-      - name: Configuration pgbackrest.sql parameters to our database
-        become: true
-        become_user: postgres
-        shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/pgbackrest.sql    
-
-
-      - name: Restart the PostgreSQL service 
-        service: name=postgresql state=restarted 
-
-
-
-      - name: Configure the location  on the pgbackrest log location
-        become: yes
-        become_user: postgres
-        shell:  pgbackrest --stanza=pgbackrest stanza-create
-        args:
-         executable: /bin/bash     
-
-
-      - name: Cronjob Entry pgbackrest FULL 
-        cron:
-         name: "### execute pgbackrest FULL"
-         user: postgres
-         minute: "0"
-         hour: "0"
-         day: "*"
-         month: "*"
-         weekday: "0"
-         job: pgbackrest --stanza=pgbackrest --type=full backup 
-
-
-      - name: Cronjob Entry pgbackrest scripts DIFF 
-        cron:
-         name: "### execute pgbackrest DIFF"
-         user: postgres
-         minute: "0"
-         hour: "0"
-         day: "*"
-         month: "*"
-         weekday: "6"
-         job: pgbackrest --stanza=pgbackrest --type=diff backup
-
-
-      - name: Cronjob Entry pgbackrest scripts INCR 
-        cron:
-         name: "### execute pgbackrest INCR"
-         user: postgres
-         minute: "0"
-         hour: "*/8"
-         day: "*"
-         month: "*"
-         weekday: "1-5"
-         job: pgbackrest --stanza=pgbackrest --type=incr backup
+    - name: Cronjob Entry pgbackrest scripts INCR
+      cron:
+        name: "### execute pgbackrest INCR"
+        user: postgres
+        minute: "0"
+        hour: "*/8"
+        day: "*"
+        month: "*"
+        weekday: "1-5"
+        job: pgbackrest --stanza=pgbackrest --type=incr backup

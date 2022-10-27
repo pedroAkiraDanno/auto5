@@ -55,7 +55,7 @@ FROM pg_stat_user_tables;
 --Grep System Process Status
 --ps -axww | grep autovacuum
 --Grep Postgres Log
---grep autovacuum /var/lib/postgresql/14/main/log/*
+--grep autovacuum /var/lib/postgresql/15/main/log/*
 SELECT name, setting FROM pg_settings WHERE name='autovacuum';
 select count(*) from pg_stat_activity where backend_type like 'autovacuum%';
 
@@ -283,7 +283,7 @@ ORDER BY last_autovacuum;
 
     DROP TABLE t;
 --refe: https://www.2ndquadrant.com/en/blog/autovacuum-tuning-basics/
---      https://postgresqlco.nf/doc/en/param/autovacuum_vacuum_scale_factor/14/?category=autovacuum
+--      https://postgresqlco.nf/doc/en/param/autovacuum_vacuum_scale_factor/15/?category=autovacuum
 
   /*
   autovacuum_vacuum_scale_factor

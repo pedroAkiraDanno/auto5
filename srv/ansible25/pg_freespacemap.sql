@@ -43,7 +43,7 @@ CREATE DATABASE  vacuum_test TEMPLATE template0;
 \c vacuum_test;
 
 
---ls  /usr/share/postgresql/14/extension/pg_freespacemap*
+--ls  /usr/share/postgresql/15/extension/pg_freespacemap*
 
 
 --Check extension details by query pg_extension and pg_available_extensions.

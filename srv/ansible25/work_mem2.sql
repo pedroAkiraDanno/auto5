@@ -28,7 +28,7 @@
          Time: 24350.670 ms (00:24.351)
 
 
-      postgres@instance-20220329-1520:~$ watch ls -lath  /var/lib/postgresql/14/main/base/pgsql_tmp
+      postgres@instance-20220329-1520:~$ watch ls -lath  /var/lib/postgresql/15/main/base/pgsql_tmp
 
 
 
@@ -57,7 +57,7 @@
    postgres@instance-20220329-1520:~$ sudo systemctl restart postgresql
 
 
-   postgres@instance-20220308-1903:~$ tail -200f /var/lib/postgresql/14/main/log/server_log."`date +%a`"
+   postgres@instance-20220308-1903:~$ tail -200f /var/lib/postgresql/15/main/log/server_log."`date +%a`"
 */
 
 

@@ -53,7 +53,7 @@ postgres@instance-20220329-1520:~$ psql -U postgres -d test1 -a -f /var/lib/post
    Time: 24350.670 ms (00:24.351)
 
 
-postgres@instance-20220329-1520:~$ watch ls -lath  /var/lib/postgresql/14/main/base/pgsql_tmp
+postgres@instance-20220329-1520:~$ watch ls -lath  /var/lib/postgresql/15/main/base/pgsql_tmp
 
 
 

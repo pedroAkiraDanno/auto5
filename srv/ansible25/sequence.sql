@@ -73,7 +73,7 @@ drop table testsequencetbl;
 /*
 Layout of Databases files: 
      /var/lib/postgresql/
-     /var/lib/postgresql/14/main/base
+     /var/lib/postgresql/15/main/base
 */
 
 

@@ -62,7 +62,7 @@ $do$;
 SELECT pg_relation_filepath ('COMPANY2'); 
 
 --NEED EXEC THIS COMMAND IN LINUX TO MONIT
-select  'watch ls -lath /var/lib/postgresql/14/main/' || pg_relation_filepath ('COMPANY2') || '*';
+select  'watch ls -lath /var/lib/postgresql/15/main/' || pg_relation_filepath ('COMPANY2') || '*';
 
 --pg_sleep
 SELECT clock_timestamp(), pg_sleep(10);
@@ -84,7 +84,7 @@ drop table COMPANY2;
 /*
 Layout of Databases files: 
 /var/lib/postgresql/
-/var/lib/postgresql/14/main/base
+/var/lib/postgresql/15/main/base
 */
 
 

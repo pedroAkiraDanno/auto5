@@ -22,7 +22,7 @@ CREATE DATABASE  vacuum_test TEMPLATE template0;
 --DROP EXTENSION IF EXISTS <extension name>;
 CREATE  EXTENSION pgstattuple;
 
---ls  /usr/share/postgresql/14/extension/pgstattuple*
+--ls  /usr/share/postgresql/15/extension/pgstattuple*
 
 
 --Check extension details by query pg_extension and pg_available_extensions.
@@ -66,7 +66,7 @@ pgstattuple returns a relation's physical length, percentage of “dead” tuple
 test=> SELECT * FROM pgstattuple('pg_catalog.pg_proc');
 -[ RECORD 1 ]------+-------
 table_len          | 458752
-tuple_count        | 1470
+tuple_count        | 1570
 tuple_len          | 438896
 tuple_percent      | 95.67
 dead_tuple_count   | 11

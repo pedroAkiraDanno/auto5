@@ -7,7 +7,7 @@
     db_name2: test_db
     db_name3: test1
     db_password: dbpassword
-    postgresql_version: 14
+    postgresql_version: 15
 
   tasks:
     - name: Ansible copy file GeneratingfakedataSQL.sql to remote server

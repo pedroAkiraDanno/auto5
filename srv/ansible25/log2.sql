@@ -20,7 +20,7 @@ select name,setting,unit from pg_settings where name like '%log%';
 -- or can use this too
     root@instance-20220524-1858:~# sudo find / -name pg\*.conf
     root@instance-20220524-1858:~# find / -name postgresql.conf
-    postgres@instance-20220524-1858:~$ cat /etc/postgresql/14/main/postgresql.conf | grep log
+    postgres@instance-20220524-1858:~$ cat /etc/postgresql/15/main/postgresql.conf | grep log
 
 
 */
@@ -64,19 +64,19 @@ select name,setting,unit from pg_settings where name like '%log%';
 --sudo  systemctl restart postgresql
 
 --will generate a new log file immediately in a pg_log directory.
---direcoty /var/lib/postgresql/14/main/log/
+--direcoty /var/lib/postgresql/15/main/log/
 --SELECT *FROM pg_rotate_logfile();
 
 --
--- ls -lath /var/lib/postgresql/14/main/log/
+-- ls -lath /var/lib/postgresql/15/main/log/
 
 
 --directorys 
 --  ls -lath /var/log/postgresql
--- ls -lath /var/lib/postgresql/14/main/log/
+-- ls -lath /var/lib/postgresql/15/main/log/
 
 ---SHOW CURRENT FILE 
---cd /var/lib/postgresql/14/main
+--cd /var/lib/postgresql/15/main
 --cat current_logfiles
 
 
@@ -117,7 +117,7 @@ log_filename
 log_rotation_age
 log_rotation_size
 log_truncate_on_rotation
-log_rotation_age and log_rotation_size control when a new log file is created. For example, setting log_rotation_age to 1440 will create a new log file every 1440 minutes (1 day), and setting log_rotation_size to 10000 will create a new log file when the previous one reaches 10 000 KB.
+log_rotation_age and log_rotation_size control when a new log file is created. For example, setting log_rotation_age to 1540 will create a new log file every 1540 minutes (1 day), and setting log_rotation_size to 10000 will create a new log file when the previous one reaches 10 000 KB.
 
 log_filename controls the name given to every log file. You can use time and date format conversion in the name. For a complete list, see http://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html.
 
@@ -126,7 +126,7 @@ When log_truncate_on_rotation is set to "on", it will overwrite any log file tha
 There are several combinations of parameters that you can use to achieve a log rotation to suit your requirements. Here is one example:
 
 log_filename = 'postgresql-%a.log' (every log file has the first 3 letters of the weekday in its name)
-log_rotation_age = 1440 (a new log file is created daily)
+log_rotation_age = 1540 (a new log file is created daily)
 log_rotation_size = 0. (setting is disabled to prevent the overwriting of the daily log file every time this limit is exceeded)
 log_truncate_on_rotation = on (enable log file overwrite)
 

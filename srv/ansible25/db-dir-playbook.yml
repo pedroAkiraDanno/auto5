@@ -10,11 +10,6 @@
     postgresql_version: 15
 
   tasks:
-    - name: Install Monitoring of PostgreSQL Instances pg_top
-      apt: name={{ item }} update_cache=true state=latest
-      with_items:
-        - pgtop
-
     - name: Creates directory to scripts
       file:
         path: /var/lib/postgresql/scripts

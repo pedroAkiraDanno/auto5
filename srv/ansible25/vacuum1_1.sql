@@ -35,7 +35,7 @@ SELECT oid from pg_database WHERE datname = 'vacuum_test';
 SELECT relname, relfilenode FROM pg_class WHERE relname = 't_person'; 
 
 --pg_lsclusters
---pg_ctl status -D /var/lib/postgresql/14/main
+--pg_ctl status -D /var/lib/postgresql/15/main
 
 SELECT pg_relation_filepath('t_person');
 

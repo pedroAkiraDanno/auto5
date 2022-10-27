@@ -6,7 +6,7 @@ select * from generate_series(1,90000000) order by 1 LIMIT 1;
 
 
 --watch temp files was creted 
--- watch ls -lath /var/lib/postgresql/14/main/base/pgsql_tmp
+-- watch ls -lath /var/lib/postgresql/15/main/base/pgsql_tmp
 
 
 -- you can decomment

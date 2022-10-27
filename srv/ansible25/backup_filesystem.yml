@@ -2,63 +2,58 @@
 - hosts: all
   become: yes
   vars:
-      db_user: dbusername
-      db_name: dbname
-      db_password: dbpassword
-      postgresql_version: 14
-      uuid: 5494afe6-01     
+    db_user: dbusername
+    db_name: dbname
+    db_password: dbpassword
+    postgresql_version: 15
+    uuid: 5494afe6-01
 
   tasks:
-      #- name: partition new disk
-      #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdb
-      #  args:
-      #   executable: /bin/bash
+    #- name: partition new disk
+    #  shell: echo -e "n\np\n1\n\n\nw" | sudo fdisk /dev/sdb
+    #  args:
+    #   executable: /bin/bash
 
-      - name: Create a new ext4 primary partition
-        community.general.parted:
-         device: /dev/sdc
-         number: 1
-         state: present
-         fs_type: ext4      
+    - name: Create a new ext4 primary partition
+      community.general.parted:
+        device: /dev/sdc
+        number: 1
+        state: present
+        fs_type: ext4
 
-      - name: Create a ext4 filesystem on /dev/sdc1
-        community.general.filesystem:
-         fstype: ext4
-         dev: /dev/sdc1
+    - name: Create a ext4 filesystem on /dev/sdc1
+      community.general.filesystem:
+        fstype: ext4
+        dev: /dev/sdc1
 
+    #      - name:  Mount command
+    #        shell: mount UUID=$(blkid /dev/sdc1 -sUUID -ovalue) /var/lib/postgresql/
+    #        args:
+    #         executable: /bin/bash
 
-#      - name:  Mount command
-#        shell: mount UUID=$(blkid /dev/sdc1 -sUUID -ovalue) /var/lib/postgresql/
-#        args:
-#         executable: /bin/bash      
+    - name: Creates directory to postgresql
+      file:
+        path: /postgresql/
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
+        recurse: yes
 
+    - name: add /postgresql/ entry to /etc/fstab
+      mount:
+        path: /postgresql
+        src: /dev/sdc1
+        fstype: ext4
+        opts: defaults,auto,noatime,_netdev
+        dump: "2"
+        state: mounted
 
-      - name: Creates directory to postgresql
-        file:
-          path:  /postgresql/
-          state: directory
-          owner: postgres
-          group: postgres
-          mode:  0777   
-          recurse: yes
-
-
-      - name: add /postgresql/ entry to /etc/fstab
-        mount:
-         path: /postgresql
-         src: /dev/sdc1 
-         fstype: ext4
-         opts: defaults,auto,noatime,_netdev
-         dump: '2'
-         state: mounted
-
-
-      - name: Creates directory to postgresql /postgresql/backups/
-        file:
-          path:  /postgresql/backups
-          state: directory
-          owner: postgres
-          group: postgres
-          mode:  0777   
-          recurse: yes
-
+    - name: Creates directory to postgresql /postgresql/backups/
+      file:
+        path: /postgresql/backups
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
+        recurse: yes
