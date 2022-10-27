@@ -9,7 +9,7 @@ export PGPORT="5432"
 echo -e "\n\nBackup Status: $(date +"%d-%m-%y-%T")" >> $backup_dir/Status.log
 echo -e "-----------------------" >> $backup_dir/Status.log
 echo -e "\nStart Time: $(date)\n" >> $backup_dir/Status.log
-/usr/lib/postgresql/14/bin/pg_basebackup  -U postgres  -D $backup_dir/PostgreSQL_basebackup_$(date +"%d-%m-%y-%T") -l "'date'" -P -F tar -z -R &>> $backup_dir/Status.log
+/usr/lib/postgresql/15/bin/pg_basebackup  -U postgres  -D $backup_dir/PostgreSQL_basebackup_$(date +"%d-%m-%y-%T") -l "'date'" -P -F tar -z -R &>> $backup_dir/Status.log
 echo -e "\nEnd Time: $(date)" >> $backup_dir/Status.log
 
 #Auto Deletion for Backups

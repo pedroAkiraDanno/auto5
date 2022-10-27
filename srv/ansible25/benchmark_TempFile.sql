@@ -14,7 +14,7 @@ create temp table testnumeric (
 with (oids = false);
 
 --NEED EXEC THIS COMMAND IN LINUX TO MONIT
-select  'watch ls -lath /var/lib/postgresql/14/main/' || pg_relation_filepath ('testnumeric') || '*';
+select  'watch ls -lath /var/lib/postgresql/15/main/' || pg_relation_filepath ('testnumeric') || '*';
 
 
 CREATE  temp TABLE COMPANY1(
@@ -22,7 +22,7 @@ CREATE  temp TABLE COMPANY1(
 );
 
 --NEED EXEC THIS COMMAND IN LINUX TO MONIT
-select  'watch ls -lath /var/lib/postgresql/14/main/' || pg_relation_filepath ('COMPANY1') || '*';
+select  'watch ls -lath /var/lib/postgresql/15/main/' || pg_relation_filepath ('COMPANY1') || '*';
 
 
 

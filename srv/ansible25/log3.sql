@@ -20,7 +20,7 @@ select name,setting,unit from pg_settings where name like '%log%';
 -- or can use this too
 
     root@instance-20220524-1858:~# find / -name postgresql.conf
-    postgres@instance-20220524-1858:~$ cat /etc/postgresql/14/main/postgresql.conf | grep log
+    postgres@instance-20220524-1858:~$ cat /etc/postgresql/15/main/postgresql.conf | grep log
 
 
 */
@@ -57,11 +57,11 @@ select name,setting,unit from pg_settings where name like '%log%';
 --sudo  systemctl restart postgresql
 
 --will generate a new log file immediately in a pg_log directory.
---direcoty /var/lib/postgresql/14/main/log/
+--direcoty /var/lib/postgresql/15/main/log/
 SELECT *FROM pg_rotate_logfile();
 
 --
--- ls -lath /var/lib/postgresql/14/main/log/
+-- ls -lath /var/lib/postgresql/15/main/log/
 
 
 
@@ -102,7 +102,7 @@ REFES:
     https://pubs.opengroup.org/onlinepubs/009695399/functions/strftime.html
     https://www.dbrnd.com/2017/02/postgresql-pg_rotate_logfile-to-switch-and-rotate-the-server-log-file-pg_log/
     https://postgresqlco.nf/doc/en/param/log_rotation_age/?category=reporting-and-logging
-    https://www.postgresql.org/docs/14/runtime-config-logging.html#GUC-LOG-ROTATION-AGE
+    https://www.postgresql.org/docs/15/runtime-config-logging.html#GUC-LOG-ROTATION-AGE
 
 
 

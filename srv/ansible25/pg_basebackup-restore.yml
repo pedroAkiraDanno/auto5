@@ -2,82 +2,77 @@
 - hosts: all
   become: yes
   vars:
-      db_user: dbusername
-      db_name:  backup
-      db_name2: postgres      
-      db_name3: test1      
-      db_password: dbpassword
-      postgresql_version: 14
+    db_user: dbusername
+    db_name: backup
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
 
   tasks:
+    - name: Create the database specified in vars
+      become: true
+      become_user: postgres
+      postgresql_db: name={{ db_name }}
+        template='template0'
+        state=present
 
-      - name: Create the database specified in vars
-        become: true
-        become_user: postgres
-        postgresql_db: name={{ db_name }}
-            template='template0'
-            state=present
+    - name: Ensure user has access to the new database
+      become: true
+      become_user: postgres
+      postgresql_user: db={{ db_name }}
+        name={{ db_user }}
+        password={{ db_password }}
+        priv=ALL
+        state=present
 
-      - name: Ensure user has access to the new database
-        become: true
-        become_user: postgres
-        postgresql_user: db={{ db_name }}
-             name={{ db_user }}
-             password={{ db_password }}
-             priv=ALL
-             state=present
+    - name: Create database with some data
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/pg_basebackup.sql
 
-      - name: Create database with some data
-        become: true
-        become_user: postgres
-        shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/pg_basebackup.sql    
+    - name: Archive the logs
+      become: true
+      become_user: postgres
+      shell: psql -c "select pg_switch_wal();"
 
-      - name: Archive the logs
-        become: true
-        become_user: postgres
-        shell: psql -c "select pg_switch_wal();"     
+    - name: backup database
+      become: true
+      become_user: postgres
+      shell: /var/lib/postgresql/scripts/fullbck-pg_basebackup.sh
 
-      - name: backup database
-        become: true
-        become_user: postgres
-        shell: /var/lib/postgresql/scripts/fullbck-pg_basebackup.sh     
+    - name: stop DB and destroy data
+      become: true
+      become_user: postgres
+      shell: systemctl stop postgresql
 
-      - name: stop DB and destroy data
-        become: true
-        become_user: postgres
-        shell: systemctl stop postgresql    
+    - name: Destroy data /var/lib/postgresql/15/main
+      become: true
+      become_user: postgres
+      shell: rm /var/lib/postgresql/15/main* -r
 
-      - name: Destroy data /var/lib/postgresql/14/main
-        become: true
-        become_user: postgres
-        shell: rm /var/lib/postgresql/14/main* -r 
+    - name: Creates directory to pg_basebackup
+      file:
+        path: /postgresql/pg_basebackup
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
 
+    - name: Ansible copy file fullbck-pg_basebackup to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: fullbck-pg_basebackup.sh
+        dest: /var/lib/postgresql/scripts
 
-
-      - name: Creates directory to pg_basebackup
-        file:
-         path:  /postgresql/pg_basebackup
-         state: directory
-         owner: postgres
-         group: postgres
-         mode:  0777
-     
-      - name: Ansible copy file fullbck-pg_basebackup to remote server
-        copy:
-         owner: postgres
-         group: postgres
-         src:  fullbck-pg_basebackup.sh
-         dest: /var/lib/postgresql/scripts
-
-      - name: Cronjob Entry fullbck-pg_basebackup scripts
-        cron:
-         name: "### execute fullbck-pg_basebackup scripts"
-         user: postgres
-         minute: "*"
-         hour: "23"
-         day: "*"
-         month: "*"
-         weekday: "*"
-         job: /var/lib/postgresql/scripts/fullbck-pg_basebackup.sh
-
-
+    - name: Cronjob Entry fullbck-pg_basebackup scripts
+      cron:
+        name: "### execute fullbck-pg_basebackup scripts"
+        user: postgres
+        minute: "*"
+        hour: "23"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: /var/lib/postgresql/scripts/fullbck-pg_basebackup.sh

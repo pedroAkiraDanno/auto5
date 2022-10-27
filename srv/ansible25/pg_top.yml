@@ -1,0 +1,74 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Install Monitoring of PostgreSQL Instances pg_top
+      apt: name={{ item }} update_cache=true state=latest
+      with_items:
+        - pgtop
+
+    - name: Creates directory to scripts
+      file:
+        path: /var/lib/postgresql/scripts
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
+
+    - name: Ansible copy file to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: InsertFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file DeleteFile.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: DeleteFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file IndexFile.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: IndexFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file SelectFile.sql  to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: SelectFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    #      - name: Ansible copy multiple files at once
+    #        copy:
+    #          src:{{ item }} dest=/var/lib/postgresql/scripts
+    #        with_items:
+    #         - DeleteFile.sql
+    #         - IndexFile.sql
+    #         - SelectFile.sql
+
+    - name: Ansible copy file dump.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: dump.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Restart postgresql
+      service: name=postgresql state=restarted
+      when: pgconf.changed
+
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes

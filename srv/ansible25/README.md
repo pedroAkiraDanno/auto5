@@ -121,67 +121,89 @@ Repo to postgresql 15 with ansible
 
     cd /etc/ansible
 
-    ansible-playbook -i hosts filesystem-playbook2.yml   #IF AZURE exec because they create sdb1 in /mnt    ansible-playbook -i hosts filesystem-playbook2-azure2.yml
-    ansible-playbook -i hosts db-server-playbook.yml
-    ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
-    ansible-playbook -i hosts backupcron.yml
-    ansible-playbook -i hosts archive.yml
-    #ansible-playbook -i hosts pgmetrics.yml
-    ansible-playbook -i hosts pgbackRest.yaml
-    ansible-playbook -i hosts swap.yml
-    ansible-playbook -i hosts pg_collector.yml
-    ansible-playbook -i hosts /etc/ansible/Load_sample_database_dvdrental3.yml
-    #/var/lib/postgresql/scripts/dvdrental.sh
-    ansible-playbook -i hosts /etc/ansible/db-temp.yml
-    ansible-playbook -i hosts /etc/ansible/large_sort_temporary_files.yml
-    ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
-    ansible-playbook -i hosts /etc/ansible/sudo.yml
-    ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
-    ansible-playbook -i hosts /etc/ansible/postgres_structure.yaml
-    ansible-playbook -i hosts /etc/ansible/pg_stat_statements.yml
-    ansible-playbook -i hosts /etc/ansible/sequence.yml
-    ansible-playbook -i hosts /etc/ansible/walfile.yml
-    #ansible-playbook -i hosts pgAdmin.yaml
+    #FILE SYSTEM - create file system to /dev/sd[b,c] and create /var/lib/postgresql/
+        ansible-playbook -i hosts filesystem-playbook2.yml   #IF AZURE exec because they create sdb1 in /mnt    ansible-playbook -i hosts filesystem-playbook2-azure2.yml
+
+    #Install postgresql
+        ansible-playbook -i hosts db-server-playbook.yml
+
+    #Move .sql files and install and config  pg_top pgbadger pgbench
+        ansible-playbook -i hosts db-dir-playbook.yml
+        ansible-playbook -i hosts pg_top.yml
+
+    #File System to backup and cron dump backup
+        ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
+        ansible-playbook -i hosts backupcron.yml
+
+
+        ansible-playbook -i hosts archive.yml
+        #ansible-playbook -i hosts pgmetrics.yml
+
+
+    #Backup about pgbackRest
+        ansible-playbook -i hosts pgbackRest.yaml
+
+        ansible-playbook -i hosts swap.yml
+        ansible-playbook -i hosts pg_collector.yml
+        ansible-playbook -i hosts /etc/ansible/Load_sample_database_dvdrental3.yml
+        #/var/lib/postgresql/scripts/dvdrental.sh
+        ansible-playbook -i hosts /etc/ansible/db-temp.yml
+        ansible-playbook -i hosts /etc/ansible/large_sort_temporary_files.yml
+
+
+    #Backup about pg_basebackup and pgbackRest-restore2
+        ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
+        ansible-playbook -i hosts /etc/ansible/sudo.yml
+        ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
+
+        ansible-playbook -i hosts /etc/ansible/postgres_structure.yaml
+        ansible-playbook -i hosts /etc/ansible/pg_stat_statements.yml
+        ansible-playbook -i hosts /etc/ansible/sequence.yml
+        ansible-playbook -i hosts /etc/ansible/walfile.yml
+        #ansible-playbook -i hosts pgAdmin.yaml
+
+
+
 
     ## LOG  	#dont need exec this commands 	IF
-    ansible-playbook -i hosts /etc/ansible/log2.yml 	#Script to log maintenance log_rotation_size=500MB EXEC THIS IF WANT LESS SIZE
-    ansible-playbook -i hosts /etc/ansible/log3.yml 	#Script to test log name and size 		JUST TO TEST
+        ansible-playbook -i hosts /etc/ansible/log2.yml 	#Script to log maintenance log_rotation_size=500MB EXEC THIS IF WANT LESS SIZE
+        ansible-playbook -i hosts /etc/ansible/log3.yml 	#Script to test log name and size 		JUST TO TEST
 
     ## Linux health-check-scripts
-    #ansible-playbook -i hosts /etc/ansible/Environmental_Variables.yml
-    ansible-playbook -i hosts /etc/ansible/Environmental_Variables2.yml
-    ansible-playbook -i hosts /etc/ansible/health-check-script.yml
-    ansible-playbook -i hosts /etc/ansible/health-check-script2.yaml
-    ansible-playbook -i hosts /etc/ansible/health-check-script3.yaml
+        #ansible-playbook -i hosts /etc/ansible/Environmental_Variables.yml
+        ansible-playbook -i hosts /etc/ansible/Environmental_Variables2.yml
+        ansible-playbook -i hosts /etc/ansible/health-check-script.yml
+        ansible-playbook -i hosts /etc/ansible/health-check-script2.yaml
+        ansible-playbook -i hosts /etc/ansible/health-check-script3.yaml
 
     ## About VACUUM
-    ansible-playbook -i hosts /etc/ansible/pg_freespacemap.yaml
-    ansible-playbook -i hosts /etc/ansible/vacuum_pgstattuple.yaml
-    ansible-playbook -i hosts vacuum.yml
-    ansible-playbook -i hosts /etc/ansible/vacuum_TABLE_BLOAT.yml
-    ansible-playbook -i hosts /etc/ansible/vacuum_parameter.yml
+        ansible-playbook -i hosts /etc/ansible/pg_freespacemap.yaml
+        ansible-playbook -i hosts /etc/ansible/vacuum_pgstattuple.yaml
+        ansible-playbook -i hosts vacuum.yml
+        ansible-playbook -i hosts /etc/ansible/vacuum_TABLE_BLOAT.yml
+        ansible-playbook -i hosts /etc/ansible/vacuum_parameter.yml
 
 
     ## PGTune  Parameters 	OPTION TO EXEC
-    #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters8GB.yml
-    #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters12GB.yml
-    #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml
-    #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters32GB.yml
+        #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters8GB.yml
+        #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters12GB.yml
+        #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml
+        #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters32GB.yml
 
 
     #Generating fake data
-    ansible-playbook -i hosts /etc/ansible/GeneratingfakedataSQL.yml
-    ansible-playbook -i hosts /etc/ansible/MOCK_DATA.yml
-    ansible-playbook -i hosts /etc/ansible/MOCK_DATA-cvs.yml
+        ansible-playbook -i hosts /etc/ansible/GeneratingfakedataSQL.yml
+        ansible-playbook -i hosts /etc/ansible/MOCK_DATA.yml
+        ansible-playbook -i hosts /etc/ansible/MOCK_DATA-cvs.yml
 
 
     ## About GUI Graphical User Interface in Linux
-    ansible-playbook -i hosts /etc/ansible/GUI_linux.yml
-    ansible-playbook -i hosts /etc/ansible/change_password.yml
+        ansible-playbook -i hosts /etc/ansible/GUI_linux.yml
+        ansible-playbook -i hosts /etc/ansible/change_password.yml
 
 
     # About Postgresql architecture
-    ansible-playbook -i hosts /etc/ansible/work_mem.yml
+        ansible-playbook -i hosts /etc/ansible/work_mem.yml
 
 ## need exec
 
@@ -288,7 +310,7 @@ Repo to postgresql 15 with ansible
 
     Access the OCI and enable port 80/443/3000 in the firewall
     Virtual Cloud Networks:
-    Networking  -> Virtual Cloud Networks  -> vcn-20220114-0043  -> Subnet Details  -> Security Lists
+    Networking  -> Virtual Cloud Networks  -> vcn-20220115-0043  -> Subnet Details  -> Security Lists
     Add enable port 80/443/3000 to the rules
 
 ## Step 2: in the server Linux

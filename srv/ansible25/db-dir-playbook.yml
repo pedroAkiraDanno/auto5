@@ -1,0 +1,248 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Creates directory to scripts
+      file:
+        path: /var/lib/postgresql/scripts
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
+
+    - name: Ansible copy file to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: InsertFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file DeleteFile.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: DeleteFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file IndexFile.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: IndexFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file SelectFile.sql  to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: SelectFile.sql
+        dest: /var/lib/postgresql/scripts
+
+    #      - name: Ansible copy multiple files at once
+    #        copy:
+    #          src:{{ item }} dest=/var/lib/postgresql/scripts
+    #        with_items:
+    #         - DeleteFile.sql
+    #         - IndexFile.sql
+    #         - SelectFile.sql
+
+    - name: Ansible copy file dump.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: dump.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file dump2.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: dump2.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ansible copy file pgbadger_delete.sh to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: pgbadger_delete.sh
+        dest: /var/lib/postgresql/scripts
+
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes
+
+    - name: Create the database specified in vars
+      become: true
+      become_user: postgres
+      postgresql_db: name={{ db_name }}
+        template='template0'
+        state=present
+
+    - name: Ensure user has access to the new database
+      become: true
+      become_user: postgres
+      postgresql_user: db={{ db_name }}
+        name={{ db_user }}
+        password={{ db_password }}
+        priv=ALL
+        state=present
+
+    - name: Ensure user does not have unnecessary permissions
+      become: true
+      become_user: postgres
+      postgresql_user: name={{ db_user }}
+        role_attr_flags=NOSUPERUSER,NOCREATEDB
+        state=present
+
+    - name: Add some dummy data to our database
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/dump.sql
+
+    - name: Add some dummy data to our database
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name3 }} < /var/lib/postgresql/scripts/dump2.sql
+
+    - name: Update PostgreSQL config
+      template: src=postgresql.conf.j2 dest=/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf
+      register: pgconf
+
+    - name: Restart postgresql
+      service: name=postgresql state=restarted
+      when: pgconf.changed
+
+    - name: Cronjob Entry DeleteFile.sql scripts
+      cron:
+        name: "### execute DeleteFile.sql scripts"
+        user: postgres
+        minute: "*"
+        hour: "*/6"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/DeleteFile.sql
+
+    - name: Cronjob Entry IndexFile.sql scripts
+      cron:
+        name: "### execute IndexFile.sql scripts"
+        user: postgres
+        minute: "*"
+        hour: "*/4"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/IndexFile.sql
+
+    - name: Cronjob Entry InsertFile.sql scripts
+      cron:
+        name: "### execute InsertFile.sql scripts"
+        user: postgres
+        minute: "*/10"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/InsertFile.sql
+
+    - name: Cronjob Entry SelectFile.sql scripts
+      cron:
+        name: "### execute SelectFile.sql scripts"
+        user: postgres
+        minute: "*/5"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: psql -U postgres -d test1 -a -f /var/lib/postgresql/scripts/SelectFile.sql
+
+    - name: Ansible copy file log.sql to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        src: log.sql
+        dest: /var/lib/postgresql/scripts
+
+    - name: Configuration log parameters to our database
+      become: true
+      become_user: postgres
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/log.sql
+
+    - name: Restart the PostgreSQL service
+      service: name=postgresql state=restarted
+
+    - name: Install dependencies for pgbadger
+      apt: name={{ item }} update_cache=true state=latest
+      with_items:
+        - pgbadger
+        - tree
+
+    - name: Creates directory to pgbadger
+      file:
+        path: /var/lib/postgresql/pgbadger
+        state: directory
+        owner: postgres
+        group: postgres
+        mode: 0777
+
+    - name: Ansible copy file pgbadger.sh to remote server
+      copy:
+        owner: postgres
+        group: postgres
+        mode: 0777
+        src: pgbadger.sh
+        dest: /var/lib/postgresql/scripts/
+
+    - name: Cronjob Entry pgbadger.sh scripts
+      cron:
+        name: "### execute pgbadger.sh scripts"
+        user: postgres
+        minute: "30"
+        hour: "20"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: /var/lib/postgresql/scripts/pgbadger.sh
+
+    - name: Create the database pgbench
+      become: true
+      become_user: postgres
+      postgresql_db: name=pgbench
+        template='template0'
+        state=present
+
+    - name: Command pgbench
+      become: true
+      become_user: postgres
+      shell: /lib/postgresql/15/bin/pgbench -i pgbench
+      args:
+        executable: /bin/bash
+
+    - name: Cronjob Entry pgbench scripts
+      cron:
+        name: "### execute pgbench scripts"
+        user: postgres
+        minute: "*/10"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: /lib/postgresql/15/bin/pgbench -c 5 -j 2 -t 10 pgbench
+
+    - name: Cronjob Entry pgbadger_delete scripts
+      cron:
+        name: "### execute pgbadger_delete scripts"
+        user: postgres
+        minute: "11"
+        hour: "*"
+        day: "*"
+        month: "*"
+        weekday: "*"
+        job: /var/lib/postgresql/scripts/pgbadger_delete.sh

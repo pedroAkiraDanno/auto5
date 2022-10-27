@@ -2,28 +2,18 @@
 - hosts: all
   become: yes
   vars:
-      db_user: dbusername
-      db_name: dbname
-      db_name2: postgres      
-      db_name3: test1      
-      db_password: dbpassword
-      postgresql_version: 14
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
 
   tasks:
-
-
-      - name: Ansible copy file .profile to remote server in /var/lib/postgresql/ 
-        copy:
-         owner: postgres
-         group: postgres
-         mode:  0664         
-         src:  .profile
-         dest: /var/lib/postgresql/       
-
-
-
-
-
-
-
-
+    - name: Ansible copy file .profile to remote server in /var/lib/postgresql/
+      copy:
+        owner: postgres
+        group: postgres
+        mode: 0664
+        src: .profile
+        dest: /var/lib/postgresql/

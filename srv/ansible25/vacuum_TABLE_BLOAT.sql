@@ -75,7 +75,7 @@ ref: https://www.crunchydata.com/blog/checking-for-postgresql-bloat
 --DROP EXTENSION IF EXISTS <extension name>;
 CREATE  EXTENSION pgstattuple;
 
---ls  /usr/share/postgresql/14/extension/pgstattuple*
+--ls  /usr/share/postgresql/15/extension/pgstattuple*
 
 
 --Check extension details by query pg_extension and pg_available_extensions.
