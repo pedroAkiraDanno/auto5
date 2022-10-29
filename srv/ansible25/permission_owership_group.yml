@@ -26,6 +26,14 @@
         owner: postgres
         group: postgres
 
+    - name: Recursively change ownership of a directory /var/lib/postgresql/scripts/
+      ansible.builtin.file:
+        path: /var/lib/postgresql/scripts/
+        state: directory
+        recurse: yes
+        owner: postgres
+        group: postgres
+
     - name: Change file ownership, group and permissions pg_collector_delete.sh
       ansible.builtin.file:
         path: /var/lib/postgresql/scripts/pg_collector_delete.sh
@@ -42,9 +50,6 @@
 
     - name: Change file ownership, group and permissions /var/lib/postgresql/scripts/*.sh
       ansible.builtin.file:
-        path: /var/lib/postgresql/scripts/
-        state: file
-        recurse: yes
+        path: /var/lib/postgresql/scripts/*.sh
         owner: postgres
         group: postgres
-        mode: "+x"
