@@ -22,6 +22,8 @@
         - gcc
         - postfix
         - mailutils
+        - build-essential
+        - alien
 
     - name: Update apt cache and make sure Curl and Unzip are installed
       apt:

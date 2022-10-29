@@ -105,15 +105,13 @@ Repo to postgresql 15 with ansible
 
 ## 6 - step exec ansible
 
-    #TEST new files
-    #cd ~
-    #cd /etc/ansible/  && rm -rf /etc/ansible/*
-    #git clone https://github.com/pedroAkiraDanno/auto5
-    #cd /etc/ansible/auto5/ ;     git checkout develop ; cd ..
-    #cd /etc/ansible/auto5/srv/ansible25/ ; mv *  /etc/ansible/
-    #cd /etc/ansible/  && rm -rf auto5/
-
-
+    #TEST new files ****NOT NEED EXEC
+        cd ~
+        cd /etc/ansible/  && rm -rf /etc/ansible/*
+        git clone https://github.com/pedroAkiraDanno/auto5
+        cd /etc/ansible/auto5/ ;     git checkout develop ; cd ..
+        cd /etc/ansible/auto5/srv/ansible25/ ; mv *  /etc/ansible/
+        cd /etc/ansible/  && rm -rf auto5/
 
 
 
@@ -138,7 +136,6 @@ Repo to postgresql 15 with ansible
         #ansible-playbook -i hosts pgmetrics.yml
 
 
-
     ##BACKUP###
     #Backup - File System to backup
         ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
@@ -158,8 +155,6 @@ Repo to postgresql 15 with ansible
 
 
 
-
-
     #Postgresql test and utilitys
         ansible-playbook -i hosts swap.yml
         ansible-playbook -i hosts pg_collector.yml
@@ -173,8 +168,6 @@ Repo to postgresql 15 with ansible
         ansible-playbook -i hosts /etc/ansible/sequence.yml
         ansible-playbook -i hosts /etc/ansible/walfile.yml
         #ansible-playbook -i hosts pgAdmin.yaml
-
-
 
 
     ## LOG  	#dont need exec this commands 	IF
