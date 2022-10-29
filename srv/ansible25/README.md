@@ -154,7 +154,6 @@ Repo to postgresql 15 with ansible
         ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
 
 
-
     #Postgresql test and utilitys
         ansible-playbook -i hosts swap.yml
         ansible-playbook -i hosts pg_collector.yml
