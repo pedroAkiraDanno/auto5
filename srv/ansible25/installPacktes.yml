@@ -22,3 +22,19 @@
         - gcc
         - postfix
         - mailutils
+
+    - name: Update apt cache and make sure Curl and Unzip are installed
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      loop:
+        - curl
+        - unzip
+
+    # Installing the zip, tree, and curl packages which are required to work with Apache server ( TASK-2)
+    - name: Install a list of packages
+      apt:
+        pkg:
+          - zip
+          - tree
+          - elinks
