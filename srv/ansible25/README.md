@@ -231,6 +231,59 @@ Repo to postgresql 15 with ansible
     /root/scripts/tecmint_monitor.sh -i
 
     apt-get install -y postfix mailutils
+
+    cp profile /var/lib/postgresql
+    #login with postgresql
+    mv profile .profile
+    . .profile
+
+    #rm /root/.ssh/ssh-key-2022-01-19*
+    #sudo passwd postgres
+
+    ***change the name in fstab to uuid
+    sudo blkid | grep UUID=
+    vi /etc/fstab
+
+
+    UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
+    UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"
+
+    UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
+    UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+
+
+
+    #sudo apt-get update && sudo apt-get upgrade -y
+    #apt list --upgradable
+    #lsblk
+    #reboot server --because the HDs
+
+
+    #sudo with no NOPASSWD
+    sudo su -
+    cp /etc/sudoers /root/sudoers.bak
+    su - postgres
+    sudo visudo
+    	postgres ALL=(ALL) NOPASSWD: ALL
+    sudo -k
+
+
+    #https://www.youtube.com/watch?v=FmiDt5hiOe0
+    #https://phoenixnap.com/kb/how-to-install-nmap-ubuntu-18-04
+    #https://linuxhint.com/setup-sudo-no-password-linux/
+
+## need exec 2 BACKUP NOT USE OR EXEC
+
+    #use user root
+
+    mkdir -p  /var/log/health-report/
+    chmod +x /root/scripts/health-check.sh
+    chmod +x /root/scripts/health-check-gen.sh
+    chmod +x /root/scripts/linuxsystemhealth.sh
+    chmod 755 /root/scripts/tecmint_monitor.sh
+    /root/scripts/tecmint_monitor.sh -i
+
+    apt-get install -y postfix mailutils
     #/var/lib/postgresql/scripts/pgmetrics.sh
 
     #mkdir  /postgresql/backups/
