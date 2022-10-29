@@ -25,3 +25,10 @@
         recurse: yes
         owner: postgres
         group: postgres
+
+    - name: Change file ownership, group and permissions pg_collector_delete.sh
+    ansible.builtin.file:
+      path: /var/lib/postgresql/scripts/pg_collector_delete.sh
+      owner: postgres
+      group: postgres
+      mode: "+x"
