@@ -34,6 +34,12 @@
         owner: postgres
         group: postgres
 
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /var/lib/postgresql/scripts/
+        state: directory
+        mode: "+x"
+
     - name: Change file ownership, group and permissions pg_collector_delete.sh
       ansible.builtin.file:
         path: /var/lib/postgresql/scripts/pg_collector_delete.sh
@@ -47,9 +53,14 @@
         owner: postgres
         group: postgres
         mode: "+x"
+#
+#
+#
 
-    - name: Change file ownership, group and permissions /var/lib/postgresql/scripts/*.sh
-      ansible.builtin.file:
-        path: /var/lib/postgresql/scripts/*.sh
-        owner: postgres
-        group: postgres
+#    - name: Change file ownership, group and permissions /var/lib/postgresql/scripts/*.sh
+#      ansible.builtin.file:
+#        path: /var/lib/postgresql/scripts/*.sh
+#        owner: postgres
+#        group: postgres
+#REFERENCE:
+#https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
