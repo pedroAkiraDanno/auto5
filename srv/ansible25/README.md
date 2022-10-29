@@ -194,7 +194,7 @@ Repo to postgresql 15 with ansible
         #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters12GB.yml
         #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml
         #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters32GB.yml
-
+        #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters64GB.yml
 
     #Generating fake data
         ansible-playbook -i hosts /etc/ansible/GeneratingfakedataSQL.yml

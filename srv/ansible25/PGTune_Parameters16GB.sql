@@ -1,13 +1,13 @@
-# DB Version: 14
+# DB Version: 15
 # OS Type: linux
 # DB Type: oltp
 # Total Memory (RAM): 16 GB
 # CPUs num: 4
-# Connections num: 100
-# Data Storage: san
+# Connections num: 1000
+# Data Storage: ssd
 
 ALTER SYSTEM SET
- max_connections = '100';
+ max_connections = '1000';
 ALTER SYSTEM SET
  shared_buffers = '4GB';
 ALTER SYSTEM SET
@@ -23,9 +23,9 @@ ALTER SYSTEM SET
 ALTER SYSTEM SET
  random_page_cost = '1.1';
 ALTER SYSTEM SET
- effective_io_concurrency = '300';
+ effective_io_concurrency = '200';
 ALTER SYSTEM SET
- work_mem = '20971kB';
+ work_mem = '2097kB';
 ALTER SYSTEM SET
  min_wal_size = '2GB';
 ALTER SYSTEM SET

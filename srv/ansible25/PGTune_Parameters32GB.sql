@@ -1,8 +1,8 @@
-# DB Version: 14
+# DB Version: 15
 # OS Type: linux
 # DB Type: oltp
 # Total Memory (RAM): 32 GB
-# CPUs num: 8
+# CPUs num: 4
 # Connections num: 1000
 # Data Storage: ssd
 
@@ -25,19 +25,19 @@ ALTER SYSTEM SET
 ALTER SYSTEM SET
  effective_io_concurrency = '200';
 ALTER SYSTEM SET
- work_mem = '2097kB';
+ work_mem = '4194kB';
 ALTER SYSTEM SET
  min_wal_size = '2GB';
 ALTER SYSTEM SET
  max_wal_size = '8GB';
 ALTER SYSTEM SET
- max_worker_processes = '8';
+ max_worker_processes = '4';
 ALTER SYSTEM SET
- max_parallel_workers_per_gather = '4';
+ max_parallel_workers_per_gather = '2';
 ALTER SYSTEM SET
- max_parallel_workers = '8';
+ max_parallel_workers = '4';
 ALTER SYSTEM SET
- max_parallel_maintenance_workers = '4';
+ max_parallel_maintenance_workers = '2';
 
 
  --reference: 
