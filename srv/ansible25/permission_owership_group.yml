@@ -40,9 +40,9 @@
         group: postgres
         mode: "+x"
 
-  - name: Change file ownership, group and permissions /var/lib/postgresql/scripts/*.sh
-    ansible.builtin.file:
-      path: /var/lib/postgresql/scripts/*.sh
-      owner: postgres
-      group: postgres
-      mode: "+x"
+    - name: Change file ownership, group and permissions /var/lib/postgresql/scripts/*.sh
+      ansible.builtin.file:
+        path: /var/lib/postgresql/scripts/*.sh
+        owner: postgres
+        group: postgres
+        mode: "+x"
