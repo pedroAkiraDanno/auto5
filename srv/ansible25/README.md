@@ -133,7 +133,7 @@ Repo to postgresql 15 with ansible
 
     #Enable archive and pgmetrics
         ansible-playbook -i hosts archive.yml
-        #ansible-playbook -i hosts pgmetrics.yml
+        #ansible-playbook -i hosts pgmetrics.yml  ***PROBLEM WITH aarch64
 
 
     ##BACKUP###

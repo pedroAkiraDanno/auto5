@@ -53,8 +53,8 @@
       cron:
         name: "### execute high benchmark scripts"
         user: postgres
-        minute: "10"
-        hour: "*"
+        minute: "*"
+        hour: "1"
         day: "*"
         month: "*"
         weekday: "*"
