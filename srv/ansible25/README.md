@@ -159,6 +159,7 @@ Repo to postgresql 15 with ansible
 
 
 
+
     #Postgresql test and utilitys
         ansible-playbook -i hosts swap.yml
         ansible-playbook -i hosts pg_collector.yml
@@ -216,6 +217,10 @@ Repo to postgresql 15 with ansible
 
     # About Postgresql architecture
         ansible-playbook -i hosts /etc/ansible/work_mem.yml
+
+
+    #Install packetes
+       ansible-playbook -i hosts /etc/ansible/installPacktes.yml
 
 ## need exec
 
