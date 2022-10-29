@@ -10,10 +10,20 @@
     postgresql_version: 15
 
   tasks:
-    - name: Recursively change ownership of a directory
+    - name: Recursively change ownership of a directory /postgresql/backups/
       ansible.builtin.file:
         path: /postgresql/backups/
         state: directory
         recurse: yes
         owner: postgres
         group: postgres
+
+  - name: Recursively change ownership of a directory /postgresql/
+    ansible.builtin.file:
+      path: /postgresql/
+      state: directory
+      recurse: yes
+      owner: postgres
+      group: postgres
+
+
