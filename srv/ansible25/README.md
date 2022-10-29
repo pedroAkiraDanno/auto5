@@ -149,9 +149,10 @@ Repo to postgresql 15 with ansible
     #Backup about pg_basebackup
         ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
 
-    Backup Restore  pgbackRest
+    #Backup Restore  pgbackRest
         ansible-playbook -i hosts /etc/ansible/sudo.yml
         ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
+
 
 
     #Postgresql test and utilitys
@@ -214,6 +215,10 @@ Repo to postgresql 15 with ansible
     #Install packetes
        ansible-playbook -i hosts /etc/ansible/installPacktes.yml
 
+
+    #Permission_owership_group.yml
+       ansible-playbook -i hosts /etc/ansible/permission_owership_group.yml
+
 ## need exec
 
     #use user root
@@ -229,19 +234,17 @@ Repo to postgresql 15 with ansible
     #/var/lib/postgresql/scripts/pgmetrics.sh
 
     #mkdir  /postgresql/backups/
-    chown -R postgres /postgresql/backups/
-    chgrp -R postgres /postgresql/backups/
+    #chown -R postgres /postgresql/backups/
+    #chgrp -R postgres /postgresql/backups/
 
-    chown -R postgres /postgresql/backups/
-    chgrp -R postgres /postgresql/backups/
-    chmod +x /var/lib/postgresql/scripts/pg_collector_delete.sh
-    chmod +x /var/lib/postgresql/scripts/pgbadger_delete.sh
+    #chown -R postgres /postgresql/backups/
+    #chgrp -R postgres /postgresql/backups/
+    #chmod +x /var/lib/postgresql/scripts/pg_collector_delete.sh
+    #chmod +x /var/lib/postgresql/scripts/pgbadger_delete.sh
 
 
-    apt-get install gcc -y
-
-    chmod +x /var/lib/postgresql/scripts/*.sh
-    chown -R postgres:postgres /postgresql/
+    #chmod +x /var/lib/postgresql/scripts/*.sh
+    #chown -R postgres:postgres /postgresql/
 
     cp profile /var/lib/postgresql
     #login with postgresql
@@ -254,7 +257,6 @@ Repo to postgresql 15 with ansible
     ***change the name in fstab to uuid
     sudo blkid | grep UUID=
     vi /etc/fstab
-
 
 
     UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
@@ -272,7 +274,6 @@ Repo to postgresql 15 with ansible
     #reboot server --because the HDs
 
 
-
     #sudo with no NOPASSWD
     sudo su -
     cp /etc/sudoers /root/sudoers.bak
@@ -282,13 +283,14 @@ Repo to postgresql 15 with ansible
     sudo -k
 
 
+    apt-get install gcc -y
+
     ## install nmap and traceroute to zabbix
     sudo apt-get update
     sudo apt-get install nmap -y
     nmap --version
 
     sudo apt-get install traceroute
-
 
 
     #INSTALL
