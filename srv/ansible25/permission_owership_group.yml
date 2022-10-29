@@ -32,3 +32,10 @@
         owner: postgres
         group: postgres
         mode: "+x"
+
+    - name: Change file ownership, group and permissions pgbadger_delete.sh
+      ansible.builtin.file:
+        path: chmod +x /var/lib/postgresql/scripts/pgbadger_delete.sh
+        owner: postgres
+        group: postgres
+        mode: "+x"
