@@ -129,32 +129,43 @@ Repo to postgresql 15 with ansible
 
     #Move .sql files and install and config  pg_top pgbadger pgbench
         ansible-playbook -i hosts db-dir-playbook.yml
+        ansible-playbook -i hosts pgbench.yml
         ansible-playbook -i hosts pg_top.yml
 
-    #File System to backup and cron dump backup
-        ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
-        ansible-playbook -i hosts backupcron.yml
 
-
+    #Enable archive and pgmetrics
         ansible-playbook -i hosts archive.yml
         #ansible-playbook -i hosts pgmetrics.yml
 
 
+
+    ##BACKUP###
+    #Backup - File System to backup
+        ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
+
+    #Backup to dump
+        ansible-playbook -i hosts backupcron.yml
+
     #Backup about pgbackRest
         ansible-playbook -i hosts pgbackRest.yaml
 
+    #Backup about pg_basebackup
+        ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
+
+    Backup Restore  pgbackRest
+        ansible-playbook -i hosts /etc/ansible/sudo.yml
+        ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
+
+
+
+
+    #Postgresql test and utilitys
         ansible-playbook -i hosts swap.yml
         ansible-playbook -i hosts pg_collector.yml
         ansible-playbook -i hosts /etc/ansible/Load_sample_database_dvdrental3.yml
         #/var/lib/postgresql/scripts/dvdrental.sh
         ansible-playbook -i hosts /etc/ansible/db-temp.yml
         ansible-playbook -i hosts /etc/ansible/large_sort_temporary_files.yml
-
-
-    #Backup about pg_basebackup and pgbackRest-restore2
-        ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
-        ansible-playbook -i hosts /etc/ansible/sudo.yml
-        ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
 
         ansible-playbook -i hosts /etc/ansible/postgres_structure.yaml
         ansible-playbook -i hosts /etc/ansible/pg_stat_statements.yml
@@ -168,6 +179,7 @@ Repo to postgresql 15 with ansible
     ## LOG  	#dont need exec this commands 	IF
         ansible-playbook -i hosts /etc/ansible/log2.yml 	#Script to log maintenance log_rotation_size=500MB EXEC THIS IF WANT LESS SIZE
         ansible-playbook -i hosts /etc/ansible/log3.yml 	#Script to test log name and size 		JUST TO TEST
+
 
     ## Linux health-check-scripts
         #ansible-playbook -i hosts /etc/ansible/Environmental_Variables.yml

@@ -211,31 +211,6 @@
         weekday: "*"
         job: /var/lib/postgresql/scripts/pgbadger.sh
 
-    - name: Create the database pgbench
-      become: true
-      become_user: postgres
-      postgresql_db: name=pgbench
-        template='template0'
-        state=present
-
-    - name: Command pgbench
-      become: true
-      become_user: postgres
-      shell: /lib/postgresql/15/bin/pgbench -i pgbench
-      args:
-        executable: /bin/bash
-
-    - name: Cronjob Entry pgbench scripts
-      cron:
-        name: "### execute pgbench scripts"
-        user: postgres
-        minute: "*/10"
-        hour: "*"
-        day: "*"
-        month: "*"
-        weekday: "*"
-        job: /lib/postgresql/15/bin/pgbench -c 5 -j 2 -t 10 pgbench
-
     - name: Cronjob Entry pgbadger_delete scripts
       cron:
         name: "### execute pgbadger_delete scripts"
