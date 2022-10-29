@@ -42,7 +42,7 @@
 
     - name: Change file ownership, group and permissions /var/lib/postgresql/scripts/*.sh
       ansible.builtin.file:
-        path: /var/lib/postgresql/scripts/*.sh
+        path: /var/lib/postgresql/scripts/
         state: file
         recurse: yes
         owner: postgres
