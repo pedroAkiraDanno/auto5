@@ -520,8 +520,8 @@ https://www.ibm.com/docs/en/cloud-pak-system-w3550/2.3.3?topic=images-extending-
 ## OPTIONS 4: Pgadmin4
 
     ***INSTALL PGADMIN4 IN WINDOWS IN HOST/LOCAL MACHINE
-    https://www.pgadmin.org/download/
-    https://www.pgadmin.org/download/pgadmin-4-windows/
+        https://www.pgadmin.org/download/
+        https://www.pgadmin.org/download/pgadmin-4-windows/
 
 
     ***POSTGRESQL REMOTE CONNNECTIONS
