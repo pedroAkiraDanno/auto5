@@ -38,7 +38,7 @@ Repo to postgresql 15 with ansible
     #move file sshd_config with github
     cd ~  ; rm -fr auto5
     git clone https://github.com/pedroAkiraDanno/auto5
-    cd /root/auto5/srv/ansible24/ ; mv sshd_config  /etc/ssh/
+    cd /root/auto5/srv/ansible25/ ; mv sshd_config  /etc/ssh/
     cat /etc/ssh/ssh_config | grep PasswordAuthentication
     cd ~  ; rm -fr auto5
     systemctl restart sshd
@@ -64,7 +64,7 @@ Repo to postgresql 15 with ansible
     cd ~
     rm -fr auto5
     git clone https://github.com/pedroAkiraDanno/auto5
-    cd  /root/auto5/srv/ansible24/ ; mv ssh-key-2022-01-19.key*  /root/.ssh/
+    cd  /root/auto5/srv/ansible25/ ; mv ssh-key-2022-01-19.key*  /root/.ssh/
     cd ~  ; rm -fr auto5
     chmod 400 /root/.ssh/ssh-key-2022-01-19.key*
     ls -lath /root/.ssh/ssh-key-2022-01-19.key*
@@ -83,7 +83,7 @@ Repo to postgresql 15 with ansible
     #GitHub:
     cd /etc/ansible/  && rm -rf /etc/ansible/*
     git clone https://github.com/pedroAkiraDanno/auto5
-    cd /etc/ansible/auto5/srv/ansible24/ ; mv *  /etc/ansible/
+    cd /etc/ansible/auto5/srv/ansible25/ ; mv *  /etc/ansible/
     cd /etc/ansible/  && rm -rf auto5/
     ls -lath
 
@@ -105,15 +105,13 @@ Repo to postgresql 15 with ansible
 
 ## 6 - step exec ansible
 
-    #TEST new files
-    #cd ~
-    #cd /etc/ansible/  && rm -rf /etc/ansible/*
-    #git clone https://github.com/pedroAkiraDanno/auto5
-    #cd /etc/ansible/auto5/ ;     git checkout develop ; cd ..
-    #cd /etc/ansible/auto5/srv/ansible24/ ; mv *  /etc/ansible/
-    #cd /etc/ansible/  && rm -rf auto5/
-
-
+    #TEST new files ****NOT NEED EXEC
+        cd ~
+        cd /etc/ansible/  && rm -rf /etc/ansible/*
+        git clone https://github.com/pedroAkiraDanno/auto5
+        cd /etc/ansible/auto5/ ;     git checkout develop ; cd ..
+        cd /etc/ansible/auto5/srv/ansible25/ ; mv *  /etc/ansible/
+        cd /etc/ansible/  && rm -rf auto5/
 
 
 
@@ -129,32 +127,41 @@ Repo to postgresql 15 with ansible
 
     #Move .sql files and install and config  pg_top pgbadger pgbench
         ansible-playbook -i hosts db-dir-playbook.yml
+        ansible-playbook -i hosts pgbench.yml
         ansible-playbook -i hosts pg_top.yml
 
-    #File System to backup and cron dump backup
-        ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
-        ansible-playbook -i hosts backupcron.yml
 
-
+    #Enable archive and pgmetrics
         ansible-playbook -i hosts archive.yml
-        #ansible-playbook -i hosts pgmetrics.yml
+        #ansible-playbook -i hosts pgmetrics.yml  ***PROBLEM WITH aarch64
 
+
+    ##BACKUP###
+    #Backup - File System to backup
+        ansible-playbook -i  hosts backup_filesystem.yml     #IF AZURE exec     ansible-playbook -i hosts backup_filesystem-azure2.yml     if need: sudo useradd postgres
+
+    #Backup to dump
+        ansible-playbook -i hosts backupcron.yml
 
     #Backup about pgbackRest
         ansible-playbook -i hosts pgbackRest.yaml
 
+    #Backup about pg_basebackup
+        ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
+
+    #Backup Restore  pgbackRest
+        ansible-playbook -i hosts /etc/ansible/sudo.yml
+        ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
+
+
+
+    #Postgresql test and utilitys
         ansible-playbook -i hosts swap.yml
         ansible-playbook -i hosts pg_collector.yml
         ansible-playbook -i hosts /etc/ansible/Load_sample_database_dvdrental3.yml
         #/var/lib/postgresql/scripts/dvdrental.sh
         ansible-playbook -i hosts /etc/ansible/db-temp.yml
         ansible-playbook -i hosts /etc/ansible/large_sort_temporary_files.yml
-
-
-    #Backup about pg_basebackup and pgbackRest-restore2
-        ansible-playbook -i hosts /etc/ansible/pg_basebackup.yml
-        ansible-playbook -i hosts /etc/ansible/sudo.yml
-        ansible-playbook -i hosts /etc/ansible/pgbackRest-restore2.yaml
 
         ansible-playbook -i hosts /etc/ansible/postgres_structure.yaml
         ansible-playbook -i hosts /etc/ansible/pg_stat_statements.yml
@@ -163,11 +170,10 @@ Repo to postgresql 15 with ansible
         #ansible-playbook -i hosts pgAdmin.yaml
 
 
-
-
     ## LOG  	#dont need exec this commands 	IF
         ansible-playbook -i hosts /etc/ansible/log2.yml 	#Script to log maintenance log_rotation_size=500MB EXEC THIS IF WANT LESS SIZE
         ansible-playbook -i hosts /etc/ansible/log3.yml 	#Script to test log name and size 		JUST TO TEST
+
 
     ## Linux health-check-scripts
         #ansible-playbook -i hosts /etc/ansible/Environmental_Variables.yml
@@ -189,7 +195,7 @@ Repo to postgresql 15 with ansible
         #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters12GB.yml
         #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters16GB.yml
         #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters32GB.yml
-
+        #ansible-playbook -i hosts /etc/ansible/PGTune_Parameters64GB.yml
 
     #Generating fake data
         ansible-playbook -i hosts /etc/ansible/GeneratingfakedataSQL.yml
@@ -205,7 +211,68 @@ Repo to postgresql 15 with ansible
     # About Postgresql architecture
         ansible-playbook -i hosts /etc/ansible/work_mem.yml
 
+
+    #Install packetes
+       ansible-playbook -i hosts /etc/ansible/installPacktes.yml
+
+
+    #Permission_owership_group.yml
+       ansible-playbook -i hosts /etc/ansible/permission_owership_group.yml
+
 ## need exec
+
+    #use user root
+
+    mkdir -p  /var/log/health-report/
+    chmod +x /root/scripts/health-check.sh
+    chmod +x /root/scripts/health-check-gen.sh
+    chmod +x /root/scripts/linuxsystemhealth.sh
+    chmod 755 /root/scripts/tecmint_monitor.sh
+    /root/scripts/tecmint_monitor.sh -i
+
+    apt-get install -y postfix mailutils
+
+    cp profile /var/lib/postgresql
+    #login with postgresql
+    mv profile .profile
+    . .profile
+
+    #rm /root/.ssh/ssh-key-2022-01-19*
+    #sudo passwd postgres
+
+    ***change the name in fstab to uuid
+    sudo blkid | grep UUID=
+    vi /etc/fstab
+
+
+    UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
+    UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"
+
+    UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"   /var/lib/postgresql ext4 defaults,auto,noatime,_netdev 2 0
+    UUID="1d1bb132-635a-44d0-9983-82fbb85b2b9b"  /postgresql ext4 defaults,auto,noatime,_netdev 2 0
+
+
+
+    #sudo apt-get update && sudo apt-get upgrade -y
+    #apt list --upgradable
+    #lsblk
+    #reboot server --because the HDs
+
+
+    #sudo with no NOPASSWD
+    sudo su -
+    cp /etc/sudoers /root/sudoers.bak
+    su - postgres
+    sudo visudo
+    	postgres ALL=(ALL) NOPASSWD: ALL
+    sudo -k
+
+
+    #https://www.youtube.com/watch?v=FmiDt5hiOe0
+    #https://phoenixnap.com/kb/how-to-install-nmap-ubuntu-18-04
+    #https://linuxhint.com/setup-sudo-no-password-linux/
+
+## need exec 2 BACKUP NOT USE OR EXEC
 
     #use user root
 
@@ -220,19 +287,17 @@ Repo to postgresql 15 with ansible
     #/var/lib/postgresql/scripts/pgmetrics.sh
 
     #mkdir  /postgresql/backups/
-    chown -R postgres /postgresql/backups/
-    chgrp -R postgres /postgresql/backups/
+    #chown -R postgres /postgresql/backups/
+    #chgrp -R postgres /postgresql/backups/
 
-    chown -R postgres /postgresql/backups/
-    chgrp -R postgres /postgresql/backups/
-    chmod +x /var/lib/postgresql/scripts/pg_collector_delete.sh
-    chmod +x /var/lib/postgresql/scripts/pgbadger_delete.sh
+    #chown -R postgres /postgresql/backups/
+    #chgrp -R postgres /postgresql/backups/
+    #chmod +x /var/lib/postgresql/scripts/pg_collector_delete.sh
+    #chmod +x /var/lib/postgresql/scripts/pgbadger_delete.sh
 
 
-    apt-get install gcc -y
-
-    chmod +x /var/lib/postgresql/scripts/*.sh
-    chown -R postgres:postgres /postgresql/
+    #chmod +x /var/lib/postgresql/scripts/*.sh
+    #chown -R postgres:postgres /postgresql/
 
     cp profile /var/lib/postgresql
     #login with postgresql
@@ -245,7 +310,6 @@ Repo to postgresql 15 with ansible
     ***change the name in fstab to uuid
     sudo blkid | grep UUID=
     vi /etc/fstab
-
 
 
     UUID="cf63881d-c34c-4cd7-be49-d4ed4586648e"
@@ -263,7 +327,6 @@ Repo to postgresql 15 with ansible
     #reboot server --because the HDs
 
 
-
     #sudo with no NOPASSWD
     sudo su -
     cp /etc/sudoers /root/sudoers.bak
@@ -273,13 +336,14 @@ Repo to postgresql 15 with ansible
     sudo -k
 
 
+    apt-get install gcc -y
+
     ## install nmap and traceroute to zabbix
     sudo apt-get update
     sudo apt-get install nmap -y
     nmap --version
 
     sudo apt-get install traceroute
-
 
 
     #INSTALL

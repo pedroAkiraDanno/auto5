@@ -1,0 +1,42 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Install packages git
+      apt: name={{ item }} update_cache=true state=latest
+      with_items:
+        - git
+        - net-tools
+        - neofetch
+        - net-tools
+        - traceroute
+        - nmap
+        - gcc
+        - postfix
+        - mailutils
+        - build-essential
+        - alien
+
+    - name: Update apt cache and make sure Curl and Unzip are installed
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      loop:
+        - curl
+        - unzip
+
+    # Installing the zip, tree, and curl packages which are required to work with Apache server ( TASK-2)
+    - name: Install a list of packages
+      apt:
+        pkg:
+          - zip
+          - tree
+          - elinks

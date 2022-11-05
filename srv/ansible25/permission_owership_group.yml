@@ -1,0 +1,66 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    db_user: dbusername
+    db_name: dbname
+    db_name2: postgres
+    db_name3: test1
+    db_password: dbpassword
+    postgresql_version: 15
+
+  tasks:
+    - name: Recursively change ownership of a directory /postgresql/backups/
+      ansible.builtin.file:
+        path: /postgresql/backups/
+        state: directory
+        recurse: yes
+        owner: postgres
+        group: postgres
+
+    - name: Recursively change ownership of a directory /postgresql/
+      ansible.builtin.file:
+        path: /postgresql/
+        state: directory
+        recurse: yes
+        owner: postgres
+        group: postgres
+
+    - name: Recursively change ownership of a directory /var/lib/postgresql/scripts/
+      ansible.builtin.file:
+        path: /var/lib/postgresql/scripts/
+        state: directory
+        recurse: yes
+        owner: postgres
+        group: postgres
+
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /var/lib/postgresql/scripts/
+        state: directory
+        mode: "+x"
+
+    - name: Change file ownership, group and permissions pg_collector_delete.sh
+      ansible.builtin.file:
+        path: /var/lib/postgresql/scripts/pg_collector_delete.sh
+        owner: postgres
+        group: postgres
+        mode: "+x"
+
+    - name: Change file ownership, group and permissions pgbadger_delete.sh
+      ansible.builtin.file:
+        path: /var/lib/postgresql/scripts/pgbadger_delete.sh
+        owner: postgres
+        group: postgres
+        mode: "+x"
+#
+#
+#
+
+#    - name: Change file ownership, group and permissions /var/lib/postgresql/scripts/*.sh
+#      ansible.builtin.file:
+#        path: /var/lib/postgresql/scripts/*.sh
+#        owner: postgres
+#        group: postgres
+#REFERENCE:
+#https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html

@@ -10,7 +10,7 @@ fi
 #umask 022# .bash_profile
 
 # db_version
-db_version=14
+db_version=15
 
 #2. Set Data directory in PostgreSQL
 PGDATA=/var/lib/postgresql/$db_version/main; export PGDATA
@@ -26,7 +26,7 @@ export TMPDIR=/tmp
 
 
 #
-# PostgreSQL 14.3 alias
+# PostgreSQL 15 alias
 #
 alias pg_start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 alias pg_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
@@ -54,7 +54,7 @@ echo "  #        ####   ####    #    ####  #    # ######  #####   ### # ######"
 echo " "
 echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 echo "# "
-echo "#   [ PostgreSQL 14.3  ( PostgreSQL )     /     PostgreSQL ]     "
+echo "#   [ PostgreSQL 15  ( PostgreSQL )     /     PostgreSQL ]     "
 echo "# "
 echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 echo "# "

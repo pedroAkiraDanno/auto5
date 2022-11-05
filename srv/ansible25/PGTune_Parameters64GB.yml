@@ -10,17 +10,17 @@
     postgresql_version: 15
 
   tasks:
-    - name: Ansible copy file PGTune_Parameters.sql to remote server
+    - name: Ansible copy file PGTune_Parameters64GB.sql to remote server
       copy:
         owner: postgres
         group: postgres
-        src: PGTune_Parameters8GB.sql
+        src: PGTune_Parameters64GB.sql
         dest: /var/lib/postgresql/scripts
 
     - name: Ensure user has access to the new database
       become: true
       become_user: postgres
-      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/PGTune_Parameters8GB.sql
+      shell: psql {{ db_name2 }} < /var/lib/postgresql/scripts/PGTune_Parameters64GB.sql
 
     - name: Restart postgresql
       service: name=postgresql state=restarted
