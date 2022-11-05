@@ -524,27 +524,27 @@ https://www.ibm.com/docs/en/cloud-pak-system-w3550/2.3.3?topic=images-extending-
     https://www.pgadmin.org/download/pgadmin-4-windows/
 
 
-    ***postgresql remote connections
-    #Find Configuration File
+    ***POSTGRESQL REMOTE CONNNECTIONS
+    #1: Find Configuration File
         sudo -u postgres psql -c "SHOW config_file;"
 
-    #Configure PostgreSQL to Allow Remote Connections
+    #2: Configure PostgreSQL to Allow Remote Connections
         sudo nano /etc/postgresql/15/main/postgresql.conf
         #listen_addresses = 'localhost'
         listen_addresses = '\*'
 
-    #Configuring pg_hba.conf:
-    sudo nano /etc/postgresql/13/main/pg_hba.conf
+    #3: Configuring pg_hba.conf:
+        sudo nano /etc/postgresql/13/main/pg_hba.conf
 
-    # TYPE  DATABASE	USER	ADDRESS   	METHOD
-    host    all     	all     0.0.0.0/0       md5
-    host    all             all     :/0             md5
+        # TYPE  DATABASE	USER	ADDRESS   	METHOD
+        host    all     	all     0.0.0.0/0       md5
+        host    all             all     :/0             md5
 
-    sudo systemctl restart postgresql
-    sudo ufw allow 5432
+        sudo systemctl restart postgresql
+        sudo ufw allow 5432
 
-    sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 3332 -j ACCEPT
-    sudo netfilter-persistent save
+        sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 3332 -j ACCEPT
+        sudo netfilter-persistent save
 
 ### REFERENCES:
 
