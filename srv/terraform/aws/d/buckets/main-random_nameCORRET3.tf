@@ -21,7 +21,7 @@ resource "random_id" "s3_id" {
 
 
 resource "aws_s3_bucket" "s3_bucket" {
-  bucket = "s3_bucket-${random_id.s3_id.dec}"
+  bucket = "s3bucket-${random_id.s3_id.dec}"
 
   tags = {
       Env = "dev"
