@@ -10,29 +10,24 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region  = "us-east-1"
 }
 
+resource "random_id" "my-random-id" {
+byte_length = 4
+}
 
-resource "random_id" "s3_id" {
-    byte_length = 4
+output "id" {
+  value = random_id.my-random-id.id
 }
 
 
 
 resource "aws_s3_bucket" "s3_bucket" {
-  bucket = "s3bucket-${random_id.s3_id.dec}"
-
-  tags = {
-      Env = "dev"
-      Service = "s3"
-      Team = "devops"
-  }
+  bucket = "s3_bucket-${random_id.my-random-id.dec}"  
 }
 
-
-/*
-resource "aws_s3_bucket_public_access_block" "s3_bucket" {
+resource "aws_s3_bucket_public_access_block" "s3_block" {
   bucket = aws_s3_bucket.s3_bucket.id
 
   block_public_acls       = true
@@ -40,32 +35,6 @@ resource "aws_s3_bucket_public_access_block" "s3_bucket" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
-*/
-
-
-
-
-/*INSTALL: 
-    sudo yum install -y yum-utils
-    sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-    sudo yum -y install terraform
-*/
-
-
-
-
-/*exec: 
-    cd ~ 
-    rm t* -fr    
-    rm -fr t1 
-    mkdir t1 ; cd t1 
-    vi main-random_name.tf
-
-    terraform init
-    terraform plan
-    terraform apply
-    terraform apply -auto-approve
-*/
 
 
 
@@ -73,11 +42,16 @@ resource "aws_s3_bucket_public_access_block" "s3_bucket" {
   https://subscription.packtpub.com/book/cloud-and-networking/9781800201538/16/ch16lvl1sec92/choosing-an-aws-bucket-name-and-how-to-create-a-random-bucket-name
   https://thecloudbootcamp.notion.site/Hands-on-with-AWS-and-Terraform-f03e78550854400581f519b458f680e7
   https://stackoverflow.com/questions/73340706/modifying-s3-bucket-created-by-random-id-in-terraform
-  https://tianzhui.cloud/post/dulmsel3/
   https://www.terraform.io/downloads
-  
-
-
-  https://www.cloudforecast.io/blog/terraform-s3-bucket-aws-tags/
 
 */
+
+
+/*exec: 
+  terraform init
+  terraform plan
+  terraform apply
+*/
+
+
+
