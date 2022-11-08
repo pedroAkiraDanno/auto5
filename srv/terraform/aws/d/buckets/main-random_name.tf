@@ -29,3 +29,7 @@ resource "aws_s3_bucket_public_access_block" "s3_block" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+
+
+//https://subscription.packtpub.com/book/cloud-and-networking/9781800201538/16/ch16lvl1sec92/choosing-an-aws-bucket-name-and-how-to-create-a-random-bucket-name
