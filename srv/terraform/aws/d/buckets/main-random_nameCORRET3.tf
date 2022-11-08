@@ -20,8 +20,8 @@ resource "random_id" "s3_id" {
 
 
 
-resource "aws_s3_bucket" "devops_bucket" {
-  bucket = "devops-bucket-${random_id.s3_id.dec}"
+resource "aws_s3_bucket" "s3_bucket" {
+  bucket = "s3_bucket-${random_id.s3_id.dec}"
 
   tags = {
       Env = "dev"
@@ -32,8 +32,8 @@ resource "aws_s3_bucket" "devops_bucket" {
 
 
 
-resource "aws_s3_bucket_public_access_block" "devops_bucket" {
-  bucket = aws_s3_bucket.devops_bucket.id
+resource "aws_s3_bucket_public_access_block" "s3_bucket" {
+  bucket = aws_s3_bucket.s3_bucket.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -55,6 +55,11 @@ resource "aws_s3_bucket_public_access_block" "devops_bucket" {
 
 
 /*exec: 
+    cd ~ 
+    rm -fr t1 
+    mkdir t1 ; cd t1 
+    vi main-random_name.tf
+
     terraform init
     terraform plan
     terraform apply
