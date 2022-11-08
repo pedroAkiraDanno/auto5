@@ -19,6 +19,7 @@ resource "random_id" "s3_id" {
 }
 
 
+
 resource "aws_s3_bucket" "devops_bucket" {
   bucket = "devops-bucket-${random_id.s3_id.dec}"
 
@@ -31,7 +32,14 @@ resource "aws_s3_bucket" "devops_bucket" {
 
 
 
+resource "aws_s3_bucket_public_access_block" "devops_bucket" {
+  bucket = aws_s3_bucket.devops_bucket.id
 
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
 
 
 
@@ -40,7 +48,9 @@ resource "aws_s3_bucket" "devops_bucket" {
   https://subscription.packtpub.com/book/cloud-and-networking/9781800201538/16/ch16lvl1sec92/choosing-an-aws-bucket-name-and-how-to-create-a-random-bucket-name
   https://thecloudbootcamp.notion.site/Hands-on-with-AWS-and-Terraform-f03e78550854400581f519b458f680e7
   https://stackoverflow.com/questions/73340706/modifying-s3-bucket-created-by-random-id-in-terraform
+  https://tianzhui.cloud/post/dulmsel3/
   https://www.terraform.io/downloads
+  
 
 
   https://www.cloudforecast.io/blog/terraform-s3-bucket-aws-tags/
