@@ -1,11 +1,29 @@
-    LIST BUCKET AWS:
+#### Create Test Buckets
+
+        cd ~
+        rm -fr auto5/
+        git clone https://github.com/pedroAkiraDanno/auto5.git
+        cd auto5/srv/terraform/aws/
+
+
+        cd ~
+        cd auto5/srv/terraform/aws/d/buckets/
+
+        terraform init
+        terraform plan
+        //terraform apply
+        terraform apply -auto-approve
+
+        //terraform destroy -auto-approve
+
+#### LIST BUCKET AWS:
+
         https://stackoverflow.com/questions/3337912/quick-way-to-list-all-files-in-amazon-s3-bucket
 
         aws s3 ls
 
+#### DELETE AWS S3 BUCKET:
 
-
-    DELETE AWS S3 BUCKET:
         aws s3 rb <bucket URI> --recursive
         aws s3 rb s3://<bucket URI>
         aws s3 rb s3://s3bucket-1068736247
