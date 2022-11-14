@@ -7,7 +7,7 @@
 
 
         cd ~
-        cd auto5/srv/terraform/aws/d/buckets/
+        cd auto5/srv/terraform/aws/d/buckets/3
 
         terraform init
         terraform plan
