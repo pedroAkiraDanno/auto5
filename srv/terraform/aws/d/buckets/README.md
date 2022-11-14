@@ -1,9 +1,15 @@
+### Install Terraform in AMAZON LINUX:
+
+        sudo yum install -y yum-utils
+        sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+        sudo yum -y install terraform
+
 #### Create Test Buckets
 
         cd ~
         rm -fr auto5/
         git clone https://github.com/pedroAkiraDanno/auto5.git
-        cd auto5/srv/terraform/aws/
+        cd auto5/srv/terraform/aws/  ;     git checkout develop ; cd ..
 
 
         cd ~
