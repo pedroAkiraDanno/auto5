@@ -531,14 +531,26 @@ https://www.ibm.com/docs/en/cloud-pak-system-w3550/2.3.3?topic=images-extending-
     #2: Configure PostgreSQL to Allow Remote Connections
         sudo nano /etc/postgresql/15/main/postgresql.conf
         #listen_addresses = 'localhost'
-        listen_addresses = '\*'
+        #listen_addresses = '\*'
+        listen_addresses = '*'
+
 
     #3: Configuring pg_hba.conf:
-        sudo nano /etc/postgresql/13/main/pg_hba.conf
+        sudo cp /etc/postgresql/15/main/pg_hba.conf /etc/postgresql/15/main/pg_hba.conf.backup
+        sudo nano /etc/postgresql/15/main/pg_hba.conf
 
         # TYPE  DATABASE	USER	ADDRESS   	METHOD
         host    all     	all     0.0.0.0/0       md5
-        host    all             all     :/0             md5
+        host    all         all     :/0             md5
+        host    all         all     all             md5
+
+
+    #4:  PASSWORD
+    sudo su - postgres
+    psql
+    postgres=# ALTER USER postgres PASSWORD 'postgres';
+
+
 
         sudo systemctl restart postgresql
         sudo ufw allow 5432
