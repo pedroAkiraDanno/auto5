@@ -10,7 +10,7 @@
     postgresql_version: 15
 
   tasks:
-    - name: Install packages git
+    - name: Install packages git net-tools neofetch net-tools traceroute nmap gcc postfix mailutils build-essential alien
       apt: name={{ item }} update_cache=true state=latest
       with_items:
         - git
