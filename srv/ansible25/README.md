@@ -209,7 +209,7 @@ Repo to postgresql 15 with ansible
 
 
     # About Postgresql architecture
-        ansible-playbook -i hosts /etc/ansible/work_mem.yml
+        #ansible-playbook -i hosts /etc/ansible/work_mem.yml
 
 
     #Install packetes
