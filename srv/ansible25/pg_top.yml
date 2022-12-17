@@ -68,7 +68,7 @@
 
     - name: Restart postgresql
       service: name=postgresql state=restarted
-      when: pgconf.changed
+      #when: pgconf.changed
 
     - name: Ensure the PostgreSQL service is running
       service: name=postgresql state=started enabled=yes
