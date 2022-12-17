@@ -555,6 +555,7 @@ https://www.ibm.com/docs/en/cloud-pak-system-w3550/2.3.3?topic=images-extending-
         sudo systemctl restart postgresql
         sudo ufw allow 5432
 
+        sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5432 -j ACCEPT
         sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 3332 -j ACCEPT
         sudo netfilter-persistent save
 
